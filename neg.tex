@@ -20,20 +20,21 @@ In their well-known paper \cite{legg}, Legg and Hutter write:
     encompassing as possible, the space of environments used in our definition should
     be as large as possible.''
 \end{quote}
-We find it strange, then, that they choose to limit their environments to have
-rewards in $[0,1]\cap \mathbb Q$, the set of non-negative rational numbers
-$\leq 1$. The decision to limit rewards to a closed interval does make a lot of sense
-in the context of their paper, but the decision to rule out negative rewards does
-not make as much sense.
+So motivated, we investigated what would happen if we extended the universe
+of environments to include environments with rewards from $\mathbb Q\cap [-1,1]$
+instead of just from $\mathbb Q\cap [0,1]$ as in Legg and Hutter's paper.
+In other words, we investigated what would happen if environments are not only
+allowed to reward agents but also to punish agents (a punishment being a negative
+reward).
 
-We propose that for the purpose of measuring intelligence,
-one should consider agents' performance in environments that punish agents as well
-as reward them. We have discovered that when negative rewards are allowed, this
+We discovered that when negative rewards are allowed, this
 introduces a certain algebraic structure into the agent-environment framework, which
 in turn allows an intelligence definition that is both better-behaved and also
 easier to compute. The main objection we anticipate to our proposed improved
 intelligence measure is that it assigns negative intelligence to certain agents.
 We will argue that this not only makes perfect sense, in fact when one looks at
 it from the proper perspective, it is almost nonsensical to demand otherwise.
+
+
 
 \end{document}
