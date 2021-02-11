@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 
-\title{Negative Intelligence}
+\title{Negative Intelligence: An Improvement to Legg-Hutter Universal Intelligence}
 \author{Samuel Allen Alexander}
 
 \begin{document}
@@ -14,6 +14,26 @@
 
 \section{Introduction}
 
-Intro goes here.
+In their well-known paper \cite{legg}, Legg and Hutter write:
+\begin{quote}
+    ``As our goal is to produce a definition of intelligence that is as broad and
+    encompassing as possible, the space of environments used in our definition should
+    be as large as possible.''
+\end{quote}
+We find it strange, then, that they choose to limit their environments to have
+rewards in $[0,1]\cap \mathbb Q$, the set of non-negative rational numbers
+$\leq 1$. The decision to limit rewards to a closed interval does make a lot of sense
+in the context of their paper, but the decision to rule out negative rewards does
+not make as much sense.
+
+We propose that for the purpose of measuring intelligence,
+one should consider agents' performance in environments that punish agents as well
+as reward them. We have discovered that when negative rewards are allowed, this
+introduces a certain algebraic structure into the agent-environment framework, which
+in turn allows an intelligence definition that is both better-behaved and also
+easier to compute. The main objection we anticipate to our proposed improved
+intelligence measure is that it assigns negative intelligence to certain agents.
+We will argue that this not only makes perfect sense, in fact when one looks at
+it from the proper perspective, it is almost nonsensical to demand otherwise.
 
 \end{document}
