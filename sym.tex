@@ -61,30 +61,29 @@ We assume $\mathcal A$, $\mathcal O$, and $\mathcal R$ are mutually disjoint
 (i.e., no reward is an action, no reward is an observation, and no action is an
 observation).
 The acronym ORA stands for ``observation-reward-action''.
+Throughout the paper, $\langle\rangle$ denotes the empty sequence.
 
 \begin{definition}
     (Agents and environments)
     \begin{enumerate}
         \item
-        By an \emph{ORA-sequence}, we mean a sequence which is either empty, or else
-        is of the form $\langle x_0,\ldots,x_n\rangle$ where:
+        By an \emph{ORA-sequence}, we mean a sequence $s$ such that the following requirements
+        hold for every natural number $n$:
         \begin{itemize}
-            \item
-            Whenever $i$ is of the form $3k$, $x_i$ is an observation.
-            \item
-            Whenever $i$ is of the form $3k+1$, $x_i$ is a reward.
-            \item
-            Whenever $i$ is of the form $3k+2$, $x_i$ is an action.
+            \item If $s$ has a $(3n)$th element, that element is an observation.
+            \item If $s$ has a $(3n+1)$th element, that element is a reward.
+            \item If $s$ has a $(3n+2)$th element, that element is an action.
         \end{itemize}
         Thus, informally speaking, a non-empty ORA-sequence
-        looks like ``observation, reward, action, observation, reward, action,
-        ..., observation, reward, action'' (but does not necessarily have to terminate
-        with an action---it can terminate with a reward, or even with an observation).
+        looks like ``observation, reward, action, observation, reward, action, ...'';
+        if it terminates (i.e., if it is finite), it may terminate with
+        either an observation, a reward, or an action.
         \item
-        By an \emph{ORA-prompt}, we mean an ORA-sequence which is either empty or else
-        ends with a reward.
+        By an \emph{ORA-prompt}, we mean a non-empty ORA-sequence which
+        terminates with a reward.
         \item
-        By an \emph{ORA-play}, we mean a nonempty ORA-sequence which ends with an action.
+        By an \emph{ORA-play}, we mean an ORA-sequence which is either empty or else
+        terminates with an action.
         \item
         By an \emph{agent}, we mean a function $\pi$ which assigns to every
         ORA-prompt $p$ a probability measure $\pi(p)$ on $\mathcal A$.
@@ -93,7 +92,7 @@ The acronym ORA stands for ``observation-reward-action''.
         Intuitively, we think of $\pi(a|p)$ as the probability that the agent $\pi$
         will take action $a$ in response to the ORA-prompt $p$.
         \item
-        By an \emph{unbounded environment}, we mean a function $\mu$
+        By an \emph{environment}, we mean a function $\mu$
         which assigns to every ORA-play $p$ a probability measure $\mu(p)$
         on $\mathcal O\times\mathcal R$.
         For each $o\in\mathcal O$ and $r\in\mathcal R$, we write $\mu(or|p)$
@@ -101,6 +100,42 @@ The acronym ORA stands for ``observation-reward-action''.
         Intuitively, we think of $\mu(or|p)$ as the probability that the environment
         $\mu$ will issue observation $o$ and reward $r$ to the agent in response
         to the ORA-play $p$.
+        \item
+        An infinite ORA-sequence $(o_0,r_0,a_0,\ldots)$ is \emph{possible for agent
+        $\pi$ interacting with environment $\mu$} if the following requirements hold.
+        \begin{itemize}
+            \item The probability $\mu(o_0r_0|\langle\rangle)$ is nonzero.
+            \item The probability $\pi(a_0|o_0r_0)$ is nonzero.
+            \item For each $i>0$, the probability
+                $\mu(o_ir_i|o_0r_0a_0\cdots o_{i-1}r_{i-1}a_{i-1})$ is nonzero.
+            \item For each $i>0$, the probability
+                $\pi(a_i|o_0r_0a_0\cdots o_{i-1}r_{i-1}a_{i-1}o_ir_i)$ is nonzero.
+        \end{itemize}
+        \item
+        An environment $\mu$ is \emph{bounded} if for every agent $\pi$,
+        for every infinite ORA-sequence $s=(o_0,r_0,a_0,\ldots)$,
+        if $s$ is possible for $\pi$ interacting with $\mu$, then
+        $\sum_{i=0}^\infty r_i$ converges and $-1\leq \sum_{i=0}^\infty r_i\leq 1$.
+        \item
+        If $\pi$ is an agent and $\mu$ is a bounded environment,
+        we write $V^\pi_\mu$ for the expected value of the sum of the rewards in an
+        ORA-sequence $(o_0,r_0,a_0,o_1,r_1,a_1,\ldots)$ randomly obtained as follows:
+        \begin{enumerate}
+            \item $(o_0,r_0)\in \mathcal O\times\mathcal R$ is chosen randomly based
+            on the probability measure $\mu(\langle\rangle)$.
+            \item $a_0\in\mathcal A$ is chosen randomly based on the probability
+            measure $\pi(o_0,r_0)$.
+            \item
+            For each $i>0$,
+            $(o_i,r_i)\in\mathcal O\times\mathcal R$ is chosen randomly based on
+            the probability measure $\mu(o_0,r_0,a_0,\ldots,o_{i-1},r_{i-1},a_{i-1})$.
+            \item
+            For each $i>0$,
+            $a_i\in\mathcal A$ is chosen randomly based on the probability measure
+            $\pi(o_0,r_0,a_0,\ldots,o_{i-1},r_{i-1},a_{i-1},o_i,r_i)$.
+        \end{enumerate}
+        Intuitively, $V^\pi_\mu$ is the expected reward which $\pi$ would extract
+        from $\mu$.
     \end{enumerate}
 \end{definition}
 
