@@ -142,8 +142,8 @@ Note that it is possible for $V^\pi_\mu$ to be undefined.
 For example, if $\mu$ is an environment which always issues
 reward $(-1)^n$ in response to the agent's $n$th action,
 then $V^\pi_\mu$ is undefined for every agent $\pi$.
-This would not be the case if rewards were required to be taken
-from $\mathbb Q\cap [0,1]$, so this is one way in which allowing
+This would not be the case if rewards were required to be positive,
+so this is one way in which allowing
 punishments complicates the resulting theory.
 
 In order to define Legg-Hutter-style
@@ -182,7 +182,7 @@ definition.
 (Dual Agents and Dual Environments)
 \begin{enumerate}
     \item
-    Suppose $s$ is an ORA-sequence. Let $-s$, called the \emph{dual} of $s$,
+    Suppose $s$ is an ORA-sequence. Let $-s$
     be the ORA-sequence which is equal to $s$ in every way except that,
     whenever the $(3n+1)$th element of $s$ is a reward $r$,
     then the $(3n+1)$th element of $-s$ is $-r$.
@@ -191,14 +191,16 @@ definition.
     We define a new agent $-\pi$, the \emph{dual} of $\pi$,
     as follows:
     for each ORA-prompt $p$, for each action $a\in\mathcal A$,
-    $\pi(a|p)=(-\pi)(a|-p)$.
+    \[(-\pi)(a|p)=\pi(a|{-p}).\]
     \item
     Suppose $\mu$ is an environment.
     We define a new environment $-\mu$, the \emph{dual} of $\mu$,
     as follows:
     for each ORA-play $p$, for each observatin $o\in\mathcal O$
-    and reward $r\in\mathcal R$, $(-\mu)(or|p)=\mu(o(-r)|p)$.
+    and reward $r\in\mathcal R$,
+    \[(-\mu)(or|p)=\mu(o(-r)|p).\]
 \end{enumerate}
+\end{definition}
 
 
 
