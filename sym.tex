@@ -112,13 +112,9 @@ Throughout the paper, $\langle\rangle$ denotes the empty sequence.
                 $\pi(a_i|o_0r_0a_0\cdots o_{i-1}r_{i-1}a_{i-1}o_ir_i)$ is nonzero.
         \end{itemize}
         \item
-        An environment $\mu$ is \emph{bounded} if for every agent $\pi$,
-        for every infinite ORA-sequence $s=(o_0,r_0,a_0,\ldots)$,
-        if $s$ is possible for $\pi$ interacting with $\mu$, then
-        $\sum_{i=0}^\infty r_i$ converges and $-1\leq \sum_{i=0}^\infty r_i\leq 1$.
-        \item
         If $\pi$ is an agent and $\mu$ is a bounded environment,
-        we write $V^\pi_\mu$ for the expected value of the sum of the rewards in an
+        we write $V^\pi_\mu$ for the expected value (if it exists)
+        of the sum of the rewards in an
         ORA-sequence $(o_0,r_0,a_0,o_1,r_1,a_1,\ldots)$ randomly obtained as follows:
         \begin{enumerate}
             \item $(o_0,r_0)\in \mathcal O\times\mathcal R$ is chosen randomly based
@@ -138,6 +134,34 @@ Throughout the paper, $\langle\rangle$ denotes the empty sequence.
         from $\mu$.
     \end{enumerate}
 \end{definition}
+
+Note that it is possible for $V^\pi_\mu$ to be undefined.
+For example, if $\mu$ is an environment which always issues
+reward $(-1)^n$ in response to the agent's $n$th action,
+then $V^\pi_\mu$ is undefined for every agent $\pi$.
+This would not be the case if rewards were required to be taken
+from $\mathbb Q\cap [0,1]$, so this is one way in which allowing
+punishments complicates the resulting theory.
+
+In order to define Legg-Hutter-style
+intelligence measures, it is, in any case, necessary to restrict attention to
+certain well-behaved environments. Legg and Hutter (in their Section 3.2)
+restrict attention to environments $\mu$ that never give total reward more than $1$,
+from which it follows that $V^\pi_\mu\leq 1$. This implication is less clear
+when environments can punish the agent, so we take a different approach:
+rather than limit the total reward the environment can give and use that to
+force $V^\pi_\mu$ to be well-behaved, we will cut the middleman and
+directly assume that $V^\pi_\mu$ is well-behaved.
+
+\begin{definition}
+    An environment $\mu$ is \emph{well-behaved} if the following
+    condition holds: for every agent $\pi$, $V^\pi_\mu$ exists and
+    $-1\leq V^\pi_\mu\leq 1$.
+\end{definition}
+
+
+
+
 
 \bibliographystyle{plain}
 \bibliography{sym}
