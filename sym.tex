@@ -57,6 +57,9 @@ and a finite set $\mathcal R\subseteq \mathbb Q\cap [-1,1]$ of \emph{rewards}
 (so each reward is a rational number between $-1$ and $1$ inclusive),
 with $|\mathcal A|>1$,
 $|\mathcal O|>0$, $|\mathcal R|>0$.
+We assume that $\mathcal R$ satisfies the following property:
+whenever $\mathcal R$ contains any reward $r$, then $\mathcal R$
+also contains $-r$.
 We assume $\mathcal A$, $\mathcal O$, and $\mathcal R$ are mutually disjoint
 (i.e., no reward is an action, no reward is an observation, and no action is an
 observation).
@@ -159,7 +162,43 @@ directly assume that $V^\pi_\mu$ is well-behaved.
     $-1\leq V^\pi_\mu\leq 1$.
 \end{definition}
 
+With the machinery defined so far, it would be possible to now define an
+intelligence measure in the same way as Legg and Hutter,
+declaring the intelligence of an agent $\pi$ to be
+$\sum_{\mu} 2^{-K(\mu)}V^\pi_\mu$ where $\mu$ ranges over the universe
+of all well-behaved environments and $K(\mu)$ is the Kolmogorov complexity
+of $\mu$. But we will instead propose a different intelligence measure
+which apparently has better structural properties. First, though, we need
+to introduce (in its debut appearance) some additional notions.
 
+\section{Dual Agents and Dual Environments}
+
+In the Introduction, we promised that by allowing environments to punish agents,
+we would reveal algebraic structure which is not present when environments are
+not allowed to punish agents. The key to this additional structure is the following
+definition.
+
+\begin{definition}
+(Dual Agents and Dual Environments)
+\begin{enumerate}
+    \item
+    Suppose $s$ is an ORA-sequence. Let $-s$, called the \emph{dual} of $s$,
+    be the ORA-sequence which is equal to $s$ in every way except that,
+    whenever the $(3n+1)$th element of $s$ is a reward $r$,
+    then the $(3n+1)$th element of $-s$ is $-r$.
+    \item
+    Suppose $\pi$ is an agent.
+    We define a new agent $-\pi$, the \emph{dual} of $\pi$,
+    as follows:
+    for each ORA-prompt $p$, for each action $a\in\mathcal A$,
+    $\pi(a|p)=(-\pi)(a|-p)$.
+    \item
+    Suppose $\mu$ is an environment.
+    We define a new environment $-\mu$, the \emph{dual} of $\mu$,
+    as follows:
+    for each ORA-play $p$, for each observatin $o\in\mathcal O$
+    and reward $r\in\mathcal R$, $(-\mu)(or|p)=\mu(o(-r)|p)$.
+\end{enumerate}
 
 
 
