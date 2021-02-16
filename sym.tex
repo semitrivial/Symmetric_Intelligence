@@ -101,9 +101,10 @@ Throughout the paper, $\langle\rangle$ denotes the empty sequence.
         By an \emph{environment}, we mean a function $\mu$
         which assigns to every ORA-play $p$ a probability measure $\mu(p)$
         on $\mathcal O\times\mathcal R$.
-        For each $o\in\mathcal O$ and $r\in\mathcal R$, we write $\mu(or|p)$
+        For each $o\in\mathcal O$ and $r\in\mathcal R$, we write $\mu(\langle o,r\rangle|p)$
         for the probability assigned to $(o,r)$ by $\mu(p)$.
-        Intuitively, we think of $\mu(or|p)$ as the probability that the environment
+        Intuitively, we think of $\mu(\langle o,r\rangle|p)$ as the
+        probability that the environment
         $\mu$ will issue observation $o$ and reward $r$ to the agent in response
         to the ORA-play $p$.
         \item
@@ -193,7 +194,7 @@ definition.
     as follows:
     for each ORA-play $p$, for each observation $o\in\mathcal O$
     and reward $r\in\mathcal R$,
-    \[(-\mu)(or|p)=\mu(o(-r)|{-p}).\]
+    \[(-\mu)(\langle o,r\rangle|p)=\mu(\langle o,-r\rangle|{-p}).\]
 \end{enumerate}
 \end{definition}
 
@@ -208,7 +209,7 @@ definition.
 \end{lemma}
 
 \begin{proof}
-    Follows from the fact that for every real number $r$, $-(-r)=r$.
+    Follows from the fact that for every real number $r$, $--r=r$.
 \end{proof}
 
 In the proof of the following theorem, we write $\frown$ for concatenation.
