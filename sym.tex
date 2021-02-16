@@ -6,6 +6,7 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
 
 \title{Symmetric Intelligence: An Improvement to Legg-Hutter Universal Intelligence}
 \author{Samuel Allen Alexander}
@@ -215,11 +216,13 @@ definition.
 In the proof of the following theorem, we write $\frown$ for concatenation.
 
 \begin{theorem}
+\label{bigtheorem}
     Suppose $\mu$ is a well-behaved environment and $\pi$ is an agent.
     Then
     \[
-        V^{-\pi}_{-\mu}=-V^\pi_\mu.
+        V^{-\pi}_{-\mu}=-V^\pi_\mu
     \]
+    (and the left-hand side is defined if and only if the right-hand side is defined).
 \end{theorem}
 
 \begin{proof}
@@ -270,6 +273,32 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     \end{align*}
 \end{proof}
 
+\begin{corollary}
+\label{twistcorollary}
+    For every agent $\pi$ and environment $\mu$,
+    \[V^\pi_{-\mu}=-V^{-\pi}_{\mu}\]
+    (and the left-hand side is defined if and only if the right-hand side is defined).
+\end{corollary}
+
+\begin{proof}
+    If neither side is defined, then there is nothing to prove.
+    Assume the left-hand side is defined. Then
+    \begin{align*}
+        V^\pi_{-\mu} &= V^{--\pi}_{-\mu} &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
+            &= -V^{-\pi}_\mu, &\mbox{(Theorem \ref{bigtheorem})}
+    \end{align*}
+    as desired. A similar argument holds if we assume the right-hand side is defined.
+\end{proof}
+
+\begin{corollary}
+    For every environment $\mu$, if $\mu$ is well-behaved, then $-\mu$
+    is well-behaved.
+\end{corollary}
+
+\begin{proof}
+    Let $\pi$ be any agent. Since $\mu$ is well-behaved, $V^{-\pi}_\mu$ is defined,
+    thus $V^\pi_{-\mu}=-V^{-\pi}_\mu$ is defined by Corollary \ref{twistcorollary}.
+\end{proof}
 
 \bibliographystyle{plain}
 \bibliography{sym}
