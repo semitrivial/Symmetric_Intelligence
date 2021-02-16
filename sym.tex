@@ -5,6 +5,7 @@
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
 
 \title{Symmetric Intelligence: An Improvement to Legg-Hutter Universal Intelligence}
 \author{Samuel Allen Alexander}
@@ -196,6 +197,21 @@ definition.
 \end{enumerate}
 \end{definition}
 
+\begin{lemma}
+\label{doublesubtractionlemma}
+    \begin{enumerate}
+        \item For each ORA-sequence $s$, $-(-s)=s$.
+        \item For each agent $\pi$, $-(-\pi)=\pi$.
+        \iten For each environment $\mu$, $-(-\mu)=\mu$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Follows from the fact that for every real number $r$, $-(-r)=r$.
+\end{proof}
+
+In the proof of the following theorem, we write $\frown$ for concatenation.
+
 \begin{theorem}
     Suppose $\mu$ is a well-behaved environment and $\pi$ is an agent.
     Then $V^{-\pi}_{-\mu}=-V^\pi_\mu$.
@@ -212,54 +228,27 @@ definition.
     equals the probability $X'$ of generating $-p$
     using $-\pi$ and $-\mu$. Let $|p|$ be the length of $p$.
 
-    Case 1: $|p|=0$. Then $X=X'=1$.
-
-    Case 2: $|p|=1$. Impossible, then $p$ would terminate with an observation,
-    not with a reward or an action.
-
-    Case 3: $|p|=2$. Then we can write $p=(o,r)$.
-    We reason:
+    Case 1: $p$ terminates with a reward.
+    Then $p=q\frown \langle o,r\rangle$
+    for some ORA-play $q$. We reason:
     \begin{align*}
-        X &= \mu(\langle o,r\rangle|\langle\rangle)
+        X &= \mu(\langle o,r\rangle|q)
             &\mbox{(Definition of $X$)}\\
-          &= \mu(\langle o,--r\rangle | {-\langle\rangle})
-            &\mbox{(Since $r=--r$ and $\langle\rangle=-\langle\rangle$)}\\
-          &= (-\mu)(\langle o,-r\rangle | {\langle\rangle})
+          &= \mu(\langle o,--r\rangle | {--q})
+            &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
+          &= (-\mu)(\langle o,-r\rangle | {-q})
             &\mbox{(Definition of $-\mu$)}\\
           &= X'. &\mbox{(Definition of $X'$)}
     \end{align*}
 
-    Case 4: $|p|=3$. Then we can write $p=(o,r,a)$. We reason:
+    Case 2: $p$ terminates with an action.
+    Then $p=q\frown a$ for some ORA-prompt $q$. We reason:
     \begin{align*}
-        X &= \pi(a|o,r)
+        X &= \pi(a|q)
             &\mbox{(Definition of $X$)}\\
-          &= \pi(a|o,--r)
-            &\mbox{(Since $--r=r$)}\\
-          &= (-\pi)(a|o,-r)
-            &\mbox{(Definition of $-\pi$)}\\
-          &= X'. &\mbox{(Definition of $X'$)}
-    \end{align*}
-
-    Case 5: $|p|>3$ and $p$ terminates with a reward.
-    Then we can write $p=(\ldots,a,o,r)$. We reason:
-    \begin{align*}
-        X &= \mu(\langle o,r\rangle|\ldots, a)
-            &\mbox{(Definition of $X$)}\\
-          &= \mu(\langle o,--r\rangle | --(\ldots,a))
-            &\mbox{(Since $--r=r$ and $--(\ldots,a)=(\ldots,a)$)}\\
-          &= (-\mu)(\langle o,-r\rangle | -(\ldots,a))
-            &\mbox{(Definition of $-\mu$)}\\
-          &= X'. &\mbox{(Definition of $X'$)}
-    \end{align*}
-
-    Case 5: $|p|>3$ and $p$ terminates with an action.
-    Then we can write $p=(\ldots,o,r,a)$. We reason:
-    \begin{align*}
-        X &= \pi(a|\ldots,o,r)
-            &\mbox{(Definition of $X$)}\\
-          &= \pi(a|--(\ldots,o,r))
-            &\mbox{(Since $--(\ldots,o,r)=(\ldots,o,r))$}\\
-          &= (-\pi)(a|-(\ldots,o,r))
+          &= \pi(a|{--q})
+            &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
+          &= (-\pi)(a|{-q})
             &\mbox{(Definition of $-\pi$)}\\
           &= X'. &\mbox{(Definition of $X'$)}
     \end{align*}
