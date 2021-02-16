@@ -215,7 +215,10 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
 
 \begin{theorem}
     Suppose $\mu$ is a well-behaved environment and $\pi$ is an agent.
-    Then $V^{-\pi}_{-\mu}=-V^\pi_\mu$.
+    Then
+    \[
+        V^{-\pi}_{-\mu}=-V^\pi_\mu.
+    \]
 \end{theorem}
 
 \begin{proof}
@@ -223,34 +226,45 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     it suffices to show that for each $n\in\mathbb N$,
     $V^{-\pi}_{-\mu,n}=-V^\pi_{\mu,n}$.
     For that, it suffices to show that for every finite ORA-sequence
-    $p$, if $p$ terminates with a reward or an action, then
+    $p$, if $p$ is empty or $p$ terminates with a reward or an action, then
     the probability $X$ of generating $p$ using $\pi$ and $\mu$
     (as in Definition \ref{omnibusdefn} part 6)
     equals the probability $X'$ of generating $-p$
-    using $-\pi$ and $-\mu$.
+    using $-\pi$ and $-\mu$. We will show this by induction on the length of $p$.
 
-    Case 1: $p$ terminates with a reward.
+    Case 1: $p$ is empty. Then $X=X'=1$.
+
+    Case 2: $p$ terminates with a reward.
     Then $p=q\frown \langle o,r\rangle$
-    for some ORA-play $q$. We reason:
+    for some ORA-play $q$. Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
+    (resp.\ $-q$)
+    using $\pi$ and $\mu$ (resp.\ $-\pi$ and $-\mu$). We reason:
     \begin{align*}
-        X &= \mu(\langle o,r\rangle|q)
+        X &= \mu(\langle o,r\rangle|q)Y
             &\mbox{(Definition of $X$)}\\
-          &= \mu(\langle o,--r\rangle | {--q})
+          &= \mu(\langle o,--r\rangle | {--q})Y
             &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
-          &= (-\mu)(\langle o,-r\rangle | {-q})
+          &= (-\mu)(\langle o,-r\rangle | {-q})Y
             &\mbox{(Definition of $-\mu$)}\\
+          &= (-\mu)(\langle o,-r\rangle | {-q})Y'
+            &\mbox{(By induction, $Y=Y'$)}\\
           &= X'. &\mbox{(Definition of $X'$)}
     \end{align*}
 
-    Case 2: $p$ terminates with an action.
-    Then $p=q\frown a$ for some ORA-prompt $q$. We reason:
+    Case 3: $p$ terminates with an action.
+    Then $p=q\frown a$ for some ORA-prompt $q$.
+    Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
+    (resp.\ $-q$)
+    using $\pi$ and $\mu$ (resp.\ $-\pi$ and $-\mu$). We reason:
     \begin{align*}
-        X &= \pi(a|q)
+        X &= \pi(a|q)Y
             &\mbox{(Definition of $X$)}\\
-          &= \pi(a|{--q})
+          &= \pi(a|{--q})Y
             &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
-          &= (-\pi)(a|{-q})
+          &= (-\pi)(a|{-q})Y
             &\mbox{(Definition of $-\pi$)}\\
+          &= (-\pi)(a|{-q})Y'
+            &\mbox{(By induction, $Y=Y'$)}\\
           &= X'. &\mbox{(Definition of $X'$)}
     \end{align*}
 \end{proof}
