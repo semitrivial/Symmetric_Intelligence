@@ -199,10 +199,11 @@ definition.
 
 \begin{lemma}
 \label{doublesubtractionlemma}
+(Double Negation)
     \begin{enumerate}
-        \item For each ORA-sequence $s$, $-(-s)=s$.
-        \item For each agent $\pi$, $-(-\pi)=\pi$.
-        \iten For each environment $\mu$, $-(-\mu)=\mu$.
+        \item For each ORA-sequence $s$, $--s=s$.
+        \item For each agent $\pi$, $--\pi=\pi$.
+        \item For each environment $\mu$, $--\mu=\mu$.
     \end{enumerate}
 \end{lemma}
 
@@ -226,7 +227,7 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     the probability $X$ of generating $p$ using $\pi$ and $\mu$
     (as in Definition \ref{omnibusdefn} part 6)
     equals the probability $X'$ of generating $-p$
-    using $-\pi$ and $-\mu$. Let $|p|$ be the length of $p$.
+    using $-\pi$ and $-\mu$.
 
     Case 1: $p$ terminates with a reward.
     Then $p=q\frown \langle o,r\rangle$
