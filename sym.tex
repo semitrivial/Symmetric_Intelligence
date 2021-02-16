@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}[theorem]{Definition}
 
@@ -47,8 +48,8 @@ should therefore have a negative intelligence level.
 In defining agent and environment below, we attempt to follow
 Legg and Hutter \cite{legg2007universal} as closely as possible,
 except that we permit environments to output rewards from $\mathbb Q \cap [-1,1]$
-rather than just $\mathbb Q\cap [0,1]$ (and, accordingly, we modify what it means
-for an environment to be bounded).
+rather than just $\mathbb Q\cap [0,1]$ (and, accordingly, we modify which well-behaved
+environments to restrict our attention to).
 
 Throughout the paper, we implicitly
 fix a finite set $\mathcal A$ of \emph{actions},
@@ -67,6 +68,7 @@ The acronym ORA stands for ``observation-reward-action''.
 Throughout the paper, $\langle\rangle$ denotes the empty sequence.
 
 \begin{definition}
+\label{omnibusdefn}
     (Agents and environments)
     \begin{enumerate}
         \item
@@ -104,21 +106,10 @@ Throughout the paper, $\langle\rangle$ denotes the empty sequence.
         $\mu$ will issue observation $o$ and reward $r$ to the agent in response
         to the ORA-play $p$.
         \item
-        An infinite ORA-sequence $(o_0,r_0,a_0,\ldots)$ is \emph{possible for agent
-        $\pi$ interacting with environment $\mu$} if the following requirements hold.
-        \begin{itemize}
-            \item The probability $\mu(o_0r_0|\langle\rangle)$ is nonzero.
-            \item The probability $\pi(a_0|o_0r_0)$ is nonzero.
-            \item For each $i>0$, the probability
-                $\mu(o_ir_i|o_0r_0a_0\cdots o_{i-1}r_{i-1}a_{i-1})$ is nonzero.
-            \item For each $i>0$, the probability
-                $\pi(a_i|o_0r_0a_0\cdots o_{i-1}r_{i-1}a_{i-1}o_ir_i)$ is nonzero.
-        \end{itemize}
-        \item
-        If $\pi$ is an agent and $\mu$ is a bounded environment,
-        we write $V^\pi_\mu$ for the expected value (if it exists)
-        of the sum of the rewards in an
-        ORA-sequence $(o_0,r_0,a_0,o_1,r_1,a_1,\ldots)$ randomly obtained as follows:
+        If $\pi$ is an agent, $\mu$ is an environment, and $n\in\mathbb N$,
+        we write $V^\pi_{\mu,n}$ for the expected value of the sum of
+        the first $n$ rewards which would occur in an ORA-sequence
+        $(o_0,r_0,a_0,\ldots,o_n,r_n)$ randomly generated as follows:
         \begin{enumerate}
             \item $(o_0,r_0)\in \mathcal O\times\mathcal R$ is chosen randomly based
             on the probability measure $\mu(\langle\rangle)$.
@@ -133,6 +124,9 @@ Throughout the paper, $\langle\rangle$ denotes the empty sequence.
             $a_i\in\mathcal A$ is chosen randomly based on the probability measure
             $\pi(o_0,r_0,a_0,\ldots,o_{i-1},r_{i-1},a_{i-1},o_i,r_i)$.
         \end{enumerate}
+        \item
+        If $\pi$ is an agent and $\mu$ is an environment,
+        let $V^\pi_\mu=\lim_{n\to\infty}V^{\pi}_{\mu,n}$.
         Intuitively, $V^\pi_\mu$ is the expected reward which $\pi$ would extract
         from $\mu$.
     \end{enumerate}
@@ -196,12 +190,80 @@ definition.
     Suppose $\mu$ is an environment.
     We define a new environment $-\mu$, the \emph{dual} of $\mu$,
     as follows:
-    for each ORA-play $p$, for each observatin $o\in\mathcal O$
+    for each ORA-play $p$, for each observation $o\in\mathcal O$
     and reward $r\in\mathcal R$,
-    \[(-\mu)(or|p)=\mu(o(-r)|p).\]
+    \[(-\mu)(or|p)=\mu(o(-r)|{-p}).\]
 \end{enumerate}
 \end{definition}
 
+\begin{theorem}
+    Suppose $\mu$ is a well-behaved environment and $\pi$ is an agent.
+    Then $V^{-\pi}_{-\mu}=-V^\pi_\mu$.
+\end{theorem}
+
+\begin{proof}
+    By Definition \ref{omnibusdefn} part 7,
+    it suffices to show that for each $n\in\mathbb N$,
+    $V^{-\pi}_{-\mu,n}=-V^\pi_{\mu,n}$.
+    For that, it suffices to show that for every finite ORA-sequence
+    $p$, if $p$ terminates with a reward or an action, then
+    the probability $X$ of generating $p$ using $\pi$ and $\mu$
+    (as in Definition \ref{omnibusdefn} part 6)
+    equals the probability $X'$ of generating $-p$
+    using $-\pi$ and $-\mu$. Let $|p|$ be the length of $p$.
+
+    Case 1: $|p|=0$. Then $X=X'=1$.
+
+    Case 2: $|p|=1$. Impossible, then $p$ would terminate with an observation,
+    not with a reward or an action.
+
+    Case 3: $|p|=2$. Then we can write $p=(o,r)$.
+    We reason:
+    \begin{align*}
+        X &= \mu(\langle o,r\rangle|\langle\rangle)
+            &\mbox{(Definition of $X$)}\\
+          &= \mu(\langle o,--r\rangle | {-\langle\rangle})
+            &\mbox{(Since $r=--r$ and $\langle\rangle=-\langle\rangle$)}\\
+          &= (-\mu)(\langle o,-r\rangle | {\langle\rangle})
+            &\mbox{(Definition of $-\mu$)}\\
+          &= X'. &\mbox{(Definition of $X'$)}
+    \end{align*}
+
+    Case 4: $|p|=3$. Then we can write $p=(o,r,a)$. We reason:
+    \begin{align*}
+        X &= \pi(a|o,r)
+            &\mbox{(Definition of $X$)}\\
+          &= \pi(a|o,--r)
+            &\mbox{(Since $--r=r$)}\\
+          &= (-\pi)(a|o,-r)
+            &\mbox{(Definition of $-\pi$)}\\
+          &= X'. &\mbox{(Definition of $X'$)}
+    \end{align*}
+
+    Case 5: $|p|>3$ and $p$ terminates with a reward.
+    Then we can write $p=(\ldots,a,o,r)$. We reason:
+    \begin{align*}
+        X &= \mu(\langle o,r\rangle|\ldots, a)
+            &\mbox{(Definition of $X$)}\\
+          &= \mu(\langle o,--r\rangle | --(\ldots,a))
+            &\mbox{(Since $--r=r$ and $--(\ldots,a)=(\ldots,a)$)}\\
+          &= (-\mu)(\langle o,-r\rangle | -(\ldots,a))
+            &\mbox{(Definition of $-\mu$)}\\
+          &= X'. &\mbox{(Definition of $X'$)}
+    \end{align*}
+
+    Case 5: $|p|>3$ and $p$ terminates with an action.
+    Then we can write $p=(\ldots,o,r,a)$. We reason:
+    \begin{align*}
+        X &= \pi(a|\ldots,o,r)
+            &\mbox{(Definition of $X$)}\\
+          &= \pi(a|--(\ldots,o,r))
+            &\mbox{(Since $--(\ldots,o,r)=(\ldots,o,r))$}\\
+          &= (-\pi)(a|-(\ldots,o,r))
+            &\mbox{(Definition of $-\pi$)}\\
+          &= X'. &\mbox{(Definition of $X'$)}
+    \end{align*}
+\end{proof}
 
 
 \bibliographystyle{plain}
