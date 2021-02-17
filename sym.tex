@@ -7,6 +7,7 @@
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
 
 \title{Symmetric Intelligence: An Improvement to Legg-Hutter Universal Intelligence}
 \author{Samuel Allen Alexander}
@@ -299,6 +300,132 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     We prove the $\Rightarrow$ direction, the other is similar.
     Let $\pi$ be any agent. Since $\mu$ is well-behaved, $V^{-\pi}_\mu$ is defined,
     thus $V^\pi_{-\mu}=-V^{-\pi}_\mu$ is defined by Corollary \ref{twistcorollary}.
+\end{proof}
+
+\section{A Decomposition Result}
+
+Throughout this section, we write $WB$ for the set of all well-behaved
+environments. For any well-behaved environment $\mu$, we write $K(\mu)$
+for the Kolmogorov complexity of $\mu$.
+
+\begin{definition}
+    By a \emph{weighted performance measure},
+    we mean a function $\Gamma$ which takes one agent $\pi$
+    and one well-defined environment $\mu$ and outputs
+    a real number $\Gamma(\pi,\mu)$, with the following property:
+    for every agent $\pi$, the infinite sum
+    $\sum_{\mu\in WB}\Gamma(\pi,\mu)$ converges.
+\end{definition}
+
+\begin{definition}
+    For any weighted performance measure $\Gamma$, the
+    \emph{intelligence measure given by $\Gamma$} is the function
+    $\Gamma$ which takes an agent $\pi$ and outputs
+    $\Gamma(\pi)=\sum_{\mu\in WB}\Gamma(\pi,\mu)$.
+\end{definition}
+
+\begin{definition}
+\label{intmeasuregivenbyaweightedperformancemeasuredefn}
+    The \emph{Legg-Hutter intelligence measure} is the
+    intelligence measure given by the weighted performance measure
+    $\Gamma(\pi,\mu)=2^{-K(\mu)}V^\pi_\mu$.
+\end{definition}
+
+\begin{definition}
+(Blind agents and environments)
+    \begin{enumerate}
+        \item
+        An agent $\pi$ is \emph{blind} if $\pi$ ignores rewards,
+        by which we mean the following:
+        for every two ORA-prompts $p,p'$, if $p$ and $p'$ are identical
+        except for having different rewards, then $\pi(p)=\pi(p')$.
+        \item
+        An environment $\mu$ is \emph{blind} if $\mu$ ignores actions,
+        by which we mean the following:
+        for every two ORA-plays $p,p'$, if $p$ and $p'$ are identical
+        except for having different actions, then $\mu(p)=\mu(p')$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+(Desiderata of weighted performance measures)
+    Suppose $\Gamma$ is a weighted performance measure.
+    \begin{enumerate}
+        \item We say $\Gamma$ \emph{gives $0$ credit to blind agents}
+        if $\Gamma(\pi,\mu)=0$ for every blind agent $\pi$.
+        \item We say $\Gamma$ \emph{ignores blind environments}
+        if $\Gamma(\pi,\mu)=0$ for every blind environment $\mu$.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    Suppose $\Gamma$ is a weighted performance measure and $\Gamma$
+    is the intelligence measure given by $\Gamma$. If $\Gamma$ gives
+    $0$ credit to blind agents, then for every blind agent $\pi$,
+    $\Gamma(\pi)=0$.
+\end{lemma}
+
+\begin{proof}
+    Assume the hypotheses and suppose $\pi$ is a blind agent.
+    Then
+    \begin{align*}
+        \Gamma(\pi) &= \sum_{\mu\in WB} \Gamma(\pi,\mu)
+            &\mbox{(Definition \ref{intmeasuregivenbyaweightedperformancemeasuredefn})}\\
+          &= \sum_{\mu\in WB} 0
+            &\mbox{(Since $\pi$ is blind)}\\
+          &= 0.
+    \end{align*}
+\end{proof}
+
+\begin{definition}
+\label{specialweightedmeasuresdefn}
+(Two special weighted performance measures)
+    \begin{enumerate}
+        \item
+        We define a weighted performance measure $\Gamma_A$ by
+        \[
+            \Gamma_A(\pi,\mu) = 2^{-K(\mu)}(V^\pi_\mu - V^{-\pi}_\mu).
+        \]
+        \item
+        We define a weighted performance measure $\Gamma_E$ by
+        \[
+            \Gamma_E(\pi,\mu) = 2^{-K(\mu)}(V^\pi_\mu + V^{-\pi}_\mu).
+        \]
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    $\Gamma_A$ gives $0$ credit to blind agents.
+\end{proposition}
+
+\begin{proof}
+    Suppose $\pi$ is a blind agent. It follows that $\pi=-\pi$.
+    Thus, for any environment $\mu$,
+    \begin{align*}
+        \Gamma_A(\pi,\mu) &= 2^{-K(\mu)}(V^\pi_\mu - V^{-\pi}_\mu)
+            &\mbox{(Definition \ref{specialweightedmeasuresdefn})}\\
+          &= 2^{-K(\mu)}(V^\pi_\mu - V^\pi)
+            &\mbox{(Since $\pi=-\pi$)}\\
+          &= 0.
+    \end{align*}
+\end{proof}
+
+\begin{proposition}
+    $\Gamma_E$ ignores blind environments.
+\end{proposition}
+
+\begin{proof}
+    Suppose $\mu$ is a blind environment. It follows that $\mu=-\mu$.
+    Thus, for any agent $\pi$,
+    \begin{align*}
+        \Gamma_E(\pi,\mu) &= 2^{-K(\mu)}(V^\pi_\mu + V^{-\pi}_\mu)
+            &\mbox{(Definition \ref{specialweightedmeasuresdefn})}\\
+          &= 2^{-K(\mu)}(V^\pi_\mu - V^\pi_{-\mu})
+            &\mbox{(Corollary \ref{twistcorollary})}\\
+          &= 2^{-K(\mu)}(V^\pi_\mu - V^\pi_\mu)
+            &\mbox{(Since $\mu=-\mu$)}\\
+          &= 0.
+    \end{align*}
 \end{proof}
 
 \bibliographystyle{plain}
