@@ -8,6 +8,8 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
+\def\LH{\textrm{LH}}
+\def\SYM{\textrm{SYM}}
 
 \title{Symmetric Intelligence: An Improvement to Legg-Hutter Universal Intelligence}
 \author{Samuel Allen Alexander}
@@ -292,6 +294,7 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
 \end{proof}
 
 \begin{corollary}
+\label{wisminuswcorollary}
     For every environment $\mu$, $\mu$ is well-behaved if and only if $-\mu$
     is well-behaved.
 \end{corollary}
@@ -302,131 +305,160 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     thus $V^\pi_{-\mu}=-V^{-\pi}_\mu$ is defined by Corollary \ref{twistcorollary}.
 \end{proof}
 
-\section{A Decomposition Result}
+\section{Symmetric Intelligence}
 
-Throughout this section, we write $WB$ for the set of all well-behaved
-environments. For any well-behaved environment $\mu$, we write $K(\mu)$
-for the Kolmogorov complexity of $\mu$.
-
-\begin{definition}
-    By a \emph{weighted performance measure},
-    we mean a function $\Gamma$ which takes one agent $\pi$
-    and one well-defined environment $\mu$ and outputs
-    a real number $\Gamma(\pi,\mu)$, with the following property:
-    for every agent $\pi$, the infinite sum
-    $\sum_{\mu\in WB}\Gamma(\pi,\mu)$ converges.
-\end{definition}
-
-\begin{definition}
-    For any weighted performance measure $\Gamma$, the
-    \emph{intelligence measure given by $\Gamma$} is the function
-    $\Gamma$ which takes an agent $\pi$ and outputs
-    $\Gamma(\pi)=\sum_{\mu\in WB}\Gamma(\pi,\mu)$.
-\end{definition}
-
-\begin{definition}
-\label{intmeasuregivenbyaweightedperformancemeasuredefn}
-    The \emph{Legg-Hutter intelligence measure} is the
-    intelligence measure given by the weighted performance measure
-    $\Gamma(\pi,\mu)=2^{-K(\mu)}V^\pi_\mu$.
-\end{definition}
+By definition, agent $-\pi$ acts exactly as agent $\pi$ would
+act if $\pi$ were confused into thinking that punishments were rewards
+and rewards were punishments.
+Whatever ingenuity $\pi$ applies to maximize rewards,
+$-\pi$ applies that exact same ingenuity to maximize punishments.
+Thus, if $\Gamma$ is an intelligence function (intended to measure how
+well an agent extracts rewards in some aggregate sense across the whole
+infinite space of all well-behaved environments), then $\Gamma$ ought
+to satisfy the equation:
+\[
+    \Gamma(-\pi) = -\Gamma(\pi).
+\]
+Not every intelligence function satisfies the above equation, but the
+above equation should be considered as a \emph{desideratum} when we
+invent ways of measuring intelligence: all else being equal, an
+intelligence function which satisfies the above equation should be
+considered better than an intelligence function which does not.
+In this section, we will argue that the universal intelligence measure
+proposed by Legg and Hutter can be improved in a natural way which
+will make it satisfy the above equation.
 
 \begin{definition}
-(Blind agents and environments)
+(Complexity)
+    Suppose $\mu$ is an environment.
     \begin{enumerate}
-        \item
-        An agent $\pi$ is \emph{blind} if $\pi$ ignores rewards,
-        by which we mean the following:
-        for every two ORA-prompts $p,p'$, if $p$ and $p'$ are identical
-        except for having different rewards, then $\pi(p)=\pi(p')$.
-        \item
-        An environment $\mu$ is \emph{blind} if $\mu$ ignores actions,
-        by which we mean the following:
-        for every two ORA-plays $p,p'$, if $p$ and $p'$ are identical
-        except for having different actions, then $\mu(p)=\mu(p')$.
-    \end{enumerate}
-\end{definition}
-
-\begin{definition}
-(Desiderata of weighted performance measures)
-    Suppose $\Gamma$ is a weighted performance measure.
-    \begin{enumerate}
-        \item We say $\Gamma$ \emph{gives $0$ credit to blind agents}
-        if $\Gamma(\pi,\mu)=0$ for every blind agent $\pi$.
-        \item We say $\Gamma$ \emph{ignores blind environments}
-        if $\Gamma(\pi,\mu)=0$ for every blind environment $\mu$.
+        \item By $K(\mu)$, we mean the Kolmogorov complexity of $\mu$.
+        \item By $S(\mu)$, the \emph{symmetric complexity} of $\mu$,
+        we mean
+        \[
+            S(\mu) = \max\{K(\mu), K(-\mu)\}.
+        \]
     \end{enumerate}
 \end{definition}
 
 \begin{lemma}
-    Suppose $\Gamma$ is a weighted performance measure and $\Gamma$
-    is the intelligence measure given by $\Gamma$. If $\Gamma$ gives
-    $0$ credit to blind agents, then for every blind agent $\pi$,
-    $\Gamma(\pi)=0$.
+\label{Sissymmetriclemma}
+    For any environment $\mu$, $S(\mu) = S(-\mu)$.
 \end{lemma}
 
 \begin{proof}
-    Assume the hypotheses and suppose $\pi$ is a blind agent.
-    Then
-    \begin{align*}
-        \Gamma(\pi) &= \sum_{\mu\in WB} \Gamma(\pi,\mu)
-            &\mbox{(Definition \ref{intmeasuregivenbyaweightedperformancemeasuredefn})}\\
-          &= \sum_{\mu\in WB} 0
-            &\mbox{(Since $\pi$ is blind)}\\
-          &= 0.
-    \end{align*}
+    Trivial.
 \end{proof}
 
 \begin{definition}
-\label{specialweightedmeasuresdefn}
-(Two special weighted performance measures)
+    Let $W$ be the set of all well-behaved environments.
+    Let $-W=\{-\mu\,:\,\mu\in W\}$.
+\end{definition}
+
+\begin{lemma}
+\label{WequalsminusWlemma}
+$W=-W$.
+\end{lemma}
+
+\begin{proof}
+    By Corollary \ref{wisminuswcorollary}.
+\end{proof}
+
+\begin{definition}
+\label{universalintelligencedefn}
+(Universal Intelligence)
+    Suppose $\pi$ is an agent.
     \begin{enumerate}
         \item
-        We define a weighted performance measure $\Gamma_A$ by
+        The \emph{Legg-Hutter universal intelligence} $\Gamma_{\LH}(\pi)$ is
         \[
-            \Gamma_A(\pi,\mu) = 2^{-K(\mu)}(V^\pi_\mu - V^{-\pi}_\mu).
+            \Gamma_{\LH}(\pi) = \sum_{\mu \in W} 2^{-K(\mu)}V^\pi_\mu.
         \]
         \item
-        We define a weighted performance measure $\Gamma_E$ by
+        The \emph{symmetric universal intelligence} $\Gamma_{\SYM}(\pi)$ is
         \[
-            \Gamma_E(\pi,\mu) = 2^{-K(\mu)}(V^\pi_\mu + V^{-\pi}_\mu).
+            \Gamma_{\SYM}(\pi) = \sum_{\mu\in W} 2^{-S(\mu)}V^\pi_\mu.
         \]
     \end{enumerate}
 \end{definition}
 
-\begin{proposition}
-    $\Gamma_A$ gives $0$ credit to blind agents.
-\end{proposition}
+The following theorem shows that $\Gamma_{\SYM}$ satisfies the above desideratum.
+
+\begin{theorem}
+\label{maintheorem}
+    For every agent $\pi$,
+    \[
+        \Gamma_{\SYM}(-\pi) = -\Gamma_{\SYM}(\pi).
+    \]
+\end{theorem}
 
 \begin{proof}
-    Suppose $\pi$ is a blind agent. It follows that $\pi=-\pi$.
-    Thus, for any environment $\mu$,
+    Let $\pi$ be an agent. Then:
     \begin{align*}
-        \Gamma_A(\pi,\mu) &= 2^{-K(\mu)}(V^\pi_\mu - V^{-\pi}_\mu)
-            &\mbox{(Definition \ref{specialweightedmeasuresdefn})}\\
-          &= 2^{-K(\mu)}(V^\pi_\mu - V^\pi)
-            &\mbox{(Since $\pi=-\pi$)}\\
-          &= 0.
-    \end{align*}
-\end{proof}
-
-\begin{proposition}
-    $\Gamma_E$ ignores blind environments.
-\end{proposition}
-
-\begin{proof}
-    Suppose $\mu$ is a blind environment. It follows that $\mu=-\mu$.
-    Thus, for any agent $\pi$,
-    \begin{align*}
-        \Gamma_E(\pi,\mu) &= 2^{-K(\mu)}(V^\pi_\mu + V^{-\pi}_\mu)
-            &\mbox{(Definition \ref{specialweightedmeasuresdefn})}\\
-          &= 2^{-K(\mu)}(V^\pi_\mu - V^\pi_{-\mu})
+        \Gamma_{\SYM}(-\pi) &= \sum_{\mu\in W} 2^{-S(\mu)}V^{-\pi}_\mu
+            &\mbox{(Definition \ref{universalintelligencedefn})}\\
+          &= -\sum_{\mu\in W} 2^{-S(\mu)}V^\pi_{-\mu}
             &\mbox{(Corollary \ref{twistcorollary})}\\
-          &= 2^{-K(\mu)}(V^\pi_\mu - V^\pi_\mu)
-            &\mbox{(Since $\mu=-\mu$)}\\
-          &= 0.
+          &= -\sum_{\mu\in W} 2^{-S(-\mu)}V^\pi_{-\mu}
+            &\mbox{(Lemma \ref{Sissymmetriclemma})}\\
+          &= -\sum_{\mu\in -W} 2^{-S(\mu)}V^\pi_\mu
+            &\mbox{(Change of variables)}\\
+          &= -\sum_{\mu\in W} 2^{-S(\mu)}V^\pi_\mu
+            &\mbox{(Lemma \ref{WequalsminusWlemma})}\\
+          &= -\Gamma_{\SYM}(\pi).
+            &\mbox{(Definition \ref{universalintelligencedefn})}
     \end{align*}
 \end{proof}
+
+The above desideratum, that $\Gamma(-\pi)=-\Gamma(\pi)$, applies to
+numerical intelligence measures. If one is merely interested in binary
+intelligence comparators (such as those in \cite{alexander2019intelligence}),
+the desideratum can be weakened into a non-numerical comparator form:
+\begin{quote}
+    If $\pi$ is more intelligent than $\rho$,
+    then $-\pi$ should be less intelligent than $-\rho$.
+\end{quote}
+The following corollary shows that $\Gamma_{\SYM}$ satisfies this desideratum too.
+
+\begin{corollary}
+    Let $\pi,\rho$ be agents. If $\Gamma_{\SYM}(\pi)>\Gamma_{\SYM}(\rho)$
+    then $\Gamma_{\SYM}(-\pi)<\Gamma_{\SYM}(-\rho)$.
+\end{corollary}
+
+\begin{proof}
+    By Theorem \ref{maintheorem} and basic algebra.
+\end{proof}
+
+The following corollary shows that $\Gamma_{\SYM}$ satisfies yet another obvious
+desideratum.
+
+\begin{corollary}
+\label{ignoringrewardscorollary}
+    Suppose $\pi$ is an agent which ignores rewards (by which we mean that
+    $\pi(p)$ does not depend on the rewards in $p$).
+    Then $\Gamma_{\SYM}(\pi)=0$.
+\end{corollary}
+
+\begin{proof}
+    The hypothesis clearly implies $\pi=-\pi$. Thus by Theorem
+    \ref{maintheorem}, $\Gamma_{\SYM}(\pi)=-\Gamma_{\SYM}(\pi)$,
+    which forces $\Gamma_{\SYM}(\pi)=0$.
+\end{proof}
+
+Corollary \ref{ignoringrewardscorollary} illuminates why
+symmetric complexity is an improvement over Kolmogorov complexity
+in Definition \ref{universalintelligencedefn}.
+Let $a\in\mathcal A$ be some default action and consider the
+agent $\pi_a$ who always takes action $a$. For any particular environment $\mu$,
+where $\pi_a$ earns some total reward $r$ by blind luck,
+that total reward ought to be cancelled out by $-\mu$, where
+the exact same blind luck becomes blind misfortune and $\pi_a$ earns total reward
+$-r$. But if $K(\mu)\not=K(-\mu)$, then the two opposite outcomes are weighed
+by different factors $2^{-K(\mu)}\not=2^{-K(-\mu)}$, preventing them from
+cancelling each other.
+
+
+
 
 \bibliographystyle{plain}
 \bibliography{sym}
