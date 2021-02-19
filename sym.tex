@@ -41,8 +41,15 @@ We discovered that when negative rewards are allowed, this
 introduces a certain algebraic structure into the agent-environment framework, which
 in turn allows an intelligence definition that is both better-behaved and also
 easier to compute. The main objection we anticipate to our proposed improved
-intelligence measure is that it assigns negative intelligence to certain agents.
-We will argue that this makes sense when environments are capable of punishing
+intelligence measure is that it assigns negative intelligence to certain
+agents\footnote{Thus, this paper falls under the broader
+program of advocating for intelligence measures having different ranges than
+the nonnegative real numbers. In other papers we have advocated
+more extreme extensions of the range of intelligence measures
+\cite{alexander2020archimedean}; by contrast, here we merely question the
+assumption that intelligence never be negative, while leaving aside the
+question of whether intelligence need be measured over the reals.}.
+We would argue that this makes sense when environments are capable of punishing
 agents: the intelligence of a reinforcement learning agent should measure the
 degree to which that agent can extract large rewards on average across many environments;
 an agent who instead extracts large punishments on average across many environments
@@ -172,6 +179,7 @@ which apparently has better structural properties. First, though, we need
 to introduce (in its debut appearance) some additional notions.
 
 \section{Dual Agents and Dual Environments}
+\label{dualsection}
 
 In the Introduction, we promised that by allowing environments to punish agents,
 we would reveal algebraic structure which is not present when environments are
@@ -456,6 +464,47 @@ the exact same blind luck becomes blind misfortune and $\pi_a$ earns total rewar
 $-r$. But if $K(\mu)\not=K(-\mu)$,
 then the different weights $2^{-K(\mu)}\not=2^{-K(-\mu)}$ would prevent
 these two outcomes from cancelling each other.
+
+Of course, Kolmogorov complexity and hence Legg-Hutter intelligence depends
+implicitly on the background model of computation \cite{leike2015bad}.
+One could contrive a background model of computation in which $K(\mu)=K(-\mu)$
+for every environment, in which case the distinct in
+Definition \ref{universalintelligencedefn} would disappear.
+
+\section{Conclusion}
+
+By extending our attention to environments which can punish agents,
+we became aware of algebraic structure in the agent-environment
+framework (Section \ref{dualsection}). This structure allowed us to
+show that by varying the weights used in the Legg-Hutter universal
+intelligence construction, we can construct a similar intelligence
+measure which satisfies a key desideratum (Theorem \ref{maintheorem}).
+
+Similar improvements could probably be made to other intelligence
+measures based on the original Legg-Hutter idea, such as the anytime
+intelligence measure of Hern{\'a}ndez-Orallo and Dowe \cite{hernandez}
+and perhaps the realtime intelligence measure of Gavane \cite{gavane},
+although the latter may involve greater care since negating numbers
+takes a nonzero amount of time. The precise strategy we employ in this
+paper is not relevant to Hibbardian intelligence measures of agents
+who compete in adversarial sequence prediction games
+\cite{hibbard} \cite{alexander2021measuring}. However, the higher-level
+idea still applies: one could argue that a predictor who always dumbly
+makes the same prediction should have intelligence $0$, because making
+such predictions requires zero intelligence, and yet, in some sense
+such a predictor still outperforms predictors who intentionally try
+to lose, and thus one could argue that intentionally-losing predictors
+really ought to have negative Hibbardian intelligence.
+
+Beyond the technical details, at a higher level, a key takeaway of
+this paper is that if intelligence is supposed to measure how much
+reward an agent extracts in aggregate across many environments,
+including environments capable of punishing the agent, then such
+intelligence measures ought to be permitted to output negative
+values for certain agents. It is fun to imagine the trouble
+that maximally anti-intelligent
+agents, such as the negative version of the universally intelligent
+agent AIXI \cite{hutter2004universal}, would get themselves into.
 
 
 \bibliographystyle{plain}
