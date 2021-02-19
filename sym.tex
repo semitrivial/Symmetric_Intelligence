@@ -187,7 +187,7 @@ force $V^\pi_\mu$ to be bounded, we will cut the middleman and
 directly assume that $V^\pi_\mu$ is bounded.
 
 \begin{definition}
-    An environment $\mu$ is \emph{well-behaved} if the following
+    A environment $\mu$ is \emph{well-behaved} if $\mu$ is computable and the following
     condition holds: for every agent $\pi$, $V^\pi_\mu$ exists and
     $-1\leq V^\pi_\mu\leq 1$.
 \end{definition}
@@ -323,6 +323,7 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
 
 \begin{proof}
     We prove the $\Rightarrow$ direction, the other is similar.
+    Clearly $\mu$ is computable if and only if $-\mu$ is computable.
     Let $\pi$ be any agent. Since $\mu$ is well-behaved, $V^{-\pi}_\mu$ is defined
     and $-1\leq V^{-\pi}_\mu\leq 1$.
     By Corollary \ref{twistcorollary},
