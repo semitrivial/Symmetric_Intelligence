@@ -196,9 +196,8 @@ directly assume that $V^\pi_\mu$ is bounded.
 \label{dualsection}
 
 In the Introduction, we promised that by allowing environments to punish agents,
-we would reveal algebraic structure which is not present when environments are
-not allowed to punish agents. The key to this additional structure is the following
-definition.
+we would reveal algebraic structure not otherwise present. The key to this additional
+structure is the following definition.
 
 \begin{definition}
 (Dual Agents and Dual Environments)
@@ -265,7 +264,7 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
 
     Case 2: $p$ terminates with a reward.
     Then $p=q\frown o \frown r$
-    for some ORA-play $q$ which terminates with an action.
+    for some ORA-sequence $q$ which terminates with an action.
     Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
     (resp.\ $-q$)
     using $\pi$ and $\mu$ (resp.\ $-\pi$ and $-\mu$). We reason:
@@ -282,7 +281,7 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     \end{align*}
 
     Case 3: $p$ terminates with an action.
-    Then $p=q\frown a$ for some ORA-prompt $q$ which terminates with a reward.
+    Then $p=q\frown a$ for some ORA-sequence $q$ which terminates with a reward.
     Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
     (resp.\ $-q$)
     using $\pi$ and $\mu$ (resp.\ $-\pi$ and $-\mu$). We reason:
@@ -324,8 +323,12 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
 
 \begin{proof}
     We prove the $\Rightarrow$ direction, the other is similar.
-    Let $\pi$ be any agent. Since $\mu$ is well-behaved, $V^{-\pi}_\mu$ is defined,
-    thus $V^\pi_{-\mu}=-V^{-\pi}_\mu$ is defined by Corollary \ref{twistcorollary}.
+    Let $\pi$ be any agent. Since $\mu$ is well-behaved, $V^{-\pi}_\mu$ is defined
+    and $-1\leq V^{-\pi}_\mu\leq 1$.
+    By Corollary \ref{twistcorollary},
+    $V^\pi_{-\mu}=-V^{-\pi}_\mu$ is defined,
+    implying $-1\leq V^\pi_{-\mu}\leq 1$.
+    By arbitrariness of $\pi$, this shows $-\mu$ is well-behaved.
 \end{proof}
 
 \section{Symmetric Intelligence}
