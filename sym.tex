@@ -152,7 +152,7 @@ Throughout the paper, $\langle\rangle$ denotes the empty sequence.
         \item
         If $\pi$ is an agent and $\mu$ is an environment,
         let $V^\pi_\mu=\lim_{n\to\infty}V^{\pi}_{\mu,n}$.
-        Intuitively, $V^\pi_\mu$ is the expected reward which $\pi$ would extract
+        Intuitively, $V^\pi_\mu$ is the expected total reward which $\pi$ would extract
         from $\mu$.
     \end{enumerate}
 \end{definition}
@@ -172,8 +172,8 @@ restrict attention to environments $\mu$ that never give total reward more than 
 from which it follows that $V^\pi_\mu\leq 1$. This implication is less clear
 when environments can punish the agent, so we take a different approach:
 rather than limit the total reward the environment can give and use that to
-force $V^\pi_\mu$ to be well-behaved, we will cut the middleman and
-directly assume that $V^\pi_\mu$ is well-behaved.
+force $V^\pi_\mu$ to be bounded, we will cut the middleman and
+directly assume that $V^\pi_\mu$ is bounded.
 
 \begin{definition}
     An environment $\mu$ is \emph{well-behaved} if the following
