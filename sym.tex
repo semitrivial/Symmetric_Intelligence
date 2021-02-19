@@ -478,7 +478,7 @@ The following corollary shows that $\Gamma_{\SYM}$ satisfies this desideratum to
     By Theorem \ref{maintheorem} and basic algebra.
 \end{proof}
 
-The following corollary shows that $\Gamma_{\SYM}$ satisfies yet another obvious
+The following corollary shows that $\Gamma_{\SYM}$ satisfies another obvious
 desideratum.
 
 \begin{corollary}
@@ -504,12 +504,16 @@ that total reward ought to be cancelled out by $-\mu$, where
 the exact same blind luck becomes blind misfortune and $\pi_a$ earns total reward
 $-r$ (Corollary \ref{twistcorollary}). But if $K(\mu)\not=K(-\mu)$,
 then the different weights $2^{-K(\mu)}\not=2^{-K(-\mu)}$ would prevent
-these two outcomes from cancelling each other.
+these two outcomes from cancelling each other. Similarly, if an environment
+$\mu$ ignores agent actions, Corollary \ref{twistcorollary} implies
+the contributions of $\mu$ and $-\mu$ cancel each other out in $\Gamma_{\SYM}(\pi)$,
+which is desirable because why should an agent's intelligence depend on
+its interaction with an environment that ignores it?
 
 Of course, Kolmogorov complexity and hence Legg-Hutter intelligence depends
 implicitly on the background model of computation \cite{leike2015bad}.
-One could contrive a background model of computation in which $K(\mu)=K(-\mu)$
-for every environment, in which case the distinction in
+One could contrive a background model of computation where $K=S$,
+in which case the distinction in
 Definition \ref{universalintelligencedefn} would disappear.
 
 \section{Conclusion}
