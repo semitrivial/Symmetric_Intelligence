@@ -9,7 +9,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
 \def\LH{\textrm{LH}}
-\def\SYM{\textrm{SYM}}
+\def\SYM{S}
 
 \title{Symmetric Universal Intelligence: A Variation of Legg-Hutter Universal Intelligence}
 \author{Samuel Allen Alexander}
@@ -362,15 +362,16 @@ didn't know; whereas you, the wise person, if you should wish to lie,
 would always consistently lie?''\ \cite{lesserhippias}
 Likewise if an agent consistently manages to extract the worst possible rewards
 from many environments, we might think the agent is brilliant but
-massochistic.
+masochistic.
 Nevertheless, we would not want to put said agent
 in charge of navigating environments for us (at least not without some
 reverse psychology).}.
 In this section, we will argue that the universal intelligence measure
-proposed by Legg and Hutter can be improved in a natural way which
+proposed by Legg and Hutter can be varied in a natural way which
 will make it satisfy the above equation.
 
 \begin{definition}
+\label{complexitydefn}
 (Complexity)
     Suppose $\mu$ is an environment.
     \begin{enumerate}
@@ -423,6 +424,12 @@ $W=-W$.
         \]
     \end{enumerate}
 \end{definition}
+
+The sum defining $\Gamma_{\LH}$ is absolutely convergent (a fact used ubiquitously
+in Legg and Hutter's paper), and thus the sum defining $\Gamma_{\SYM}$ is also
+absolutely convergent since $2^{-S(\mu)}\leq 2^{-K(\mu)}$. Thus, by a well-known
+theorem from elementary calculus, the sums do not depend on which order the $\mu\in W$
+are enumerated.
 
 The following theorem shows that $\Gamma_{\SYM}$ satisfies the above desideratum.
 
@@ -487,22 +494,22 @@ desideratum.
     which forces $\Gamma_{\SYM}(\pi)=0$.
 \end{proof}
 
-Corollary \ref{ignoringrewardscorollary} illuminates why
-symmetric complexity is an improvement over Kolmogorov complexity
+Corollary \ref{ignoringrewardscorollary} suggests
+symmetric complexity may be an improvement over Kolmogorov complexity
 in Definition \ref{universalintelligencedefn}.
 Let $a\in\mathcal A$ be some default action and consider the
 agent $\pi_a$ who always takes action $a$. For any particular environment $\mu$,
 where $\pi_a$ earns some total reward $r$ by blind luck,
 that total reward ought to be cancelled out by $-\mu$, where
 the exact same blind luck becomes blind misfortune and $\pi_a$ earns total reward
-$-r$. But if $K(\mu)\not=K(-\mu)$,
+$-r$ (Corollary \ref{twistcorollary}). But if $K(\mu)\not=K(-\mu)$,
 then the different weights $2^{-K(\mu)}\not=2^{-K(-\mu)}$ would prevent
 these two outcomes from cancelling each other.
 
 Of course, Kolmogorov complexity and hence Legg-Hutter intelligence depends
 implicitly on the background model of computation \cite{leike2015bad}.
 One could contrive a background model of computation in which $K(\mu)=K(-\mu)$
-for every environment, in which case the distinct in
+for every environment, in which case the distinction in
 Definition \ref{universalintelligencedefn} would disappear.
 
 \section{Conclusion}
