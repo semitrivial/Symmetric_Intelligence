@@ -19,7 +19,19 @@
 \maketitle
 
 \begin{abstract}
-    Fill this in.
+    Is it possible for an agent's intelligence level to be negative?
+    We extend the Legg-Hutter agent-environment framework to include environments
+    capable of punishing the agent with negative rewards. The Legg-Hutter
+    intelligence of an agent attempts to measure how much reward the agent
+    extracts from the universe of all environments in an aggregate sense. Thus,
+    when the framework is extended to allow punishments, it naturally follows
+    that an agent should have negative intelligence if that agent generally
+    extracts more punishments than rewards.
+    Extending the framework in this way, we discover algebraic structural properties
+    not otherwise present. We introduce a variation of Legg-Hutter universal
+    intelligence, which we call symmetric universal intelligence, and use said
+    structural properties to show that this symmetric universal intelligence
+    measure satisfies certain intuitive algebraic desiderata.
 \end{abstract}
 
 \section{Introduction}
@@ -251,7 +263,8 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
 
     Case 2: $p$ terminates with a reward.
     Then $p=q\frown \langle o,r\rangle$
-    for some ORA-play $q$. Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
+    for some ORA-play $q$ which terminates with an action.
+    Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
     (resp.\ $-q$)
     using $\pi$ and $\mu$ (resp.\ $-\pi$ and $-\mu$). We reason:
     \begin{align*}
@@ -267,7 +280,7 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     \end{align*}
 
     Case 3: $p$ terminates with an action.
-    Then $p=q\frown a$ for some ORA-prompt $q$.
+    Then $p=q\frown a$ for some ORA-prompt $q$ which terminates with a reward.
     Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
     (resp.\ $-q$)
     using $\pi$ and $\mu$ (resp.\ $-\pi$ and $-\mu$). We reason:
