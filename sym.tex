@@ -470,6 +470,7 @@ the desideratum can be weakened into a non-numerical comparator form:
 The following corollary shows that $\Gamma_{\SYM}$ satisfies this desideratum too.
 
 \begin{corollary}
+\label{comparatorcorollary}
     Let $\pi,\rho$ be agents. If $\Gamma_{\SYM}(\pi)>\Gamma_{\SYM}(\rho)$
     then $\Gamma_{\SYM}(-\pi)<\Gamma_{\SYM}(-\rho)$.
 \end{corollary}
@@ -524,9 +525,10 @@ we became aware of algebraic structure in the agent-environment
 framework (Section \ref{dualsection}). This structure allowed us to
 show that by varying the weights used in the Legg-Hutter universal
 intelligence construction, we can construct a similar intelligence
-measure which satisfies a key desideratum (Theorem \ref{maintheorem}).
+measure which satisfies key desiderata (Theorem \ref{maintheorem},
+Corollaries \ref{comparatorcorollary} and \ref{ignoringrewardscorollary}).
 
-Similar improvements could probably be made to other intelligence
+Similar modifications could be made to other intelligence
 measures based on the original Legg-Hutter idea, such as the anytime
 intelligence measure of Hern{\'a}ndez-Orallo and Dowe \cite{hernandez}
 and perhaps the realtime intelligence measure of Gavane \cite{gavane},
@@ -535,9 +537,8 @@ takes a nonzero amount of time. The precise strategy we employ in this
 paper is not relevant to Hibbardian intelligence measures of agents
 who compete in adversarial sequence prediction games
 \cite{hibbard} \cite{alexander2021measuring}. However, the higher-level
-idea still applies: one could argue that a predictor who always dumbly
-makes the same prediction should have intelligence $0$, because making
-such predictions requires zero intelligence, and yet, in some sense
+idea still applies: a predictor who always dumbly
+makes the same prediction should have intelligence $0$, and yet, in some sense
 such a predictor still outperforms predictors who intentionally try
 to lose, and thus one could argue that intentionally-losing predictors
 really ought to have negative Hibbardian intelligence.
