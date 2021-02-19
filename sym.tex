@@ -100,11 +100,11 @@ We assume $\mathcal A$, $\mathcal O$, and $\mathcal R$ are mutually disjoint
 (i.e., no reward is an action, no reward is an observation, and no action is an
 observation).
 The acronym ORA stands for ``observation-reward-action''.
-Throughout the paper, $\langle\rangle$ denotes the empty sequence.
+By $\langle\rangle$ we mean the empty sequence.
 
 \begin{definition}
 \label{omnibusdefn}
-    (Agents and environments)
+    (Agents, environments, etc.)
     \begin{enumerate}
         \item
         By an \emph{ORA-sequence}, we mean a sequence $s$ such that the following requirements
@@ -114,7 +114,7 @@ Throughout the paper, $\langle\rangle$ denotes the empty sequence.
             \item If $s$ has a $(3n+1)$th element, that element is a reward.
             \item If $s$ has a $(3n+2)$th element, that element is an action.
         \end{itemize}
-        Thus, informally speaking, a non-empty ORA-sequence
+        Thus, informally speaking, an ORA-sequence is empty or
         looks like ``observation, reward, action, observation, reward, action, ...'';
         if it terminates (i.e., if it is finite), it may terminate with
         either an observation, a reward, or an action.
@@ -135,9 +135,9 @@ Throughout the paper, $\langle\rangle$ denotes the empty sequence.
         By an \emph{environment}, we mean a function $\mu$
         which assigns to every ORA-play $p$ a probability measure $\mu(p)$
         on $\mathcal O\times\mathcal R$.
-        For each $o\in\mathcal O$ and $r\in\mathcal R$, we write $\mu(\langle o,r\rangle|p)$
+        For each $o\in\mathcal O$ and $r\in\mathcal R$, we write $\mu(o,r|p)$
         for the probability assigned to $(o,r)$ by $\mu(p)$.
-        Intuitively, we think of $\mu(\langle o,r\rangle|p)$ as the
+        Intuitively, we think of $\mu(o,r|p)$ as the
         probability that the environment
         $\mu$ will issue observation $o$ and reward $r$ to the agent in response
         to the ORA-play $p$.
@@ -172,7 +172,7 @@ Note that it is possible for $V^\pi_\mu$ to be undefined.
 For example, if $\mu$ is an environment which always issues
 reward $(-1)^n$ in response to the agent's $n$th action,
 then $V^\pi_\mu$ is undefined for every agent $\pi$.
-This would not be the case if rewards were required to be positive,
+This would not be the case if rewards were required to be $\geq 0$,
 so this is one way in which allowing
 punishments complicates the resulting theory.
 
@@ -191,15 +191,6 @@ directly assume that $V^\pi_\mu$ is bounded.
     condition holds: for every agent $\pi$, $V^\pi_\mu$ exists and
     $-1\leq V^\pi_\mu\leq 1$.
 \end{definition}
-
-With the machinery defined so far, it would be possible to now define an
-intelligence measure in the same way as Legg and Hutter,
-declaring the intelligence of an agent $\pi$ to be
-$\sum_{\mu} 2^{-K(\mu)}V^\pi_\mu$ where $\mu$ ranges over the universe
-of all well-behaved environments and $K(\mu)$ is the Kolmogorov complexity
-of $\mu$. But we will instead propose a different intelligence measure
-which apparently has better structural properties. First, though, we need
-to introduce (in its debut appearance) some additional notions.
 
 \section{Dual Agents and Dual Environments}
 \label{dualsection}
@@ -229,7 +220,7 @@ definition.
     as follows:
     for each ORA-play $p$, for each observation $o\in\mathcal O$
     and reward $r\in\mathcal R$,
-    \[(-\mu)(\langle o,r\rangle|p)=\mu(\langle o,-r\rangle|{-p}).\]
+    \[(-\mu)(o,r|p)=\mu(o,-r|{-p}).\]
 \end{enumerate}
 \end{definition}
 
@@ -273,19 +264,19 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     Case 1: $p$ is empty. Then $X=X'=1$.
 
     Case 2: $p$ terminates with a reward.
-    Then $p=q\frown \langle o,r\rangle$
+    Then $p=q\frown o \frown r$
     for some ORA-play $q$ which terminates with an action.
     Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
     (resp.\ $-q$)
     using $\pi$ and $\mu$ (resp.\ $-\pi$ and $-\mu$). We reason:
     \begin{align*}
-        X &= \mu(\langle o,r\rangle|q)Y
+        X &= \mu(o,r|q)Y
             &\mbox{(Definition of $X$)}\\
-          &= \mu(\langle o,--r\rangle | {--q})Y
+          &= \mu(o,--r| {--q})Y
             &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
-          &= (-\mu)(\langle o,-r\rangle | {-q})Y
+          &= (-\mu)(o,-r| {-q})Y
             &\mbox{(Definition of $-\mu$)}\\
-          &= (-\mu)(\langle o,-r\rangle | {-q})Y'
+          &= (-\mu)(o,-r| {-q})Y'
             &\mbox{(By induction, $Y=Y'$)}\\
           &= X'. &\mbox{(Definition of $X'$)}
     \end{align*}
