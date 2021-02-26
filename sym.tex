@@ -86,6 +86,8 @@ except that we permit environments to output rewards from $\mathbb Q \cap [-1,1]
 rather than just $\mathbb Q\cap [0,1]$ (and, accordingly, we modify which well-behaved
 environments to restrict our attention to).
 
+We work in a background theory of computability given by a prefix-free
+universal Turing machine.
 Throughout the paper, we implicitly
 fix a finite set $\mathcal A$ of \emph{actions},
 a finite set $\mathcal O$ of \emph{observations},
@@ -426,7 +428,11 @@ $W=-W$.
     \end{enumerate}
 \end{definition}
 
-The sum defining $\Gamma_{\LH}$ is absolutely convergent, and thus the sum defining
+The sum defining $\Gamma_{\LH}$ is absolutely convergent because the summands
+in absolute value are dominated by the summands defining Chaitin's constant
+(this is why in Section \ref{prelimsecn} we assume a background model of computation
+given by a \emph{prefix-free} universal Turing machine).
+Thus the sum defining
 $\Gamma_{\SYM}$ is also
 absolutely convergent since $2^{-S(\mu)}\leq 2^{-K(\mu)}$. Thus, by a well-known
 theorem from elementary calculus, the sums do not depend on which order the $\mu\in W$
