@@ -424,16 +424,21 @@ Suppose $U$ is any PFUTM.
 \end{enumerate}
 \end{definition}
 
-The following lemma shows that enviro-symmetric UTMs exist; in fact, any PFUTM
+The following lemma shows that enviro-symmetric PFUTMs exist; in fact, any PFUTM
 can be modified into one in a simple way.
 
 \begin{lemma}
-    Given any PFUTM $U_0$, define a new PFUTM $U$ as follows.
+    Given a PFUTM $U_0$, define a new PFUTM $U$ as follows ($x\in 2^*$).
     \begin{enumerate}
-        \item For every $x\in 2^*$, $U(0\frown x)=U_0(x)$.
-        \item For every $x\in 2^*$, if $U_0(x)=\ulcorner p\urcorner$
-        for some $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$,
-        then $U(1\frown x)=\ulcorner -p\urcorner$. Otherwise, $U(1\frown x)$ is undefined.
+        \item If $x=0\frown x_0$, let $U(x)=U_0(x_0)$.
+        \item If $x=1\frown x_0$, systematically enumerate all
+        $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$
+        looking for some $p$ such that $x_0=y\frown \ulcorner p\urcorner$.
+        If no such $p$ exist, $U(x)$ is undefined.
+        Otherwise, $p$ is unique by prefix-freeness of $\ulcorner\bullet\urcorner$.
+        If $U_0(y\frown\ulcorner -p\urcorner)=\ulcorner (o,r)\urcorner$
+        for some $(o,r)\in\mathcal O\times\mathcal R$ then
+        let $U(x)=\ulcorner (o,-r)\urcorner$. Otherwise, $U(x)$ is undefined.
     \end{enumerate}
     Then $U$ is enviro-symmetric.
 \end{lemma}
