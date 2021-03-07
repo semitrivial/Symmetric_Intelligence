@@ -384,8 +384,7 @@ backward model of computation is suitably chosen.
         such that the following condition holds.
         For every prefix-free partial computable function
         $f:\subseteq 2^*\to 2^*$, $\exists p\in 2^*$ such that
-        $\forall x\in 2^*$, $f(x)=U(p\frown x)$ (and the left-hand side is
-        defined if and only if the right-hand side is defined).
+        $\forall x\in 2^*$, $f(x)=U(p\frown x)$.
     \end{enumerate}
 \end{definition}
 
@@ -406,12 +405,11 @@ pairs $(o,r)\in\mathcal O\times\mathcal R$.
 Suppose $U$ is any PFUTM.
 \begin{enumerate}
     \item
-    For any prefix-free partial computable function $f: 2^*\to 2^*$, the
+    For any prefix-free partial computable function $f: \subseteq 2^*\to 2^*$, the
     \emph{Kolmogorov complexity of $f$ according to $U$},
     written $K_U(f)$, is the smallest $n\in\mathbb N$ such that
     there is some $p\in 2^*$ with length $n$ such that
-    $\forall x\in 2^*$, $f(x)=U(p\frown x)$ (the left-hand side being defined
-    if and only if the right-hand side is defined).
+    $\forall x\in 2^*$, $f(x)=U(p\frown x)$.
     \item
     Suppose $\mu$ is a computable environment.
     We define $K_U(\mu)$ to be $K_U(f)$ where $f$
@@ -444,7 +442,19 @@ can be modified into one in a simple way.
 \end{lemma}
 
 \begin{proof}
-    Straightforward.
+    That $U$ is a PFUTM is clear.
+    To show that $U$ is enviro-symmetric, let $\mu$ be an environment.
+    Let $q\in 2^*$ be minimal-length such that
+    $\forall p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$,
+    $U(q\frown \ulcorner p\urcorner)=\ulcorner \mu(p)\urcorner$
+    (loosely speaking, such that $U(q\frown\bullet)$ computes $\mu$).
+    If $q=0\frown q_0$ then by construction $U$ is designed so that $q'=1\frown q_0$
+    has the property that $U(q'\frown \bullet)$ computes $-\mu$.
+    On the other hand, if $q=1\frown q_0$ then the fact that $U(q\frown\bullet)$ computes
+    $--\mu$ implies (by how $U(1\frown q_0\frown\bullet)$ is defined) that
+    $q'=0\frown q_0$ has the property that $U(q'\frown\bullet)$ computes $-\mu$.
+    Either way, $K_U(-\mu)\leq K_U(\mu)$. By a symmetric argument,
+    $K_U(\mu)\leq K_U(-\mu)$, so $K_U(\mu)=K_U(-\mu)$.
 \end{proof}
 
 \begin{definition}
