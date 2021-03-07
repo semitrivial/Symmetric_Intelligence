@@ -86,8 +86,6 @@ except that we permit environments to output rewards from $\mathbb Q \cap [-1,1]
 rather than just $\mathbb Q\cap [0,1]$ (and, accordingly, we modify which well-behaved
 environments to restrict our attention to).
 
-We work in a background theory of computability given by a prefix-free
-universal Turing machine.
 Throughout the paper, we implicitly
 fix a finite set $\mathcal A$ of \emph{actions},
 a finite set $\mathcal O$ of \emph{observations},
@@ -381,7 +379,7 @@ backward model of computation is suitably chosen.
         for all $p,p'\in 2^*$, if $p$ is a strict substring of $p'$,
         then $p$ and $p'$ are not both in the domain of $f$.
         \item A \emph{prefix-free universal Turing machine}
-        (or \emph{prefix-free UTM}) is a prefix-free
+        (or \emph{PFUTM}) is a prefix-free
         partial computable function $U:\subseteq 2^*\to 2^*$
         such that the following condition holds.
         For every prefix-free partial computable function
@@ -405,7 +403,7 @@ pairs $(o,r)\in\mathcal O\times\mathcal R$.
 
 \begin{definition}
 (Kolmogorov Complexity)
-Suppose $U$ is any prefix-free UTM.
+Suppose $U$ is any PFUTM.
 \begin{enumerate}
     \item
     For any prefix-free partial computable function $f: 2^*\to 2^*$, the
@@ -420,27 +418,24 @@ Suppose $U$ is any prefix-free UTM.
     is the prefix-free partial computable function defined by
     $f(\ulcorner p\urcorner)=\ulcorner \mu(p)\urcorner$
     for every $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$.
+    \item
+    We say a PFUTM $U$ is \emph{enviro-symmetric} if
+    $K_U(\mu)=K_U(-\mu)$ for every environment $\mu$.
 \end{enumerate}
 \end{definition}
 
-\begin{definition}
-    For any prefix-free UTM $U$, we define a new prefix-free UTM $U'$ as follows.
-    \begin{enumerate}
-        \item For every $x\in 2^*$, $U'(0\frown x)=U(x)$.
-        \item For every $x\in 2^*$, if $U(x)$ is the code $U(x)=\ulcorner p\urcorner$
-        of some $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$,
-        then $U'(1\frown x)=\ulcorner -p\urcorner$. Otherwise, $U(1\frown x)$ is undefined.
-    \end{enumerate}
-\end{definition}
-
-The following lemma shows that any prefix-free UTM can be modified (as above)
-into a prefix-free UTM which assigns the same Kolmogorov complexity to every
-environment and its dual environment.
+The following lemma shows that enviro-symmetric UTMs exist; in fact, any PFUTM
+can be modified into one in a simple way.
 
 \begin{lemma}
-\label{Sissymmetriclemma}
-    For each prefix-free UTM $U$, $U'$ really is a prefix-free UTM, with the
-    property that for every computable environment $\mu$, $K_{U'}(\mu)=K_{U'}(-\mu)$.
+    Given any PFUTM $U_0$, define a new PFUTM $U$ as follows.
+    \begin{enumerate}
+        \item For every $x\in 2^*$, $U(0\frown x)=U_0(x)$.
+        \item For every $x\in 2^*$, if $U_0(x)=\ulcorner p\urcorner$
+        for some $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$,
+        then $U(1\frown x)=\ulcorner -p\urcorner$. Otherwise, $U(1\frown x)$ is undefined.
+    \end{enumerate}
+    Then $U$ is enviro-symmetric.
 \end{lemma}
 
 \begin{proof}
@@ -464,7 +459,7 @@ $W=-W$.
 \begin{definition}
 \label{universalintelligencedefn}
 For every agent $\pi$
-and prefix-free UTM $U$, the \emph{Legg-Hutter universal intelligence of $\pi$ given
+and PFUTM $U$, the \emph{Legg-Hutter universal intelligence of $\pi$ given
 by $U$}, written $\LH_U(\pi)$, is
 \[
     \LH_U(\pi) = \sum_{\mu \in W} 2^{-K_U(\mu)}V^\pi_\mu.
@@ -478,29 +473,29 @@ Thus, by a well-known
 theorem from elementary calculus, the sum does not depend on which order the $\mu\in W$
 are enumerated.
 
-The following theorem shows that for every prefix-free UTM $U$, $\LH_{U'}$
+The following theorem shows that for every enviro-symmetric PFUTM $U$, $\LH_U$
 satisfies the above desideratum.
 
 \begin{theorem}
 \label{maintheorem}
-    For every agent $\pi$ and prefix-free UTM $U$,
+    For every agent $\pi$ and enviro-symmetric PFUTM $U$,
     \[
-        \LH_{U'}(-\pi) = -\LH_{U'}(\pi).
+        \LH_U(-\pi) = -\LH_U(\pi).
     \]
 \end{theorem}
 
 \begin{proof}
     Let $\pi$ be an agent. Then:
     \begin{align*}
-        \LH_{U'}(-\pi) &= \sum_{\mu\in W} 2^{-K_{U'}(\mu)}V^{-\pi}_\mu
+        \LH_U(-\pi) &= \sum_{\mu\in W} 2^{-K_U(\mu)}V^{-\pi}_\mu
             &\mbox{(Definition \ref{universalintelligencedefn})}\\
-          &= -\sum_{\mu\in W} 2^{-K_{U'}(\mu)}V^\pi_{-\mu}
+          &= -\sum_{\mu\in W} 2^{-K_U(\mu)}V^\pi_{-\mu}
             &\mbox{(Corollary \ref{twistcorollary})}\\
-          &= -\sum_{\mu\in W} 2^{-K_{U'}(-\mu)}V^\pi_{-\mu}
-            &\mbox{(Lemma \ref{Sissymmetriclemma})}\\
-          &= -\sum_{\mu\in -W} 2^{-K_{U'}(\mu)}V^\pi_\mu
+          &= -\sum_{\mu\in W} 2^{-K_U(-\mu)}V^\pi_{-\mu}
+            &\mbox{($U$ is enviro-symmetric)}\\
+          &= -\sum_{\mu\in -W} 2^{-K_U(\mu)}V^\pi_\mu
             &\mbox{(Change of variables)}\\
-          &= -\sum_{\mu\in W} 2^{-K_{U'}(\mu)}V^\pi_\mu
+          &= -\sum_{\mu\in W} 2^{-K_U(\mu)}V^\pi_\mu
             &\mbox{(Lemma \ref{WequalsminusWlemma})}\\
           &= -\LH_{U'}(\pi).
             &\mbox{(Definition \ref{universalintelligencedefn})}
@@ -532,21 +527,21 @@ Legg-Hutter universal intelligence satisfies another obvious desideratum.
 
 \begin{corollary}
 \label{ignoringrewardscorollary}
-    Let $U$ be a prefix-free UTM and
+    Let $U$ be an enviro-symmetric PFUTM and
     suppose $\pi$ is an agent which ignores rewards (by which we mean that
     $\pi(p)$ does not depend on the rewards in $p$).
-    Then $\LH_{U'}(\pi)=0$.
+    Then $\LH_U(\pi)=0$.
 \end{corollary}
 
 \begin{proof}
     The hypothesis clearly implies $\pi=-\pi$. Thus by Theorem
-    \ref{maintheorem}, $\LH_{U'}(\pi)=-\LH_{U'}(\pi)$,
-    forcing $\LH_{U'}(\pi)=0$.
+    \ref{maintheorem}, $\LH_U(\pi)=-\LH_U(\pi)$,
+    forcing $\LH_U(\pi)=0$.
 \end{proof}
 
 Corollary \ref{ignoringrewardscorollary} illustrates why it is appropriate, for
-purposes of Legg-Hutter universal intelligence, to choose a UTM for which $\mu$
-and $-\mu$ have the same Kolmogorov complexity. Consider an agent $\pi_a$
+purposes of Legg-Hutter universal intelligence, to choose an enviro-symmetric PFUTM.
+Consider an agent $\pi_a$
 which always blindly repeats a fixed action $a\in\mathcal A$.
 For any particular environment $\mu$,
 where $\pi_a$ earns some total reward $r$ by blind luck,
