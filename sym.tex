@@ -369,9 +369,77 @@ masochistic.
 Nevertheless, we would not want to put said agent
 in charge of navigating environments for us (at least not without some
 reverse psychology).}.
-In this section, we will argue that the universal intelligence measure
-proposed by Legg and Hutter can be varied in a natural way which
-will make it satisfy the above equation.
+In this section, we will show that the universal intelligence measure
+proposed by Legg and Hutter satisfies the above equation, provided the
+backward model of computation is suitably chosen.
+
+\begin{definition}
+    (Prefix-free universal Turing machines)
+    \begin{enumerate}
+        \item A partial computable function $f:\subseteq 2^*\to 2^*$
+        is \emph{prefix-free} if the following requirement holds:
+        for all $p,p'\in 2^*$, if $p$ is a strict substring of $p'$,
+        then $p$ and $p'$ are not both in the domain of $f$.
+        \item A \emph{prefix-free universal Turing machine}
+        (or \emph{prefix-free UTM}) is a prefix-free
+        partial computable function $U:\subseteq 2^*\to 2^*$
+        such that the following condition holds.
+        For every prefix-free partial computable function
+        $f:\subseteq 2^*\to 2^*$, $\exists p\in 2^*$ such that
+        $\forall x\in 2^*$, $f(x)=U(p\frown x)$ (and the left-hand side is
+        defined if and only if the right-hand side is defined).
+    \end{enumerate}
+\end{definition}
+
+Fix a computable prefix-free binary encoding of
+$(\mathcal O\times \mathcal R\times\mathcal A)^*$, in other words,
+fix a computable function
+$\ulcorner\bullet\urcorner:(\mathcal O\times \mathcal R\times\mathcal A)^*\to 2^*$
+assigning a distinct code $\ulcorner p\urcorner\in 2^*$ to every sequence
+$p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$ in such a way that
+$\ulcorner p\urcorner$ is never a substring of $\ulcorner p'\urcorner$
+for any distinct $p,p'\in (\mathcal O\times \mathcal R\times\mathcal A)^*$.
+That this can be done is clear by the Church-Turing thesis.
+Likewise, fix prefix-free codes $\ulcorner o,r\urcorner$ for all
+pairs $(o,r)\in\mathcal O\times\mathcal R$.
+
+\begin{definition}
+(Kolmogorov Complexity)
+Suppose $U$ is any prefix-free UTM.
+\begin{enumerate}
+    \item
+    For any prefix-free partial computable function $f: 2^*\to 2^*$, the
+    \emph{Kolmogorov complexity of $f$ according to $U$},
+    written $K_U(f)$, is the smallest $n\in\mathbb N$ such that
+    there is some $p\in 2^*$ with length $n$ such that
+    $\forall x\in 2^*$, $f(x)=U(p\frown x)$ (the left-hand side being defined
+    if and only if the right-hand side is defined).
+    \item
+    Suppose $\mu$ is a computable environment.
+    We define $K_U(\mu)$ to be $K_U(f)$ where $f$
+    is the prefix-free partial computable function defined by
+    $f(\ulcorner p\urcorner)=\ulcorner \mu(p)\urcorner$
+    for every $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$.
+\end{definition}
+
+\begin{definition}
+    For any prefix-free UTM $U$, we define a new prefix-free UTM $U'$ as follows.
+    \begin{enumerate}
+        \item For every $x\in 2^*$, $U'(0\frown x)=U(x)$.
+        \item For every $x\in 2^*$, if $U(x)$ is the code $U(x)=\ulcorner p\urcorner$
+        of some $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$,
+        then $U'(1\frown x)=\ulcorner -p\urcorner$. Otherwise, $U(x)$ is undefined.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    For each prefix-free UTM $U$, $U'$ really is a prefix-free UTM, with the
+    property that for any computable environment $\mu$, $K_{U'}(\mu)=K_{U'}(-\mu)$.
+\end{lemma}
+
+\begin{proof}
+    Straightforward.
+\end{proof}
 
 \begin{definition}
 \label{complexitydefn}
