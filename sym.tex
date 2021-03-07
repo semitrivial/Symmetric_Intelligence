@@ -400,7 +400,7 @@ $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$ in such a way that
 $\ulcorner p\urcorner$ is never a substring of $\ulcorner p'\urcorner$
 for any distinct $p,p'\in (\mathcal O\times \mathcal R\times\mathcal A)^*$.
 That this can be done is clear by the Church-Turing thesis.
-Likewise, fix prefix-free codes $\ulcorner o,r\urcorner$ for all
+Likewise, fix prefix-free codes $\ulcorner (o,r)\urcorner$ for all
 pairs $(o,r)\in\mathcal O\times\mathcal R$.
 
 \begin{definition}
@@ -420,6 +420,7 @@ Suppose $U$ is any prefix-free UTM.
     is the prefix-free partial computable function defined by
     $f(\ulcorner p\urcorner)=\ulcorner \mu(p)\urcorner$
     for every $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$.
+\end{enumerate}
 \end{definition}
 
 \begin{definition}
@@ -428,40 +429,22 @@ Suppose $U$ is any prefix-free UTM.
         \item For every $x\in 2^*$, $U'(0\frown x)=U(x)$.
         \item For every $x\in 2^*$, if $U(x)$ is the code $U(x)=\ulcorner p\urcorner$
         of some $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$,
-        then $U'(1\frown x)=\ulcorner -p\urcorner$. Otherwise, $U(x)$ is undefined.
+        then $U'(1\frown x)=\ulcorner -p\urcorner$. Otherwise, $U(1\frown x)$ is undefined.
     \end{enumerate}
 \end{definition}
 
+The following lemma shows that any prefix-free UTM can be modified (as above)
+into a prefix-free UTM which assigns the same Kolmogorov complexity to every
+environment and its dual environment.
+
 \begin{lemma}
+\label{Sissymmetriclemma}
     For each prefix-free UTM $U$, $U'$ really is a prefix-free UTM, with the
-    property that for any computable environment $\mu$, $K_{U'}(\mu)=K_{U'}(-\mu)$.
+    property that for every computable environment $\mu$, $K_{U'}(\mu)=K_{U'}(-\mu)$.
 \end{lemma}
 
 \begin{proof}
     Straightforward.
-\end{proof}
-
-\begin{definition}
-\label{complexitydefn}
-(Complexity)
-    Suppose $\mu$ is an environment.
-    \begin{enumerate}
-        \item By $K(\mu)$, we mean the Kolmogorov complexity of $\mu$.
-        \item By $S(\mu)$, the \emph{symmetric complexity} of $\mu$,
-        we mean
-        \[
-            S(\mu) = \max\{K(\mu), K(-\mu)\}.
-        \]
-    \end{enumerate}
-\end{definition}
-
-\begin{lemma}
-\label{Sissymmetriclemma}
-    For any environment $\mu$, $S(\mu) = S(-\mu)$.
-\end{lemma}
-
-\begin{proof}
-    Trivial.
 \end{proof}
 
 \begin{definition}
@@ -480,117 +463,109 @@ $W=-W$.
 
 \begin{definition}
 \label{universalintelligencedefn}
-(Universal Intelligence)
-    Suppose $\pi$ is an agent.
-    \begin{enumerate}
-        \item
-        The \emph{Legg-Hutter universal intelligence} $\Gamma_{\LH}(\pi)$ is
-        \[
-            \Gamma_{\LH}(\pi) = \sum_{\mu \in W} 2^{-K(\mu)}V^\pi_\mu.
-        \]
-        \item
-        The \emph{symmetric universal intelligence} $\Gamma_{\SYM}(\pi)$ is
-        \[
-            \Gamma_{\SYM}(\pi) = \sum_{\mu\in W} 2^{-S(\mu)}V^\pi_\mu.
-        \]
-    \end{enumerate}
+For every agent $\pi$
+and prefix-free UTM $U$, the \emph{Legg-Hutter universal intelligence of $\pi$ given
+by $U$}, written $\LH_U(\pi)$, is
+\[
+    \LH_U(\pi) = \sum_{\mu \in W} 2^{-K_U(\mu)}V^\pi_\mu.
+\]
 \end{definition}
 
-The sum defining $\Gamma_{\LH}$ is absolutely convergent because the summands
+The sum defining $\LH_U(\pi)$ is absolutely convergent because the summands
 in absolute value are dominated by the summands defining Chaitin's constant
-(this is why in Section \ref{prelimsecn} we assume a background model of computation
-given by a \emph{prefix-free} universal Turing machine).
-Thus the sum defining
-$\Gamma_{\SYM}$ is also
-absolutely convergent since $2^{-S(\mu)}\leq 2^{-K(\mu)}$. Thus, by a well-known
-theorem from elementary calculus, the sums do not depend on which order the $\mu\in W$
+(this is why we insist on the UTM being prefix-free).
+Thus, by a well-known
+theorem from elementary calculus, the sum does not depend on which order the $\mu\in W$
 are enumerated.
 
-The following theorem shows that $\Gamma_{\SYM}$ satisfies the above desideratum.
+The following theorem shows that for every prefix-free UTM $U$, $\LH_{U'}$
+satisfies the above desideratum.
 
 \begin{theorem}
 \label{maintheorem}
-    For every agent $\pi$,
+    For every agent $\pi$ and prefix-free UTM $U$,
     \[
-        \Gamma_{\SYM}(-\pi) = -\Gamma_{\SYM}(\pi).
+        \LH_{U'}(-\pi) = -\LH_{U'}(\pi).
     \]
 \end{theorem}
 
 \begin{proof}
     Let $\pi$ be an agent. Then:
     \begin{align*}
-        \Gamma_{\SYM}(-\pi) &= \sum_{\mu\in W} 2^{-S(\mu)}V^{-\pi}_\mu
+        \LH_{U'}(-\pi) &= \sum_{\mu\in W} 2^{-K_{U'}(\mu)}V^{-\pi}_\mu
             &\mbox{(Definition \ref{universalintelligencedefn})}\\
-          &= -\sum_{\mu\in W} 2^{-S(\mu)}V^\pi_{-\mu}
+          &= -\sum_{\mu\in W} 2^{-K_{U'}(\mu)}V^\pi_{-\mu}
             &\mbox{(Corollary \ref{twistcorollary})}\\
-          &= -\sum_{\mu\in W} 2^{-S(-\mu)}V^\pi_{-\mu}
+          &= -\sum_{\mu\in W} 2^{-K_{U'}(-\mu)}V^\pi_{-\mu}
             &\mbox{(Lemma \ref{Sissymmetriclemma})}\\
-          &= -\sum_{\mu\in -W} 2^{-S(\mu)}V^\pi_\mu
+          &= -\sum_{\mu\in -W} 2^{-K_{U'}(\mu)}V^\pi_\mu
             &\mbox{(Change of variables)}\\
-          &= -\sum_{\mu\in W} 2^{-S(\mu)}V^\pi_\mu
+          &= -\sum_{\mu\in W} 2^{-K_{U'}(\mu)}V^\pi_\mu
             &\mbox{(Lemma \ref{WequalsminusWlemma})}\\
-          &= -\Gamma_{\SYM}(\pi).
+          &= -\LH_{U'}(\pi).
             &\mbox{(Definition \ref{universalintelligencedefn})}
     \end{align*}
 \end{proof}
 
-The above desideratum, that $\Gamma(-\pi)=-\Gamma(\pi)$, applies to
-numerical intelligence measures. If one is merely interested in binary
-intelligence comparators (such as those in \cite{alexander2019intelligence}),
-the desideratum can be weakened into a non-numerical comparator form:
-\begin{quote}
-    If $\pi$ is more intelligent than $\rho$,
-    then $-\pi$ should be less intelligent than $-\rho$.
-\end{quote}
-The following corollary shows that $\Gamma_{\SYM}$ satisfies this desideratum too.
+% The above desideratum, that $\Gamma(-\pi)=-\Gamma(\pi)$, applies to
+% numerical intelligence measures. If one is merely interested in binary
+% intelligence comparators (such as those in \cite{alexander2019intelligence}),
+% the desideratum can be weakened into a non-numerical comparator form:
+% \begin{quote}
+%     If $\pi$ is more intelligent than $\rho$,
+%     then $-\pi$ should be less intelligent than $-\rho$.
+% \end{quote}
+% The following corollary shows that $\Gamma_{\SYM}$ satisfies this desideratum too.
 
-\begin{corollary}
-\label{comparatorcorollary}
-    Let $\pi,\rho$ be agents. If $\Gamma_{\SYM}(\pi)>\Gamma_{\SYM}(\rho)$
-    then $\Gamma_{\SYM}(-\pi)<\Gamma_{\SYM}(-\rho)$.
-\end{corollary}
+% \begin{corollary}
+% \label{comparatorcorollary}
+%     Let $\pi,\rho$ be agents. If $\Gamma_{\SYM}(\pi)>\Gamma_{\SYM}(\rho)$
+%     then $\Gamma_{\SYM}(-\pi)<\Gamma_{\SYM}(-\rho)$.
+% \end{corollary}
 
-\begin{proof}
-    By Theorem \ref{maintheorem} and basic algebra.
-\end{proof}
+% \begin{proof}
+%     By Theorem \ref{maintheorem} and basic algebra.
+% \end{proof}
 
-The following corollary shows that $\Gamma_{\SYM}$ satisfies another obvious
-desideratum.
+The following corollary shows that with suitable choice of UTM,
+Legg-Hutter universal intelligence satisfies another obvious desideratum.
 
 \begin{corollary}
 \label{ignoringrewardscorollary}
-    Suppose $\pi$ is an agent which ignores rewards (by which we mean that
+    Let $U$ be a prefix-free UTM and
+    suppose $\pi$ is an agent which ignores rewards (by which we mean that
     $\pi(p)$ does not depend on the rewards in $p$).
-    Then $\Gamma_{\SYM}(\pi)=0$.
+    Then $\LH_{U'}(\pi)=0$.
 \end{corollary}
 
 \begin{proof}
     The hypothesis clearly implies $\pi=-\pi$. Thus by Theorem
-    \ref{maintheorem}, $\Gamma_{\SYM}(\pi)=-\Gamma_{\SYM}(\pi)$,
-    which forces $\Gamma_{\SYM}(\pi)=0$.
+    \ref{maintheorem}, $\LH_{U'}(\pi)=-\LH_{U'}(\pi)$,
+    forcing $\LH_{U'}(\pi)=0$.
 \end{proof}
 
-Corollary \ref{ignoringrewardscorollary} suggests
-symmetric complexity may be an improvement over Kolmogorov complexity
-in Definition \ref{universalintelligencedefn}.
-Let $a\in\mathcal A$ be some default action and consider the
-agent $\pi_a$ who always takes action $a$. For any particular environment $\mu$,
+Corollary \ref{ignoringrewardscorollary} illustrates why it is appropriate, for
+purposes of Legg-Hutter universal intelligence, to choose a UTM for which $\mu$
+and $-\mu$ have the same Kolmogorov complexity. Consider an agent $\pi_a$
+which always blindly repeats a fixed action $a\in\mathcal A$.
+For any particular environment $\mu$,
 where $\pi_a$ earns some total reward $r$ by blind luck,
 that total reward ought to be cancelled out by $-\mu$, where
 the exact same blind luck becomes blind misfortune and $\pi_a$ earns total reward
-$-r$ (Corollary \ref{twistcorollary}). But if $K(\mu)\not=K(-\mu)$,
-then the different weights $2^{-K(\mu)}\not=2^{-K(-\mu)}$ would prevent
-these two outcomes from cancelling each other. Similarly, if an environment
-$\mu$ ignores agent actions, Corollary \ref{twistcorollary} implies
-the contributions of $\mu$ and $-\mu$ cancel each other out in $\Gamma_{\SYM}(\pi)$,
-which is desirable because why should an agent's intelligence depend on
-its interaction with an environment that ignores it?
+$-r$ (Corollary \ref{twistcorollary}). But if $K_U(\mu)\not=K_U(-\mu)$,
+then the different weights $2^{-K_U(\mu)}\not=2^{-K_U(-\mu)}$ would prevent
+these two outcomes from cancelling each other.
+% Similarly, if an environment
+% $\mu$ ignores agent actions, Corollary \ref{twistcorollary} implies
+% the contributions of $\mu$ and $-\mu$ cancel each other out in $\Gamma_{\SYM}(\pi)$,
+% which is desirable because why should an agent's intelligence depend on
+% its interaction with an environment that ignores it?
 
-Of course, Kolmogorov complexity and hence Legg-Hutter intelligence depends
-implicitly on the background model of computation \cite{leike2015bad}.
-One could contrive a background model of computation where $K=S$,
-in which case the distinction in
-Definition \ref{universalintelligencedefn} would disappear.
+% Of course, Kolmogorov complexity and hence Legg-Hutter intelligence depends
+% implicitly on the background model of computation \cite{leike2015bad}.
+% One could contrive a background model of computation where $K=S$,
+% in which case the distinction in
+% Definition \ref{universalintelligencedefn} would disappear.
 
 \section{Conclusion}
 \label{conclusionsecn}
@@ -601,7 +576,7 @@ framework (Section \ref{dualsection}). This structure allowed us to
 show that by varying the weights used in the Legg-Hutter universal
 intelligence construction, we can construct a similar intelligence
 measure which satisfies key desiderata (Theorem \ref{maintheorem},
-Corollaries \ref{comparatorcorollary} and \ref{ignoringrewardscorollary}).
+and Corollary \ref{ignoringrewardscorollary}).
 
 Similar modifications could be made to other intelligence
 measures based on the original Legg-Hutter idea, such as the anytime
