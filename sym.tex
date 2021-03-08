@@ -11,7 +11,7 @@
 \def\LH{\textrm{LH}}
 \def\SYM{S}
 
-\title{Symmetric Universal Intelligence: A Variation of Legg-Hutter Universal Intelligence}
+\title{Symmetric Complexity: On Legg-Hutter Universal Intelligence with Punishments}
 \author{Samuel Allen Alexander}
 
 \begin{document}
@@ -376,15 +376,15 @@ backward model of computation is suitably chosen.
     \begin{enumerate}
         \item A partial computable function $f:\subseteq 2^*\to 2^*$
         is \emph{prefix-free} if the following requirement holds:
-        for all $p,p'\in 2^*$, if $p$ is a strict substring of $p'$,
-        then $p$ and $p'$ are not both in the domain of $f$.
+        $\forall p,p'\in 2^*$, if $p$ is a strict substring of $p'$,
+        then $f(p)$ and $f(p')$ are not both defined.
         \item A \emph{prefix-free universal Turing machine}
         (or \emph{PFUTM}) is a prefix-free
         partial computable function $U:\subseteq 2^*\to 2^*$
         such that the following condition holds.
         For every prefix-free partial computable function
-        $f:\subseteq 2^*\to 2^*$, $\exists p\in 2^*$ such that
-        $\forall x\in 2^*$, $f(x)=U(p\frown x)$.
+        $f:\subseteq 2^*\to 2^*$, $\exists y\in 2^*$ such that
+        $\forall x\in 2^*$, $f(x)=U(y\frown x)$.
     \end{enumerate}
 \end{definition}
 
@@ -402,23 +402,17 @@ pairs $(o,r)\in\mathcal O\times\mathcal R$.
 
 \begin{definition}
 (Kolmogorov Complexity)
-Suppose $U$ is any PFUTM.
+Suppose $U$ is a PFUTM.
 \begin{enumerate}
     \item
-    For any prefix-free partial computable function $f: \subseteq 2^*\to 2^*$, the
-    \emph{Kolmogorov complexity of $f$ according to $U$},
-    written $K_U(f)$, is the smallest $n\in\mathbb N$ such that
-    there is some $p\in 2^*$ with length $n$ such that
-    $\forall x\in 2^*$, $f(x)=U(p\frown x)$.
+    For each computable environment $\mu$, the \emph{Kolmogorov complexity of $\mu$
+    given by $U$}, written $K_U(\mu)$, is the smallest $n\in\mathbb N$ such that
+    there is some $y\in 2^*$ with length $n$ such that
+    $\forall p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$,
+    $\ulcorner\mu(p)\urcorner=U(y\frown\ulcorner p\urcorner)$.
     \item
-    Suppose $\mu$ is a computable environment.
-    We define $K_U(\mu)$ to be $K_U(f)$ where $f$
-    is the prefix-free partial computable function defined by
-    $f(\ulcorner p\urcorner)=\ulcorner \mu(p)\urcorner$
-    for every $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$.
-    \item
-    We say a PFUTM $U$ is \emph{enviro-symmetric} if
-    $K_U(\mu)=K_U(-\mu)$ for every environment $\mu$.
+    We say $U$ is \emph{enviro-symmetric} if
+    $K_U(\mu)=K_U(-\mu)$ for every computable environment $\mu$.
 \end{enumerate}
 \end{definition}
 
