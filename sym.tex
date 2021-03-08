@@ -397,8 +397,8 @@ $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$ in such a way that
 $\ulcorner p\urcorner$ is never a substring of $\ulcorner p'\urcorner$
 for any distinct $p,p'\in (\mathcal O\times \mathcal R\times\mathcal A)^*$.
 That this can be done is clear by the Church-Turing thesis.
-Likewise, fix prefix-free codes $\ulcorner (o,r)\urcorner$ for all
-pairs $(o,r)\in\mathcal O\times\mathcal R$.
+Likewise, fix prefix-free codes $\ulcorner m\urcorner$ for all
+rational-valued probability-measures $m$ on $\mathcal O\times\mathcal R$.
 
 \begin{definition}
 (Kolmogorov Complexity)
@@ -429,9 +429,13 @@ can be modified into one in a simple way.
         looking for some $p$ such that $x_0=y\frown \ulcorner p\urcorner$.
         If no such $p$ exist, $U(x)$ is undefined.
         Otherwise, $p$ is unique by prefix-freeness of $\ulcorner\bullet\urcorner$.
-        If $U_0(y\frown\ulcorner -p\urcorner)=\ulcorner (o,r)\urcorner$
-        for some $(o,r)\in\mathcal O\times\mathcal R$ then
-        let $U(x)=\ulcorner (o,-r)\urcorner$. Otherwise, $U(x)$ is undefined.
+        If $U_0(y\frown\ulcorner -p\urcorner)=\ulcorner m\urcorner$
+        for some $\mathbb Q$-valued probability-measure $m$
+        on $\mathcal O\times\mathcal R$,
+        then let $U(x)=\ulcorner m'\urcorner$, where
+        $m'$ is the rational-valued probability-measure
+        $m'(o,r)=m(o,-r)$.
+        Otherwise, $U(x)$ is undefined.
     \end{enumerate}
     Then $U$ is enviro-symmetric.
 \end{lemma}
