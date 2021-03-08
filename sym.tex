@@ -398,7 +398,7 @@ $\ulcorner p\urcorner$ is never a substring of $\ulcorner p'\urcorner$
 for any distinct $p,p'\in (\mathcal O\times \mathcal R\times\mathcal A)^*$.
 That this can be done is clear by the Church-Turing thesis.
 Likewise, fix prefix-free codes $\ulcorner m\urcorner$ for all
-rational-valued probability-measures $m$ on $\mathcal O\times\mathcal R$.
+$\mathbb Q$-valued probability-measures $m$ on $\mathcal O\times\mathcal R$.
 
 \begin{definition}
 (Kolmogorov Complexity)
@@ -416,44 +416,34 @@ Suppose $U$ is a PFUTM.
 \end{enumerate}
 \end{definition}
 
-The following lemma shows that enviro-symmetric PFUTMs exist; in fact, any PFUTM
-can be modified into one in a simple way.
-
 \begin{lemma}
-\label{envirosymmexistencelemma}
-    Given a PFUTM $U_0$, define a new PFUTM $U$ as follows ($x\in 2^*$).
-    \begin{enumerate}
-        \item If $x=0\frown x_0$, let $U(x)=U_0(x_0)$.
-        \item If $x=1\frown x_0$, systematically enumerate all
-        $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$
-        looking for some $p$ such that $x_0=y\frown \ulcorner p\urcorner$.
-        If no such $p$ exist, $U(x)$ is undefined.
-        Otherwise, $p$ is unique by prefix-freeness of $\ulcorner\bullet\urcorner$.
-        If $U_0(y\frown\ulcorner -p\urcorner)=\ulcorner m\urcorner$
-        for some $\mathbb Q$-valued probability-measure $m$
-        on $\mathcal O\times\mathcal R$,
-        then let $U(x)=\ulcorner m'\urcorner$, where
-        $m'$ is the rational-valued probability-measure
-        $m'(o,r)=m(o,-r)$.
-        Otherwise, $U(x)$ is undefined.
-    \end{enumerate}
-    Then $U$ is enviro-symmetric.
+    There exists an enviro-symmetric PFUTM.
 \end{lemma}
 
 \begin{proof}
-    That $U$ is a PFUTM is clear.
-    To show that $U$ is enviro-symmetric, let $\mu$ be an environment.
-    Let $q\in 2^*$ be minimal-length such that
-    $\forall p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$,
-    $U(q\frown \ulcorner p\urcorner)=\ulcorner \mu(p)\urcorner$
-    (loosely speaking, such that $U(q\frown\bullet)$ computes $\mu$).
-    If $q=0\frown q_0$ then by construction $U$ is designed so that $q'=1\frown q_0$
-    has the property that $U(q'\frown \bullet)$ computes $-\mu$.
-    On the other hand, if $q=1\frown q_0$ then the fact that $U(q\frown\bullet)$ computes
-    $--\mu$ implies (by how $U(1\frown q_0\frown\bullet)$ is defined) that
-    $q'=0\frown q_0$ has the property that $U(q'\frown\bullet)$ computes $-\mu$.
-    Either way, $K_U(-\mu)\leq K_U(\mu)$. By a symmetric argument,
-    $K_U(\mu)\leq K_U(-\mu)$, so $K_U(\mu)=K_U(-\mu)$.
+    Let $U_0$ be a PFUTM, we will modify $U_0$ to obtain an enviro-symmetric PFUTM.
+    For readability's sake, write $\mathrm{POS}$ for $0$ and $\mathrm{NEG}$ for $1$.
+    Thinking of $U_0$ as a programming language, we define a new programming language
+    $U$ as follows. Every program in $U$ must begin with one of the keywords
+    $\mathrm{POS}$ or $\mathrm{NEG}$. Outputs of $U$ are defined as follows.
+    \begin{itemize}
+        \item $U(\mathrm{POS}\frown x)=U_0(x)$.
+        \item To compute $U(\mathrm{NEG}\frown x)$, find
+        $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$ such that
+        $x=y\frown \ulcorner p\urcorner$ for some $y$ (if no such $p$ exists, diverge).
+        Note that $p$ is unique by prefix-freeness of $\ulcorner\bullet\urcorner$.
+        If $U_0(y\frown \ulcorner -p\urcorner)=\ulcorner m\urcorner$
+        for some $\mathbb Q$-valued probability-measure $m$ on
+        $\mathcal O\times\mathcal R$, then let
+        $U(\mathrm{NEG}\frown x)=\ulcorner m'\urcorner$ where $m'$
+        is the $\mathbb Q$-valued probability-measure on
+        $\mathcal O\times\mathcal R$ defined by $m'(o,r)=m(o,-r)$.
+        Otherwise, diverge.
+    \end{itemize}
+    By construction, if $y$ is any computer program in $U_0$ which computes
+    an environment $\mu$, then $\mathrm{NEG}\frown y$ is a computer program in
+    $U$ which computes $-\mu$. It follows that $U$ is an enviro-symmetric
+    PFUTM.
 \end{proof}
 
 \begin{definition}
