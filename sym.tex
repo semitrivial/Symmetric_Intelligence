@@ -417,6 +417,7 @@ Suppose $U$ is a PFUTM.
 \end{definition}
 
 \begin{lemma}
+\label{envirosymmetricexistencelemma}
     There exists an enviro-symmetric PFUTM.
 \end{lemma}
 
@@ -445,6 +446,17 @@ Suppose $U$ is a PFUTM.
     $U$ which computes $-\mu$. It follows that $U$ is an enviro-symmetric
     PFUTM.
 \end{proof}
+
+The proof of Lemma \ref{envirosymmetricexistencelemma} proves more then required:
+every PFUTM can be modified to make an enviro-symmetric PFUTM. In some sense,
+the construction in the proof of Lemma \ref{envirosymmetricexistencelemma} works
+by eliminating bias: reinforcement learning itself is implicitly biased in its
+convention that rewards be positive and punishments negative. We can imagine
+a parallel universe where RL instead follows the opposite convention, and the
+RL in that parallel universe is no less valid than the RL in our own. To be
+completely unbiased in this sense, a computer program defining an environment
+should specify which of the two RL regimes it is operating in (hence the
+$\mathrm{POS}$ and $\mathrm{NEG}$ keywords).
 
 \begin{definition}
     Let $W$ be the set of all well-behaved environments.
