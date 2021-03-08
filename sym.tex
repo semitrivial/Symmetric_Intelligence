@@ -456,9 +456,10 @@ every PFUTM can be modified to make an enviro-symmetric PFUTM. In some sense,
 the construction in the proof of Lemma \ref{envirosymmetricexistencelemma} works
 by eliminating bias: reinforcement learning itself is implicitly biased in its
 convention that rewards be positive and punishments negative. We can imagine
-a parallel universe where RL instead follows the opposite convention, and the
+a pessimistic parallel universe\footnote{Perhaps inspired by \cite{foucault2012discipline}.}
+where RL instead follows the opposite convention, and the
 RL in that parallel universe is no less valid than the RL in our own. To be
-completely unbiased in this sense, a computer program defining an environment
+unbiased in this sense, a computer program defining an environment
 should specify which of the two RL regimes it is operating in (hence the
 $\mathrm{POS}$ and $\mathrm{NEG}$ keywords).
 
