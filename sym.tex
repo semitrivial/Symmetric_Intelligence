@@ -397,7 +397,7 @@ $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$ in such a way that
 $\ulcorner p\urcorner$ is never a substring of $\ulcorner p'\urcorner$
 for any distinct $p,p'\in (\mathcal O\times \mathcal R\times\mathcal A)^*$.
 That this can be done is clear by the Church-Turing thesis.
-Likewise, fix prefix-free codes $\ulcorner m\urcorner$ for all
+Likewise, computably fix codes $\ulcorner m\urcorner$ for all
 $\mathbb Q$-valued probability-measures $m$ on $\mathcal O\times\mathcal R$.
 
 \begin{definition}
@@ -415,6 +415,10 @@ Suppose $U$ is a PFUTM.
     $K_U(\mu)=K_U(-\mu)$ for every computable environment $\mu$.
 \end{enumerate}
 \end{definition}
+
+Strictly speaking, $K_U(\mu)$ implicitly depends on our encodings
+$\ulcorner \bullet\urcorner$, but we suppress this in the notation because
+including it would not add insight.
 
 \begin{lemma}
 \label{envirosymmetricexistencelemma}
