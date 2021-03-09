@@ -396,7 +396,7 @@ proposed by Legg and Hutter satisfies the above equation, provided the
 backward model of computation is suitably chosen.
 
 We write $2^*$ for the set of finite binary strings.
-We write $f:\subseteq A\to B$ to indicate that $f$'s has codomain $B$
+We write $f:\subseteq A\to B$ to indicate that $f$ has codomain $B$
 that $f$'s domain is some subset of $A$.
 
 \begin{definition}
@@ -413,6 +413,8 @@ that $f$'s domain is some subset of $A$.
         For every prefix-free partial computable function
         $f:\subseteq 2^*\to 2^*$, $\exists y\in 2^*$ such that
         $\forall x\in 2^*$, $f(x)=U(y\frown x)$.
+        In this case, we say $y$ is a \emph{computer program for
+        $f$ in programming language $U$}.
     \end{enumerate}
 \end{definition}
 
