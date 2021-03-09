@@ -5,6 +5,7 @@
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}
 \newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{remark}[theorem]{Remark}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -66,6 +67,17 @@ agents: the intelligence of a reinforcement learning agent should measure the
 degree to which that agent can extract large rewards on average across many environments;
 an agent who instead extracts large punishments on average across many environments
 should therefore have a negative intelligence level.
+
+Leike and Hutter \cite{leike2015bad} pointed out that Legg-Hutter intelligence
+(and related agents such as AIXI) are sensitive to the background choice of a Universal
+Turing Machine (UTM). Certain choices of UTM can make AIXI and Legg-Hutter intelligence
+apparently perform badly. Leike and Hutter lamented the lack of satisfactory answers to
+the question of how to choose a ``natural'' UTM. In this paper we walk a more optimistic
+path, showing that certain choices of UTM can make Legg-Hutter intelligence perform
+nicely. We will argue (in Remark \ref{leikeresponse} below)
+that Legg-Hutter intelligence's sensitivity to choice of UTM is
+in fact not a bug, but a feature, and opine that the quest for ``the one true UTM'' is
+a red herring.
 
 The structure of the paper is as follows:
 \begin{itemize}
@@ -573,17 +585,29 @@ $-r$ (Corollary \ref{twistcorollary}). But if $K_U(\mu)\not=K_U(-\mu)$,
 then the different weights $2^{-K_U(\mu)}\not=2^{-K_U(-\mu)}$ would prevent
 these two outcomes from cancelling each other.
 
+\begin{remark}
+\label{leikeresponse}
+(Responding to Leike and Hutter \cite{leike2015bad})
 The above paragraph suggests that in the context of Legg-Hutter universal intelligence,
 enviro-symmetricity is one answer to Leike and Hutter's question \cite{leike2015bad},
 ``But what are other desirable properties of a UTM?'' We would argue it also sheds light
 on the more general question of what makes a UTM ``natural''. Enviro-symmetricity is
 natural for the context of Legg-Hutter universal intelligence but would be
 irrelevant in contexts not having to do with reinforcement learning environments---just
-as, if we added first-class web-programming support to, say, the C programming language,
+as, if we added first-class web-programming support to the C programming language,
 that would be appropriate for web-programming, but for other applications it would just
 clutter up the language. We opine that in the same way, this might explain the failure of
 attempts \cite{muller2010stationary} to find UTMs that are ``natural'' across-the-board,
-outside of specific contexts.
+outside of specific contexts. We would even go as far as to suggest that the dependence
+of Legg-Hutter universal intelligence on the UTM is a feature, not a bug. There are many
+kinds of intelligence, and Legg-Hutter intelligence's dependence on the UTM
+reflects this. No programming language is one-size-fits-all, but some programming
+languages are better for some contexts, and for any given context, Legg-Hutter intelligence
+would work best using a UTM appropriate for that context. One could even use $\LH_U$ to
+measure intelligence at chess, by contriving the programming language $U$ so that chess-related
+environments have short source-codes and chess-irrelevant environments have longer
+source-codes!
+\end{remark}
 
 We conclude this section with an exercise, suggesting how the techniques of this paper
 can be used to obtain other structural results.
