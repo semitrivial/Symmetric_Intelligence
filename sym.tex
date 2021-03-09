@@ -119,17 +119,17 @@ By $\langle\rangle$ we mean the empty sequence.
     (Agents, environments, etc.)
     \begin{enumerate}
         \item
-        By $(\mathcal O\times\mathcal R\times\mathcal A)^*$ we mean the set of
+        By $(\mathcal O\mathcal R\mathcal A)^*$ we mean the set of
         all finite sequences starting with an observation, ending with an action,
         and following the pattern ``observation, reward, action, ...''.
         \item
-        By $(\mathcal O\times\mathcal R\times\mathcal A)^*\times \mathcal O\times\mathcal R$
-        we mean all sequences of the form $s\frown o\frown r$ where
-        $s\in (\mathcal O\times\mathcal R\times\mathcal A)^*$, $o\in\mathcal O$
+        By $(\mathcal O\mathcal R\mathcal A)^* \mathcal O\mathcal R$
+        we mean the set of all sequences of the form $s\frown o\frown r$ where
+        $s\in (\mathcal O\mathcal R\mathcal A)^*$, $o\in\mathcal O$
         and $r\in\mathcal R$ ($\frown$ denotes concatenation).
         \item
         By an \emph{agent}, we mean a function $\pi$ which assigns to every sequence
-        $s\in (\mathcal O\times\mathcal R\times\mathcal A)^*\times \mathcal O\times\mathcal R$ a $\mathbb Q$-valued probability measure,
+        $s\in (\mathcal O\mathcal R\mathcal A)^* \mathcal O\mathcal R$ a $\mathbb Q$-valued probability measure,
         written $\pi(\bullet|s)$, on $\mathcal A$.
         For every such $s$ and every $a\in\mathcal A$,
         we write $\pi(a|s)$ for $(\pi(\bullet|s))(a)$.
@@ -138,7 +138,7 @@ By $\langle\rangle$ we mean the empty sequence.
         \item
         By an \emph{environment}, we mean a function $\mu$
         which assigns to every
-        $s\in (\mathcal O\times\mathcal R\times\mathcal A)^*$
+        $s\in (\mathcal O\mathcal R\mathcal A)^*$
         a $\mathbb Q$-valued probability measure,
         written $\mu(\bullet|s)$,
         on $\mathcal O\times\mathcal R$.
@@ -225,23 +225,23 @@ structure is the following definition.
 (Dual Agents and Dual Environments)
 \begin{enumerate}
     \item
-    Suppose $s$ is an ORA-sequence. Let $\overline s$
-    be the ORA-sequence which is equal to $s$ in every way except that,
-    whenever the $(3n+1)$th element of $s$ is a reward $r$,
-    then the $(3n+1)$th element of $\overline s$ is $-r$.
+    For any sequence $s$, let $\overline s$ be the sequence which results
+    by replacing every reward $r$ in $s$ by $-r$.
     \item
     Suppose $\pi$ is an agent.
     We define a new agent $\overline \pi$, the \emph{dual} of $\pi$,
     as follows:
-    for each ORA-prompt $p$, for each action $a\in\mathcal A$,
-    \[\overline\pi(a|p)=\pi(a|\overline p).\]
+    for each $s\in (\mathcal O\mathcal R\mathcal A)^*\mathcal O\mathcal R$,
+    for each action $a\in\mathcal A$,
+    \[\overline\pi(a|s)=\pi(a|\overline s).\]
     \item
     Suppose $\mu$ is an environment.
     We define a new environment $\overline\mu$, the \emph{dual} of $\mu$,
     as follows:
-    for each ORA-play $p$, for each observation $o\in\mathcal O$
+    for each $s\in (\mathcal O\mathcal R\mathcal A)^*$,
+    for each observation $o\in\mathcal O$
     and reward $r\in\mathcal R$,
-    \[\overline\mu(o,r|p)=\mu(o,-r|\overline p).\]
+    \[\overline\mu(o,r|s)=\mu(o,-r|\overline s).\]
 \end{enumerate}
 \end{definition}
 
@@ -249,7 +249,7 @@ structure is the following definition.
 \label{doublesubtractionlemma}
 (Double Negation)
     \begin{enumerate}
-        \item For each ORA-sequence $s$, $\overline{\overline s}=s$.
+        \item For each sequence $s$, $\overline{\overline s}=s$.
         \item For each agent $\pi$, $\overline{\overline \pi}=\pi$.
         \item For each environment $\mu$, $\overline{\overline \mu}=\mu$.
     \end{enumerate}
@@ -258,8 +258,6 @@ structure is the following definition.
 \begin{proof}
     Follows from the fact that for every real number $r$, $--r=r$.
 \end{proof}
-
-In the proof of the following theorem, we write $\frown$ for concatenation.
 
 \begin{theorem}
 \label{bigtheorem}
@@ -272,50 +270,51 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
 \end{theorem}
 
 \begin{proof}
-    By Definition \ref{omnibusdefn} part 7,
+    By Definition \ref{omnibusdefn} part 6,
     it suffices to show that for each $n\in\mathbb N$,
     $V^{\overline \pi}_{\overline \mu,n}=-V^\pi_{\mu,n}$.
-    For that, it suffices to show that for every finite ORA-sequence
-    $p$, if $p$ is empty or $p$ terminates with a reward or an action, then
-    the probability $X$ of generating $p$ using $\pi$ and $\mu$
-    (as in Definition \ref{omnibusdefn} part 6)
-    equals the probability $X'$ of generating $\overline p$
+    For that, it suffices to show that for every
+    $s\in ((\mathcal O\mathcal R\mathcal A)^*)
+    \cup ((\mathcal O\mathcal R\mathcal A)^*\mathcal O\mathcal R)$,
+    the probability $X$ of generating $s$ using $\pi$ and $\mu$
+    (as in Definition \ref{omnibusdefn} part 5)
+    equals the probability $X'$ of generating $\overline s$
     using $\overline \pi$ and $\overline \mu$.
-    We will show this by induction on the length of $p$.
+    We will show this by induction on the length of $s$.
 
-    Case 1: $p$ is empty. Then $X=X'=1$.
+    Case 1: $s$ is empty. Then $X=X'=1$.
 
-    Case 2: $p$ terminates with a reward.
-    Then $p=q\frown o \frown r$
-    for some ORA-sequence $q$ which terminates with an action.
-    Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
-    (resp.\ $\overline q$)
+    Case 2: $s$ terminates with a reward.
+    Then $s=t\frown o \frown r$
+    for some $t\in (\mathcal O\mathcal R\mathcal A)^*$.
+    Let $Y$ (resp.\ $Y'$) be the probability of generating $t$
+    (resp.\ $\overline t$)
     using $\pi$ and $\mu$ (resp.\ $\overline \pi$ and $\overline \mu$). We reason:
     \begin{align*}
-        X &= \mu(o,r|q)Y
+        X &= \mu(o,r|t)Y
             &\mbox{(Definition of $X$)}\\
-          &= \mu(o,--r| \overline{\overline q})Y
+          &= \mu(o,--r| \overline{\overline t})Y
             &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
-          &= \overline \mu(o,-r| \overline q)Y
+          &= \overline \mu(o,-r| \overline t)Y
             &\mbox{(Definition of $\overline\mu$)}\\
-          &= \overline \mu(o,-r| \overline q)Y'
+          &= \overline \mu(o,-r| \overline t)Y'
             &\mbox{(By induction, $Y=Y'$)}\\
           &= X'. &\mbox{(Definition of $X'$)}
     \end{align*}
 
-    Case 3: $p$ terminates with an action.
-    Then $p=q\frown a$ for some ORA-sequence $q$ which terminates with a reward.
-    Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
-    (resp.\ $\overline q$)
+    Case 3: $s$ terminates with an action.
+    Then $s=t\frown a$ for some $t\in(\mathcal O\mathcal R\mathcal A)^*\mathcal O\mathcal R$.
+    Let $Y$ (resp.\ $Y'$) be the probability of generating $t$
+    (resp.\ $\overline t$)
     using $\pi$ and $\mu$ (resp.\ $\overline\pi$ and $\overline\mu$). We reason:
     \begin{align*}
-        X &= \pi(a|q)Y
+        X &= \pi(a|t)Y
             &\mbox{(Definition of $X$)}\\
-          &= \pi(a|\overline{\overline q})Y
+          &= \pi(a|\overline{\overline t})Y
             &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
-          &= \overline \pi(a|\overline q)Y
+          &= \overline \pi(a|\overline t)Y
             &\mbox{(Definition of $\overline \pi$)}\\
-          &= \overline \pi(a|\overline q)Y'
+          &= \overline \pi(a|\overline t)Y'
             &\mbox{(By induction, $Y=Y'$)}\\
           &= X'. &\mbox{(Definition of $X'$)}
     \end{align*}
