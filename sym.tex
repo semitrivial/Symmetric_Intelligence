@@ -106,13 +106,12 @@ and a finite set $\mathcal R\subseteq \mathbb Q\cap [-1,1]$ of \emph{rewards}
 (so each reward is a rational number between $-1$ and $1$ inclusive),
 with $|\mathcal A|>1$,
 $|\mathcal O|>0$, $|\mathcal R|>0$.
-We assume that $\mathcal R$ satisfies the following property:
+We assume that $\mathcal R$ has the following property:
 whenever $\mathcal R$ contains any reward $r$, then $\mathcal R$
 also contains $-r$.
 We assume $\mathcal A$, $\mathcal O$, and $\mathcal R$ are mutually disjoint
 (i.e., no reward is an action, no reward is an observation, and no action is an
 observation).
-The acronym ORA stands for ``Observation-Reward-Action''.
 By $\langle\rangle$ we mean the empty sequence.
 
 \begin{definition}
@@ -120,45 +119,38 @@ By $\langle\rangle$ we mean the empty sequence.
     (Agents, environments, etc.)
     \begin{enumerate}
         \item
-        By an \emph{ORA-sequence}, we mean a sequence $s$ such that the following requirements
-        hold for every natural number $n$:
-        \begin{itemize}
-            \item If $s$ has a $(3n)$th element, that element is an observation.
-            \item If $s$ has a $(3n+1)$th element, that element is a reward.
-            \item If $s$ has a $(3n+2)$th element, that element is an action.
-        \end{itemize}
-        Thus, informally speaking, an ORA-sequence is empty or
-        looks like ``observation, reward, action, observation, reward, action, ...'';
-        if it terminates (i.e., if it is finite), it may terminate with
-        either an observation, a reward, or an action.
+        By $(\mathcal O\times\mathcal R\times\mathcal A)^*$ we mean the set of
+        all finite sequences starting with an observation, ending with an action,
+        and following the pattern ``observation, reward, action, ...''.
         \item
-        By an \emph{ORA-prompt}, we mean a non-empty ORA-sequence which
-        terminates with a reward.
+        By $(\mathcal O\times\mathcal R\times\mathcal A)^*\times \mathcal O\times\mathcal R$
+        we mean all sequences of the form $s\frown o\frown r$ where
+        $s\in (\mathcal O\times\mathcal R\times\mathcal A)^*$, $o\in\mathcal O$
+        and $r\in\mathcal R$ ($\frown$ denotes concatenation).
         \item
-        By an \emph{ORA-play}, we mean an ORA-sequence which is either empty or else
-        terminates with an action.
-        \item
-        By an \emph{agent}, we mean a function $\pi$ which assigns to every
-        ORA-prompt $p$ a $\mathbb Q$-valued probability measure,
-        written $\pi(\bullet|p)$, on $\mathcal A$.
-        For every such $p$ and every $a\in\mathcal A$,
-        we write $\pi(a|p)$ for $(\pi(\bullet|p))(a)$.
-        Intuitively, $\pi(a|p)$ is the probability that agent $\pi$
-        will take action $a$ in response to ORA-prompt $p$.
+        By an \emph{agent}, we mean a function $\pi$ which assigns to every sequence
+        $s\in (\mathcal O\times\mathcal R\times\mathcal A)^*\times \mathcal O\times\mathcal R$ a $\mathbb Q$-valued probability measure,
+        written $\pi(\bullet|s)$, on $\mathcal A$.
+        For every such $s$ and every $a\in\mathcal A$,
+        we write $\pi(a|s)$ for $(\pi(\bullet|s))(a)$.
+        Intuitively, $\pi(a|s)$ is the probability that agent $\pi$
+        will take action $a$ in response to history $s$.
         \item
         By an \emph{environment}, we mean a function $\mu$
-        which assigns to every ORA-play $p$ a $\mathbb Q$-valued probability measure,
-        written $\mu(\bullet|p)$,
+        which assigns to every
+        $s\in (\mathcal O\times\mathcal R\times\mathcal A)^*$
+        a $\mathbb Q$-valued probability measure,
+        written $\mu(\bullet|s)$,
         on $\mathcal O\times\mathcal R$.
-        For every such $p$ and every $(o,r)\in\mathcal O\times\mathcal R$,
-        we write $\mu(o,r|p)$ for $(\mu(\bullet|p))(o,r)$.
-        Intuitively, $\mu(o,r|p)$ is the probability that environment
+        For every such $s$ and every $(o,r)\in\mathcal O\times\mathcal R$,
+        we write $\mu(o,r|s)$ for $(\mu(\bullet|s))(o,r)$.
+        Intuitively, $\mu(o,r|s)$ is the probability that environment
         $\mu$ will issue observation $o$ and reward $r$ to the agent in response
-        to ORA-play $p$.
+        to history $s$.
         \item
         If $\pi$ is an agent, $\mu$ is an environment, and $n\in\mathbb N$,
         we write $V^\pi_{\mu,n}$ for the expected value of the sum of
-        the first $n$ rewards which would occur in an ORA-sequence
+        the first $n$ rewards which would occur in the sequence
         $(o_0,r_0,a_0,\ldots,o_n,r_n)$ randomly generated as follows:
         \begin{enumerate}
             \item $(o_0,r_0)\in \mathcal O\times\mathcal R$ is chosen randomly based
