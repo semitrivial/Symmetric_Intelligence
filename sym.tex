@@ -231,23 +231,23 @@ structure is the following definition.
 (Dual Agents and Dual Environments)
 \begin{enumerate}
     \item
-    Suppose $s$ is an ORA-sequence. Let $-s$
+    Suppose $s$ is an ORA-sequence. Let $\overline s$
     be the ORA-sequence which is equal to $s$ in every way except that,
     whenever the $(3n+1)$th element of $s$ is a reward $r$,
-    then the $(3n+1)$th element of $-s$ is $-r$.
+    then the $(3n+1)$th element of $\overline s$ is $-r$.
     \item
     Suppose $\pi$ is an agent.
-    We define a new agent $-\pi$, the \emph{dual} of $\pi$,
+    We define a new agent $\overline \pi$, the \emph{dual} of $\pi$,
     as follows:
     for each ORA-prompt $p$, for each action $a\in\mathcal A$,
-    \[(-\pi)(a|p)=\pi(a|{-p}).\]
+    \[\overline\pi(a|p)=\pi(a|\overline p).\]
     \item
     Suppose $\mu$ is an environment.
-    We define a new environment $-\mu$, the \emph{dual} of $\mu$,
+    We define a new environment $\overline\mu$, the \emph{dual} of $\mu$,
     as follows:
     for each ORA-play $p$, for each observation $o\in\mathcal O$
     and reward $r\in\mathcal R$,
-    \[(-\mu)(o,r|p)=\mu(o,-r|{-p}).\]
+    \[\overline\mu(o,r|p)=\mu(o,-r|\overline p).\]
 \end{enumerate}
 \end{definition}
 
@@ -255,9 +255,9 @@ structure is the following definition.
 \label{doublesubtractionlemma}
 (Double Negation)
     \begin{enumerate}
-        \item For each ORA-sequence $s$, $--s=s$.
-        \item For each agent $\pi$, $--\pi=\pi$.
-        \item For each environment $\mu$, $--\mu=\mu$.
+        \item For each ORA-sequence $s$, $\overline{\overline s}=s$.
+        \item For each agent $\pi$, $\overline{\overline \pi}=\pi$.
+        \item For each environment $\mu$, $\overline{\overline \mu}=\mu$.
     \end{enumerate}
 \end{lemma}
 
@@ -272,7 +272,7 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     Suppose $\mu$ is an environment and $\pi$ is an agent.
     Then
     \[
-        V^{-\pi}_{-\mu}=-V^\pi_\mu
+        V^{\overline \pi}_{\overline \mu}=-V^\pi_\mu
     \]
     (and the left-hand side is defined if and only if the right-hand side is defined).
 \end{theorem}
@@ -280,13 +280,14 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
 \begin{proof}
     By Definition \ref{omnibusdefn} part 7,
     it suffices to show that for each $n\in\mathbb N$,
-    $V^{-\pi}_{-\mu,n}=-V^\pi_{\mu,n}$.
+    $V^{\overline \pi}_{\overline \mu,n}=-V^\pi_{\mu,n}$.
     For that, it suffices to show that for every finite ORA-sequence
     $p$, if $p$ is empty or $p$ terminates with a reward or an action, then
     the probability $X$ of generating $p$ using $\pi$ and $\mu$
     (as in Definition \ref{omnibusdefn} part 6)
-    equals the probability $X'$ of generating $-p$
-    using $-\pi$ and $-\mu$. We will show this by induction on the length of $p$.
+    equals the probability $X'$ of generating $\overline p$
+    using $\overline \pi$ and $\overline \mu$.
+    We will show this by induction on the length of $p$.
 
     Case 1: $p$ is empty. Then $X=X'=1$.
 
@@ -294,16 +295,16 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     Then $p=q\frown o \frown r$
     for some ORA-sequence $q$ which terminates with an action.
     Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
-    (resp.\ $-q$)
-    using $\pi$ and $\mu$ (resp.\ $-\pi$ and $-\mu$). We reason:
+    (resp.\ $\overline q$)
+    using $\pi$ and $\mu$ (resp.\ $\overline \pi$ and $\overline \mu$). We reason:
     \begin{align*}
         X &= \mu(o,r|q)Y
             &\mbox{(Definition of $X$)}\\
-          &= \mu(o,--r| {--q})Y
+          &= \mu(o,--r| \overline{\overline q})Y
             &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
-          &= (-\mu)(o,-r| {-q})Y
-            &\mbox{(Definition of $-\mu$)}\\
-          &= (-\mu)(o,-r| {-q})Y'
+          &= \overline \mu(o,-r| \overline q)Y
+            &\mbox{(Definition of $\overline\mu$)}\\
+          &= \overline \mu(o,-r| \overline q)Y'
             &\mbox{(By induction, $Y=Y'$)}\\
           &= X'. &\mbox{(Definition of $X'$)}
     \end{align*}
@@ -311,16 +312,16 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     Case 3: $p$ terminates with an action.
     Then $p=q\frown a$ for some ORA-sequence $q$ which terminates with a reward.
     Let $Y$ (resp.\ $Y'$) be the probability of generating $q$
-    (resp.\ $-q$)
-    using $\pi$ and $\mu$ (resp.\ $-\pi$ and $-\mu$). We reason:
+    (resp.\ $\overline q$)
+    using $\pi$ and $\mu$ (resp.\ $\overline\pi$ and $\overline\mu$). We reason:
     \begin{align*}
         X &= \pi(a|q)Y
             &\mbox{(Definition of $X$)}\\
-          &= \pi(a|{--q})Y
+          &= \pi(a|\overline{\overline q})Y
             &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
-          &= (-\pi)(a|{-q})Y
-            &\mbox{(Definition of $-\pi$)}\\
-          &= (-\pi)(a|{-q})Y'
+          &= \overline \pi(a|\overline q)Y
+            &\mbox{(Definition of $\overline \pi$)}\\
+          &= \overline \pi(a|\overline q)Y'
             &\mbox{(By induction, $Y=Y'$)}\\
           &= X'. &\mbox{(Definition of $X'$)}
     \end{align*}
@@ -329,7 +330,7 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
 \begin{corollary}
 \label{twistcorollary}
     For every agent $\pi$ and environment $\mu$,
-    \[V^\pi_{-\mu}=-V^{-\pi}_{\mu}\]
+    \[V^\pi_{\overline\mu}=-V^{\overline\pi}_{\mu}\]
     (and the left-hand side is defined if and only if the right-hand side is defined).
 \end{corollary}
 
@@ -337,43 +338,45 @@ In the proof of the following theorem, we write $\frown$ for concatenation.
     If neither side is defined, then there is nothing to prove.
     Assume the left-hand side is defined. Then
     \begin{align*}
-        V^\pi_{-\mu} &= V^{--\pi}_{-\mu} &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
-            &= -V^{-\pi}_\mu, &\mbox{(Theorem \ref{bigtheorem})}
+        V^\pi_{\overline\mu}
+        &= V^{\overline{\overline\pi}}_{\overline\mu}
+            &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
+        &= -V^{\overline\pi}_\mu, &\mbox{(Theorem \ref{bigtheorem})}
     \end{align*}
     as desired. A similar argument holds if we assume the right-hand side is defined.
 \end{proof}
 
 \begin{corollary}
 \label{wisminuswcorollary}
-    For every environment $\mu$, $\mu$ is well-behaved if and only if $-\mu$
+    For every environment $\mu$, $\mu$ is well-behaved if and only if $\overline\mu$
     is well-behaved.
 \end{corollary}
 
 \begin{proof}
     We prove the $\Rightarrow$ direction, the other is similar.
-    Since $\mu$ is well-behaved, $\mu$ is computable, so clearly $-\mu$ is computable.
-    Let $\pi$ be any agent. Since $\mu$ is well-behaved, $V^{-\pi}_\mu$ is defined
-    and $-1\leq V^{-\pi}_\mu\leq 1$.
+    Since $\mu$ is well-behaved, $\mu$ is computable, so clearly $\overline\mu$ is computable.
+    Let $\pi$ be any agent. Since $\mu$ is well-behaved, $V^{\overline\pi}_\mu$ is defined
+    and $-1\leq V^{\overline\pi}_\mu\leq 1$.
     By Corollary \ref{twistcorollary},
-    $V^\pi_{-\mu}=-V^{-\pi}_\mu$ is defined,
-    implying $-1\leq V^\pi_{-\mu}\leq 1$.
-    By arbitrariness of $\pi$, this shows $-\mu$ is well-behaved.
+    $V^\pi_{\overline\mu}=-V^{\overline\pi}_\mu$ is defined,
+    implying $-1\leq V^\pi_{\overline\mu}\leq 1$.
+    By arbitrariness of $\pi$, this shows $\overline\mu$ is well-behaved.
 \end{proof}
 
 \section{Symmetric Intelligence}
 \label{mainsecn}
 
-By definition, agent $-\pi$ acts exactly as agent $\pi$ would
+By definition, agent $\overline\pi$ acts exactly as agent $\pi$ would
 act if $\pi$ were confused into thinking that punishments were rewards
 and rewards were punishments.
 Whatever ingenuity $\pi$ applies to maximize rewards,
-$-\pi$ applies that exact same ingenuity to maximize punishments.
+$\overline\pi$ applies that exact same ingenuity to maximize punishments.
 Thus, if $\Gamma$ is an intelligence function (intended to measure how
 well an agent extracts rewards in some aggregate sense across the whole
 infinite space of all well-behaved environments), then $\Gamma$ ought
 to satisfy the equation:
 \[
-    \Gamma(-\pi) = -\Gamma(\pi).
+    \Gamma(\overline\pi) = -\Gamma(\pi).
 \]
 Not every intelligence function satisfies the above equation, but the
 above equation should be considered desirable when we
@@ -440,7 +443,7 @@ Suppose $U$ is a PFUTM.
     $\ulcorner\mu(p)\urcorner=U(y\frown\ulcorner p\urcorner)$.
     \item
     We say $U$ is \emph{enviro-symmetric} if
-    $K_U(\mu)=K_U(-\mu)$ for every computable environment $\mu$.
+    $K_U(\mu)=K_U(\overline\mu)$ for every computable environment $\mu$.
 \end{enumerate}
 \end{definition}
 
@@ -465,17 +468,17 @@ including it would not add insight.
         $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$ such that
         $x=y\frown \ulcorner p\urcorner$ for some $y$ (if no such $p$ exists, diverge).
         Note that $p$ is unique by prefix-freeness of $\ulcorner\bullet\urcorner$.
-        If $U_0(y\frown \ulcorner -p\urcorner)=\ulcorner m\urcorner$
+        If $U_0(y\frown \ulcorner \overline p\urcorner)=\ulcorner m\urcorner$
         for some $\mathbb Q$-valued probability-measure $m$ on
         $\mathcal O\times\mathcal R$, then let
-        $U(\mathrm{NEG}\frown x)=\ulcorner m'\urcorner$ where $m'$
+        $U(\mathrm{NEG}\frown x)=\ulcorner \overline m\urcorner$ where $\overline m$
         is the $\mathbb Q$-valued probability-measure on
-        $\mathcal O\times\mathcal R$ defined by $m'(o,r)=m(o,-r)$.
+        $\mathcal O\times\mathcal R$ defined by $\overline m(o,r)=m(o,-r)$.
         Otherwise, diverge.
     \end{itemize}
     By construction, if $y$ is any computer program in $U_0$ which computes
     an environment $\mu$, then $\mathrm{NEG}\frown y$ is a computer program in
-    $U$ which computes $-\mu$. It follows that $U$ is an enviro-symmetric
+    $U$ which computes $\overline\mu$. It follows that $U$ is an enviro-symmetric
     PFUTM.
 \end{proof}
 
@@ -493,12 +496,12 @@ $\mathrm{POS}$ and $\mathrm{NEG}$ keywords).
 
 \begin{definition}
     Let $W$ be the set of all well-behaved environments.
-    Let $-W=\{-\mu\,:\,\mu\in W\}$.
+    Let $\overline W=\{\overline\mu\,:\,\mu\in W\}$.
 \end{definition}
 
 \begin{lemma}
 \label{WequalsminusWlemma}
-$W=-W$.
+$W=\overline W$.
 \end{lemma}
 
 \begin{proof}
@@ -529,47 +532,47 @@ satisfies the above desideratum.
 \label{maintheorem}
     For every agent $\pi$ and enviro-symmetric PFUTM $U$,
     \[
-        \LH_U(-\pi) = -\LH_U(\pi).
+        \LH_U(\overline\pi) = -\LH_U(\pi).
     \]
 \end{theorem}
 
 \begin{proof}
     Let $\pi$ be an agent. Then:
     \begin{align*}
-        \LH_U(-\pi) &= \sum_{\mu\in W} 2^{-K_U(\mu)}V^{-\pi}_\mu
+        \LH_U(\overline\pi) &= \sum_{\mu\in W} 2^{-K_U(\mu)}V^{\overline\pi}_\mu
             &\mbox{(Definition \ref{universalintelligencedefn})}\\
-          &= -\sum_{\mu\in W} 2^{-K_U(\mu)}V^\pi_{-\mu}
+          &= -\sum_{\mu\in W} 2^{-K_U(\mu)}V^\pi_{\overline\mu}
             &\mbox{(Corollary \ref{twistcorollary})}\\
-          &= -\sum_{\mu\in W} 2^{-K_U(-\mu)}V^\pi_{-\mu}
+          &= -\sum_{\mu\in W} 2^{-K_U(\overline\mu)}V^\pi_{\overline\mu}
             &\mbox{($U$ is enviro-symmetric)}\\
-          &= -\sum_{\mu\in -W} 2^{-K_U(\mu)}V^\pi_\mu
+          &= -\sum_{\mu\in \overline W} 2^{-K_U(\mu)}V^\pi_\mu
             &\mbox{(Change of variables)}\\
           &= -\sum_{\mu\in W} 2^{-K_U(\mu)}V^\pi_\mu
             &\mbox{(Lemma \ref{WequalsminusWlemma})}\\
-          &= -\LH_{U'}(\pi).
+          &= -\LH_{U}(\pi).
             &\mbox{(Definition \ref{universalintelligencedefn})}
     \end{align*}
 \end{proof}
 
-% The above desideratum, that $\Gamma(-\pi)=-\Gamma(\pi)$, applies to
-% numerical intelligence measures. If one is merely interested in binary
-% intelligence comparators (such as those in \cite{alexander2019intelligence}),
-% the desideratum can be weakened into a non-numerical comparator form:
-% \begin{quote}
-%     If $\pi$ is more intelligent than $\rho$,
-%     then $-\pi$ should be less intelligent than $-\rho$.
-% \end{quote}
-% The following corollary shows that $\Gamma_{\SYM}$ satisfies this desideratum too.
+The above desideratum, that $\Gamma(\overline\pi)=-\Gamma(\pi)$, applies to
+numerical intelligence measures. If one is merely interested in binary
+intelligence comparators (such as those in \cite{alexander2019intelligence}),
+the desideratum can be weakened into a non-numerical comparator form:
+\begin{quote}
+    If $\pi$ is more intelligent than $\rho$,
+    then $\overline\pi$ should be less intelligent than $\overline\rho$.
+\end{quote}
+The following corollary shows that $\Gamma_{\SYM}$ satisfies this desideratum too.
 
-% \begin{corollary}
-% \label{comparatorcorollary}
-%     Let $\pi,\rho$ be agents. If $\Gamma_{\SYM}(\pi)>\Gamma_{\SYM}(\rho)$
-%     then $\Gamma_{\SYM}(-\pi)<\Gamma_{\SYM}(-\rho)$.
-% \end{corollary}
+\begin{corollary}
+\label{comparatorcorollary}
+    Let $\pi,\rho$ be agents. If $\Gamma_{\SYM}(\pi)>\Gamma_{\SYM}(\rho)$
+    then $\Gamma_{\SYM}(\overline\pi)<\Gamma_{\SYM}(\overline\rho)$.
+\end{corollary}
 
-% \begin{proof}
-%     By Theorem \ref{maintheorem} and basic algebra.
-% \end{proof}
+\begin{proof}
+    By Theorem \ref{maintheorem} and basic algebra.
+\end{proof}
 
 The following corollary shows that with suitable choice of UTM,
 Legg-Hutter universal intelligence satisfies another obvious desideratum.
@@ -583,7 +586,7 @@ Legg-Hutter universal intelligence satisfies another obvious desideratum.
 \end{corollary}
 
 \begin{proof}
-    The hypothesis clearly implies $\pi=-\pi$. Thus by Theorem
+    The hypothesis clearly implies $\pi=\overline\pi$. Thus by Theorem
     \ref{maintheorem}, $\LH_U(\pi)=-\LH_U(\pi)$,
     forcing $\LH_U(\pi)=0$.
 \end{proof}
@@ -594,10 +597,10 @@ Consider an agent $\pi_a$
 which always blindly repeats a fixed action $a\in\mathcal A$.
 For any particular environment $\mu$,
 where $\pi_a$ earns some total reward $r$ by blind luck,
-that total reward ought to be cancelled out by $-\mu$, where
+that total reward ought to be cancelled out by $\overline\mu$, where
 the exact same blind luck becomes blind misfortune and $\pi_a$ earns total reward
-$-r$ (Corollary \ref{twistcorollary}). But if $K_U(\mu)\not=K_U(-\mu)$,
-then the different weights $2^{-K_U(\mu)}\not=2^{-K_U(-\mu)}$ would prevent
+$-r$ (Corollary \ref{twistcorollary}). But if $K_U(\mu)\not=K_U(\overline\mu)$,
+then the different weights $2^{-K_U(\mu)}\not=2^{-K_U(\overline\mu)}$ would prevent
 these two outcomes from cancelling each other.
 
 \begin{remark}
