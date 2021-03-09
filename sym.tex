@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}
+\newtheorem{exercise}[theorem]{Exercise}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -576,7 +577,7 @@ The above paragraph suggests that in the context of Legg-Hutter universal intell
 enviro-symmetricity is one answer to Leike and Hutter's question \cite{leike2015bad},
 ``But what are other desirable properties of a UTM?'' We would argue it also sheds light
 on the more general question of what makes a UTM ``natural''. Enviro-symmetricity is
-natural for the context of Legg-Hutter universal intelligence but would be utterly
+natural for the context of Legg-Hutter universal intelligence but would be
 irrelevant in contexts not having to do with reinforcement learning environments---just
 as, if we added first-class web-programming support to, say, the C programming language,
 that would be appropriate for web-programming, but for other applications it would just
@@ -584,6 +585,38 @@ clutter up the language. We opine that in the same way, this might explain the f
 attempts \cite{muller2010stationary} to find UTMs that are ``natural'' across-the-board,
 outside of specific contexts.
 
+We conclude this section with an exercise, suggesting how the techniques of this paper
+can be used to obtain other structural results.
+
+\begin{exercise} (Permutations)
+    \begin{enumerate}
+        \item
+        For each permutation $P:\mathcal A\to\mathcal A$ of the action-space,
+        for each history $h\in (\mathcal O\times\mathcal R\times\mathcal A)^*$,
+        let $P(h)$ be the result of applying $P$ to all the actions in $h$.
+        For each agent $\pi$, let $P(\pi)$ be the agent defined by
+        $(P(\pi))(a|h)=\pi(P(a)|P(h))$. For each environment $\mu$, let
+        $P(\mu)$ be the environment defined by
+        $(P(\mu))(o,r|h)=\mu(o,r|P(h))$. Show that in general
+        $V^\pi_\mu = V^{P(\pi)}_{P^{-1}(\mu)}$
+        and
+        $V^{P(\pi)}_\mu = V^\pi_{P(\mu)}$.
+        \item
+        Say that a PFUTM $U$ is \emph{enviro-permutable} if
+        $K_U(\mu)=K_U(P(\mu))$ for every computable environment $\mu$
+        and permutation $P:\mathcal A\to\mathcal A$. Imitating the proof of
+        Lemma \ref{envirosymmetricexistencelemma}, show how any given
+        PFUTM can be transformed into an enviro-permutable PFUTM.
+        (Hint: The details can be simplified by citing a theorem from group
+        theory which says that every permutation is a product of transpositions.)
+        \item
+        Show that if $U$ is an enviro-permutable PFUTM, then $\LH_U(P(\pi))=\LH_U(\pi)$
+        for every agent $\pi$ and permutation $P:\mathcal A\to\mathcal A$.
+        \item
+        Modify this exercise to apply to permutations $P:\mathcal O\to\mathcal O$
+        of the observation-space.
+    \end{enumerate}
+\end{exercise}
 
 % Similarly, if an environment
 % $\mu$ ignores agent actions, Corollary \ref{twistcorollary} implies
