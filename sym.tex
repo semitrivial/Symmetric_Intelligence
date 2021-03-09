@@ -419,13 +419,13 @@ that $f$'s domain is some subset of $A$.
 \end{definition}
 
 Fix a computable prefix-free binary encoding of
-$(\mathcal O\times \mathcal R\times\mathcal A)^*$, in other words,
+$(\mathcal O \mathcal R\mathcal A)^*$, in other words,
 fix a computable function
-$\ulcorner\bullet\urcorner:(\mathcal O\times \mathcal R\times\mathcal A)^*\to 2^*$
-assigning a distinct code $\ulcorner p\urcorner\in 2^*$ to every sequence
-$p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$ in such a way that
-$\ulcorner p\urcorner$ is never a substring of $\ulcorner p'\urcorner$
-for any distinct $p,p'\in (\mathcal O\times \mathcal R\times\mathcal A)^*$.
+$\ulcorner\bullet\urcorner:(\mathcal O \mathcal R\mathcal A)^*\to 2^*$
+assigning a distinct code $\ulcorner s\urcorner\in 2^*$ to every sequence
+$s\in (\mathcal O \mathcal R\mathcal A)^*$ in such a way that
+$\ulcorner s\urcorner$ is never a substring of $\ulcorner s'\urcorner$
+for any distinct $s,s'\in (\mathcal O \mathcal R\mathcal A)^*$.
 That this can be done is clear by the Church-Turing thesis.
 Likewise, computably fix codes $\ulcorner m\urcorner$ for all
 $\mathbb Q$-valued probability-measures $m$ on $\mathcal O\times\mathcal R$.
@@ -437,9 +437,10 @@ Suppose $U$ is a PFUTM.
     \item
     For each computable environment $\mu$, the \emph{Kolmogorov complexity of $\mu$
     given by $U$}, written $K_U(\mu)$, is the smallest $n\in\mathbb N$ such that
-    there is some $y\in 2^*$ with length $n$ such that
-    $\forall p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$,
-    $\ulcorner\mu(\bullet|p)\urcorner=U(y\frown\ulcorner p\urcorner)$.
+    there is some computer program of length $n$, in programming language $U$,
+    for the function $f$ defined by
+    $f(\ulcorner s\urcorner)=\ulcorner \mu(\bullet|s)\urcorner$
+    for all $s\in (\mathcal O \mathcal R\mathcal A)^*$.
     \item
     We say $U$ is \emph{enviro-symmetric} if
     $K_U(\mu)=K_U(\overline\mu)$ for every computable environment $\mu$.
@@ -464,7 +465,7 @@ including it would not add insight.
     \begin{itemize}
         \item $U(\mathrm{POS}\frown x)=U_0(x)$.
         \item To compute $U(\mathrm{NEG}\frown x)$, find
-        $p\in (\mathcal O\times \mathcal R\times\mathcal A)^*$ such that
+        $p\in (\mathcal O \mathcal R\mathcal A)^*$ such that
         $x=y\frown \ulcorner p\urcorner$ for some $y$ (if no such $p$ exists, diverge).
         Note that $p$ is unique by prefix-freeness of $\ulcorner\bullet\urcorner$.
         If $U_0(y\frown
@@ -633,12 +634,12 @@ can be used to obtain other structural results.
     \begin{enumerate}
         \item
         For each permutation $P:\mathcal A\to\mathcal A$ of the action-space,
-        for each history $h\in (\mathcal O\times\mathcal R\times\mathcal A)^*$,
-        let $P(h)$ be the result of applying $P$ to all the actions in $h$.
+        for each sequence $s$,
+        let $P(s)$ be the result of applying $P$ to all the actions in $s$.
         For each agent $\pi$, let $P(\pi)$ be the agent defined by
-        $(P(\pi))(a|h)=\pi(P(a)|P(h))$. For each environment $\mu$, let
+        $(P(\pi))(a|s)=\pi(P(a)|P(s))$. For each environment $\mu$, let
         $P(\mu)$ be the environment defined by
-        $(P(\mu))(o,r|h)=\mu(o,r|P(h))$. Show that in general
+        $(P(\mu))(o,r|s)=\mu(o,r|P(s))$. Show that in general
         $V^\pi_\mu = V^{P(\pi)}_{P^{-1}(\mu)}$
         and
         $V^{P(\pi)}_\mu = V^\pi_{P(\mu)}$.
@@ -648,8 +649,6 @@ can be used to obtain other structural results.
         and permutation $P:\mathcal A\to\mathcal A$. Imitating the proof of
         Lemma \ref{envirosymmetricexistencelemma}, show how any given
         PFUTM can be transformed into an enviro-permutable PFUTM.
-        (Hint: The details can be simplified by citing a theorem from group
-        theory which says that every permutation is a product of transpositions.)
         \item
         Show that if $U$ is an enviro-permutable PFUTM, then $\LH_U(P(\pi))=\LH_U(\pi)$
         for every agent $\pi$ and permutation $P:\mathcal A\to\mathcal A$.
