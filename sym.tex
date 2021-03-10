@@ -22,18 +22,18 @@
 
 \begin{abstract}
     Can an agent's intelligence level be negative?
-    We extend the Legg-Hutter agent-environment framework to include environments
-    capable of punishing the agent with negative rewards. The Legg-Hutter
-    intelligence of an agent attempts to measure how much reward the agent
-    extracts from the universe of all environments in an aggregate sense. Thus,
-    when the framework is extended to allow punishments, it naturally follows
-    that an agent should have negative intelligence if that agent generally
-    extracts more punishments than rewards.
-    Extending the framework in this way, we discover algebraic structural properties
-    not otherwise present. We introduce a variation of Legg-Hutter universal
-    intelligence, which we call symmetric universal intelligence, and use said
-    structural properties to show that this symmetric universal intelligence
-    measure satisfies certain intuitive algebraic desiderata.
+    We extend the Legg-Hutter agent-environment framework to include punishments
+    and argue for an affirmative answer to that question.
+    We show that if the background universal Turing machine (UTM) admits
+    vertically symmetric Kolmogorov complexities,
+    then the resulting Legg-Hutter intelligence measure is symmetric about
+    the origin (in particular, this implies reward-ignoring agents
+    have Legg-Hutter intelligence $0$, the first ever exact explicit computation
+    of Legg-Hutter intelligence). This property of admitting symmetric
+    Kolmogorov complexities is one answer to a question of Leike and Hutter,
+    ``But what are other desirable properties of a UTM?'' Having provided one
+    answer to that question, we also address the question of natural UTMs
+    more generally, vindicating Legg-Hutter intelligence.
 \end{abstract}
 
 \section{Introduction}
@@ -635,22 +635,22 @@ can be used to obtain other structural results.
         \item
         For each permutation $P:\mathcal A\to\mathcal A$ of the action-space,
         for each sequence $s$,
-        let $P(s)$ be the result of applying $P$ to all the actions in $s$.
-        For each agent $\pi$, let $P(\pi)$ be the agent defined by
-        $(P(\pi))(a|s)=\pi(P(a)|P(s))$. For each environment $\mu$, let
-        $P(\mu)$ be the environment defined by
-        $(P(\mu))(o,r|s)=\mu(o,r|P(s))$. Show that in general
-        $V^\pi_\mu = V^{P(\pi)}_{P^{-1}(\mu)}$
+        let $Ps$ be the result of applying $P$ to all the actions in $s$.
+        For each agent $\pi$, let $P\pi$ be the agent defined by
+        $P\pi(a|s)=\pi(Pa|Ps)$. For each environment $\mu$, let
+        $P\mu$ be the environment defined by
+        $P\mu(o,r|s)=\mu(o,r|Ps)$. Show that in general
+        $V^\pi_\mu = V^{P\pi}_{P^{-1}\mu}$
         and
-        $V^{P(\pi)}_\mu = V^\pi_{P(\mu)}$.
+        $V^{P\pi}_\mu = V^\pi_{P\mu}$.
         \item
         Say that a PFUTM $U$ is \emph{enviro-permutable} if
-        $K_U(\mu)=K_U(P(\mu))$ for every computable environment $\mu$
+        $K_U(\mu)=K_U(P\mu)$ for every computable environment $\mu$
         and permutation $P:\mathcal A\to\mathcal A$. Imitating the proof of
         Lemma \ref{envirosymmetricexistencelemma}, show how any given
         PFUTM can be transformed into an enviro-permutable PFUTM.
         \item
-        Show that if $U$ is an enviro-permutable PFUTM, then $\LH_U(P(\pi))=\LH_U(\pi)$
+        Show that if $U$ is an enviro-permutable PFUTM, then $\LH_U(P\pi)=\LH_U(\pi)$
         for every agent $\pi$ and permutation $P:\mathcal A\to\mathcal A$.
         \item
         Modify this exercise to apply to permutations $P:\mathcal O\to\mathcal O$
