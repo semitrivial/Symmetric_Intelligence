@@ -422,13 +422,14 @@ that $f$'s domain is some subset of $A$.
     \end{enumerate}
 \end{definition}
 
-Fix a computable prefix-free binary encoding of
+Fix a computable prefix-free, postfix-free binary encoding of
 $(\mathcal O \mathcal R\mathcal A)^*$, in other words,
 fix a computable function
 $\ulcorner\bullet\urcorner:(\mathcal O \mathcal R\mathcal A)^*\to 2^*$
 assigning a distinct code $\ulcorner s\urcorner\in 2^*$ to every sequence
 $s\in (\mathcal O \mathcal R\mathcal A)^*$ in such a way that
-$\ulcorner s\urcorner$ is never an initial segment of $\ulcorner s'\urcorner$
+$\ulcorner s\urcorner$ is never an initial segment nor terminal segment
+of $\ulcorner s'\urcorner$
 for any distinct $s,s'\in (\mathcal O \mathcal R\mathcal A)^*$.
 That this can be done is clear by the Church-Turing thesis.
 Likewise, computably fix codes $\ulcorner m\urcorner$ for all
@@ -474,7 +475,7 @@ including it would not add insight.
         \item To compute $U(\mathrm{NEG}\frown x)$, find
         $s\in (\mathcal O \mathcal R\mathcal A)^*$ such that
         $x=y\frown \ulcorner s\urcorner$ for some $y$ (if no such $s$ exists, diverge).
-        Note that $s$ is unique by prefix-freeness of $\ulcorner\bullet\urcorner$.
+        Note that $s$ is unique by postfix-freeness of $\ulcorner\bullet\urcorner$.
         If $
             U_0(y\frown
             \ulcorner \hspace{.2em} \overline s\hspace{.2em}\urcorner)
