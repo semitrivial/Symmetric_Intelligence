@@ -24,7 +24,7 @@
     Can an agent's intelligence level be negative?
     We extend the Legg-Hutter agent-environment framework to include punishments
     and argue for an affirmative answer to that question.
-    We show that if the background universal Turing machine (UTM) admits
+    We show that if the background Universal Turing Machine (UTM) admits
     vertically symmetric Kolmogorov complexities,
     then the resulting Legg-Hutter intelligence measure is symmetric about
     the origin (in particular, this implies reward-ignoring agents
@@ -57,9 +57,10 @@ main objection we anticipate to our extended framework
 is that it implies the negative intelligence of certain
 agents\footnote{Thus, this paper falls under the broader
 program of advocating for intelligence measures having different ranges than
-the nonnegative reals. In other papers we have advocated
+the nonnegative reals. Alexander has advocated
 more extreme extensions of the range of intelligence measures
-\cite{alexander2020archimedean}; by contrast, here we merely question the
+\cite{alexander2020archimedean} \cite{alexander2021measuring}; by contrast,
+here we merely question the
 assumption that intelligence never be negative, leaving aside the
 question of whether intelligence should be real-valued.}.
 We would argue that this makes perfect sense when environments are capable of punishing
@@ -69,14 +70,15 @@ an agent who instead extracts large punishments on average across many environme
 should therefore have a negative intelligence level.
 
 Leike and Hutter \cite{leike2015bad} pointed out that Legg-Hutter intelligence
-(and related agents such as AIXI) are sensitive to the background choice of a Universal
+(and related agents such as AIXI \cite{hutter2004universal}) are sensitive
+to the background choice of a Universal
 Turing Machine (UTM). Certain choices of UTM can make AIXI and Legg-Hutter intelligence
 apparently perform badly. Leike and Hutter lamented the lack of satisfactory answers to
-the question of how to choose a ``natural'' UTM. In this paper we walk a more optimistic
-path, showing that certain choices of UTM can make Legg-Hutter intelligence perform
-nicely. We will argue (in Remark \ref{leikeresponse} below)
-that Legg-Hutter intelligence's sensitivity to choice of UTM is
-in fact not a bug, but a feature, and opine that the quest for ``the one true UTM'' is
+the question of how to choose a ``natural'' UTM. This paper is more optimistic:
+we show that certain UTM qualities improve the performance of Legg-Hutter
+intelligence. We will argue (in Remark \ref{leikeresponse} below)
+that Legg-Hutter intelligence's UTM-sensitivity is
+a feature, not a bug, and opine that the quest for ``the one true UTM'' is
 a red herring.
 
 The structure of the paper is as follows:
@@ -84,8 +86,9 @@ The structure of the paper is as follows:
     \item In Section \ref{prelimsecn}, we give preliminary definitions.
     \item In Section \ref{dualsection}, we introduce what we call the dual of an agent and of
         an environment, and prove some algebraic theorems about these.
-    \item In Section \ref{mainsecn}, we introduce symmetric universal intelligence, a variation
-        of Legg-Hutter intelligence, and show it satisfies certain algebraic desiderata.
+    \item In Section \ref{mainsecn}, we show the existence of UTMs yielding Kolmogorov
+        complexities with certain symmetries, and show that the resulting Legg-Hutter
+        intelligence measures are symmetric too.
     \item In Section \ref{conclusionsecn}, we summarize and make concluding remarks, including
         remarks about how these ideas might be applied to certain other intelligence measures.
 \end{itemize}
@@ -122,6 +125,7 @@ By $\langle\rangle$ we mean the empty sequence.
         By $(\mathcal O\mathcal R\mathcal A)^*$ we mean the set of
         all finite sequences starting with an observation, ending with an action,
         and following the pattern ``observation, reward, action, ...''.
+        We include $\langle\rangle$ in this set.
         \item
         By $(\mathcal O\mathcal R\mathcal A)^* \mathcal O\mathcal R$
         we mean the set of all sequences of the form $s\frown o\frown r$ where
@@ -151,7 +155,7 @@ By $\langle\rangle$ we mean the empty sequence.
         If $\pi$ is an agent, $\mu$ is an environment, and $n\in\mathbb N$,
         we write $V^\pi_{\mu,n}$ for the expected value of the sum of
         the first $n$ rewards which would occur in the sequence
-        $(o_0,r_0,a_0,\ldots,o_n,r_n)$ randomly generated as follows:
+        $(o_0,r_0,a_0,\ldots,o_n,r_n,a_n)$ randomly generated as follows:
         \begin{enumerate}
             \item $(o_0,r_0)\in \mathcal O\times\mathcal R$ is chosen randomly based
             on the probability measure $\mu(\bullet|\langle\rangle)$.
@@ -225,7 +229,7 @@ structure is the following definition.
 (Dual Agents and Dual Environments)
 \begin{enumerate}
     \item
-    For any sequence $s$, let $\overline s$ be the sequence which results
+    For any sequence $s$, let $\overline s$ be the sequence obtained
     by replacing every reward $r$ in $s$ by $-r$.
     \item
     Suppose $\pi$ is an agent.
@@ -393,7 +397,7 @@ in charge of navigating environments for us (at least not without some
 reverse psychology).}.
 In this section, we will show that the universal intelligence measure
 proposed by Legg and Hutter satisfies the above equation, provided the
-backward model of computation is suitably chosen.
+background UTM is suitably chosen.
 
 We write $2^*$ for the set of finite binary strings.
 We write $f:\subseteq A\to B$ to indicate that $f$ has codomain $B$
@@ -404,7 +408,7 @@ that $f$'s domain is some subset of $A$.
     \begin{enumerate}
         \item A partial computable function $f:\subseteq 2^*\to 2^*$
         is \emph{prefix-free} if the following requirement holds:
-        $\forall p,p'\in 2^*$, if $p$ is a strict substring of $p'$,
+        $\forall p,p'\in 2^*$, if $p$ is a strict initial segment of $p'$,
         then $f(p)$ and $f(p')$ are not both defined.
         \item A \emph{prefix-free universal Turing machine}
         (or \emph{PFUTM}) is a prefix-free
@@ -424,7 +428,7 @@ fix a computable function
 $\ulcorner\bullet\urcorner:(\mathcal O \mathcal R\mathcal A)^*\to 2^*$
 assigning a distinct code $\ulcorner s\urcorner\in 2^*$ to every sequence
 $s\in (\mathcal O \mathcal R\mathcal A)^*$ in such a way that
-$\ulcorner s\urcorner$ is never a substring of $\ulcorner s'\urcorner$
+$\ulcorner s\urcorner$ is never an initial segment of $\ulcorner s'\urcorner$
 for any distinct $s,s'\in (\mathcal O \mathcal R\mathcal A)^*$.
 That this can be done is clear by the Church-Turing thesis.
 Likewise, computably fix codes $\ulcorner m\urcorner$ for all
@@ -442,7 +446,7 @@ Suppose $U$ is a PFUTM.
     $f(\ulcorner s\urcorner)=\ulcorner \mu(\bullet|s)\urcorner$
     for all $s\in (\mathcal O \mathcal R\mathcal A)^*$.
     \item
-    We say $U$ is \emph{enviro-symmetric} if
+    We say $U$ is \emph{vertically symmetric} if
     $K_U(\mu)=K_U(\overline\mu)$ for every computable environment $\mu$.
 \end{enumerate}
 \end{definition}
@@ -453,11 +457,11 @@ including it would not add insight.
 
 \begin{lemma}
 \label{envirosymmetricexistencelemma}
-    There exists an enviro-symmetric PFUTM.
+    There exists a vertically symmetric PFUTM.
 \end{lemma}
 
 \begin{proof}
-    Let $U_0$ be a PFUTM, we will modify $U_0$ to obtain an enviro-symmetric PFUTM.
+    Let $U_0$ be a PFUTM, we will modify $U_0$ to obtain a vertically symmetric PFUTM.
     For readability's sake, write $\mathrm{POS}$ for $0$ and $\mathrm{NEG}$ for $1$.
     Thinking of $U_0$ as a programming language, we define a new programming language
     $U$ as follows. Every program in $U$ must begin with one of the keywords
@@ -478,12 +482,12 @@ including it would not add insight.
     \end{itemize}
     By construction, if $y$ is any computer program in $U_0$ which computes
     an environment $\mu$, then $\mathrm{NEG}\frown y$ is a computer program in
-    $U$ which computes $\overline\mu$. It follows that $U$ is an enviro-symmetric
+    $U$ which computes $\overline\mu$. It follows that $U$ is a vertically symmetric
     PFUTM.
 \end{proof}
 
 The proof of Lemma \ref{envirosymmetricexistencelemma} proves more than required:
-every PFUTM can be modified to make an enviro-symmetric PFUTM. In some sense,
+every PFUTM can be modified to make a vertically symmetric PFUTM. In some sense,
 the construction in the proof of Lemma \ref{envirosymmetricexistencelemma} works
 by eliminating bias: reinforcement learning itself is implicitly biased in its
 convention that rewards be positive and punishments negative. We can imagine
@@ -525,12 +529,13 @@ Thus, by a well-known
 theorem from elementary calculus, the sum does not depend on which order the $\mu\in W$
 are enumerated.
 
-The following theorem shows that for every enviro-symmetric PFUTM $U$, $\LH_U$
+The following theorem shows that for every vertically symmetric PFUTM $U$, $\LH_U$
 satisfies the above desideratum.
 
 \begin{theorem}
 \label{maintheorem}
-    For every agent $\pi$ and enviro-symmetric PFUTM $U$,
+(Symmetry about the origin)
+    For every agent $\pi$ and vertically symmetric PFUTM $U$,
     \[
         \LH_U(\overline\pi) = -\LH_U(\pi).
     \]
@@ -544,7 +549,7 @@ satisfies the above desideratum.
           &= -\sum_{\mu\in W} 2^{-K_U(\mu)}V^\pi_{\overline\mu}
             &\mbox{(Corollary \ref{twistcorollary})}\\
           &= -\sum_{\mu\in W} 2^{-K_U(\overline\mu)}V^\pi_{\overline\mu}
-            &\mbox{($U$ is enviro-symmetric)}\\
+            &\mbox{($U$ is vertically symmetric)}\\
           &= -\sum_{\mu\in \overline W} 2^{-K_U(\mu)}V^\pi_\mu
             &\mbox{(Change of variables)}\\
           &= -\sum_{\mu\in W} 2^{-K_U(\mu)}V^\pi_\mu
@@ -566,8 +571,9 @@ The following corollary shows that $\Gamma_{\SYM}$ satisfies this desideratum to
 
 \begin{corollary}
 \label{comparatorcorollary}
-    Let $\pi,\rho$ be agents. If $\Gamma_{\SYM}(\pi)>\Gamma_{\SYM}(\rho)$
-    then $\Gamma_{\SYM}(\overline\pi)<\Gamma_{\SYM}(\overline\rho)$.
+    Let $U$ be a vertically symmetric PFUTM.
+    For any agents $\pi$ and $\rho$, if $\LH_U(\pi)>\LH_U(\rho)$
+    then $\LH_U(\overline\pi)<\LH_U(\overline\rho)$.
 \end{corollary}
 
 \begin{proof}
@@ -579,7 +585,7 @@ Legg-Hutter universal intelligence satisfies another obvious desideratum.
 
 \begin{corollary}
 \label{ignoringrewardscorollary}
-    Let $U$ be an enviro-symmetric PFUTM and
+    Let $U$ be a vertically symmetric PFUTM and
     suppose $\pi$ is an agent which ignores rewards (by which we mean that
     $\pi(\bullet|p)$ does not depend on the rewards in $p$).
     Then $\LH_U(\pi)=0$.
@@ -592,7 +598,7 @@ Legg-Hutter universal intelligence satisfies another obvious desideratum.
 \end{proof}
 
 Corollary \ref{ignoringrewardscorollary} illustrates why it is appropriate, for
-purposes of Legg-Hutter universal intelligence, to choose an enviro-symmetric PFUTM.
+purposes of Legg-Hutter universal intelligence, to choose a vertically symmetric PFUTM.
 Consider an agent $\pi_a$
 which always blindly repeats a fixed action $a\in\mathcal A$.
 For any particular environment $\mu$,
@@ -607,9 +613,9 @@ these two outcomes from cancelling each other.
 \label{leikeresponse}
 (Responding to Leike and Hutter \cite{leike2015bad})
 The above paragraph suggests that in the context of Legg-Hutter universal intelligence,
-enviro-symmetricity is one answer to Leike and Hutter's question \cite{leike2015bad},
+vertical symmetry is one answer to Leike and Hutter's question \cite{leike2015bad},
 ``But what are other desirable properties of a UTM?'' We would argue it also sheds light
-on the more general question of what makes a UTM ``natural''. Enviro-symmetricity is
+on the more general question of what makes a UTM ``natural''. Vertical symmetry is
 natural for the context of Legg-Hutter universal intelligence but would be
 irrelevant in contexts not having to do with reinforcement learning environments---just
 as, if we added first-class web-programming support to the C programming language,
@@ -644,13 +650,13 @@ can be used to obtain other structural results.
         and
         $V^{P\pi}_\mu = V^\pi_{P\mu}$.
         \item
-        Say that a PFUTM $U$ is \emph{enviro-permutable} if
+        Say that a PFUTM $U$ is \emph{permutable} if
         $K_U(\mu)=K_U(P\mu)$ for every computable environment $\mu$
         and permutation $P:\mathcal A\to\mathcal A$. Imitating the proof of
         Lemma \ref{envirosymmetricexistencelemma}, show how any given
-        PFUTM can be transformed into an enviro-permutable PFUTM.
+        PFUTM can be transformed into a permutable PFUTM.
         \item
-        Show that if $U$ is an enviro-permutable PFUTM, then $\LH_U(P\pi)=\LH_U(\pi)$
+        Show that if $U$ is a permutable PFUTM, then $\LH_U(P\pi)=\LH_U(\pi)$
         for every agent $\pi$ and permutation $P:\mathcal A\to\mathcal A$.
         \item
         Modify this exercise to apply to permutations $P:\mathcal O\to\mathcal O$
@@ -691,8 +697,7 @@ including environments capable of punishing the agent, then such
 intelligence measures ought to be permitted to output negative
 values for certain agents. It is fun to imagine the trouble
 that maximally anti-intelligent
-agents, such as the negative version of the universally intelligent
-agent AIXI \cite{hutter2004universal}, would get themselves into.
+agents would get themselves into.
 
 
 \bibliographystyle{plain}
