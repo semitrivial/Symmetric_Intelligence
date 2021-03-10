@@ -457,10 +457,10 @@ Strictly speaking, $K_U(\mu)$ implicitly depends on our encodings
 $\ulcorner \bullet\urcorner$, but we suppress this in the notation because
 including it would not add insight.
 
-\begin{lemma}
+\begin{theorem}
 \label{envirosymmetricexistencelemma}
     There exists a vertically symmetric PFUTM.
-\end{lemma}
+\end{theorem}
 
 \begin{proof}
     Let $U_0$ be a PFUTM, we will modify $U_0$ to obtain a vertically symmetric PFUTM.
@@ -504,9 +504,9 @@ including it would not add insight.
     It follows that $U$ is vertically symmetric.
 \end{proof}
 
-The proof of Lemma \ref{envirosymmetricexistencelemma} proves more than required:
+The proof of Theorem \ref{envirosymmetricexistencelemma} proves more than required:
 every PFUTM can be modified to make a vertically symmetric PFUTM. In some sense,
-the construction in the proof of Lemma \ref{envirosymmetricexistencelemma} works
+the construction in the proof of Theorem \ref{envirosymmetricexistencelemma} works
 by eliminating bias: reinforcement learning itself is implicitly biased in its
 convention that rewards be positive and punishments negative. We can imagine
 a pessimistic parallel universe\footnote{Perhaps inspired by \cite{foucault2012discipline}.}
@@ -671,7 +671,7 @@ can be used to obtain other structural results.
         Say that a PFUTM $U$ is \emph{permutable} if
         $K_U(\mu)=K_U(P\mu)$ for every computable environment $\mu$
         and permutation $P:\mathcal A\to\mathcal A$. Imitating the proof of
-        Lemma \ref{envirosymmetricexistencelemma}, show how any given
+        Theorem \ref{envirosymmetricexistencelemma}, show how any given
         PFUTM can be transformed into a permutable PFUTM.
         \item
         Show that if $U$ is a permutable PFUTM, then $\LH_U(P\pi)=\LH_U(\pi)$
