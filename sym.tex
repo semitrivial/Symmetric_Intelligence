@@ -442,7 +442,9 @@ Suppose $U$ is a PFUTM.
     For each computable environment $\mu$, the \emph{Kolmogorov complexity of $\mu$
     given by $U$}, written $K_U(\mu)$, is the smallest $n\in\mathbb N$ such that
     there is some computer program of length $n$, in programming language $U$,
-    for the function $f$ defined by
+    for the function
+    $f$
+    defined by
     $f(\ulcorner s\urcorner)=\ulcorner \mu(\bullet|s)\urcorner$
     for all $s\in (\mathcal O \mathcal R\mathcal A)^*$.
     \item
@@ -469,21 +471,37 @@ including it would not add insight.
     \begin{itemize}
         \item $U(\mathrm{POS}\frown x)=U_0(x)$.
         \item To compute $U(\mathrm{NEG}\frown x)$, find
-        $p\in (\mathcal O \mathcal R\mathcal A)^*$ such that
-        $x=y\frown \ulcorner p\urcorner$ for some $y$ (if no such $p$ exists, diverge).
-        Note that $p$ is unique by prefix-freeness of $\ulcorner\bullet\urcorner$.
-        If $U_0(y\frown
-            \ulcorner \hspace{.2em} \overline p\hspace{.2em}\urcorner)=\ulcorner m\urcorner$
+        $s\in (\mathcal O \mathcal R\mathcal A)^*$ such that
+        $x=y\frown \ulcorner s\urcorner$ for some $y$ (if no such $s$ exists, diverge).
+        Note that $s$ is unique by prefix-freeness of $\ulcorner\bullet\urcorner$.
+        If $
+            U_0(y\frown
+            \ulcorner \hspace{.2em} \overline s\hspace{.2em}\urcorner)
+            =\ulcorner m\urcorner
+        $
         for some $\mathbb Q$-valued probability-measure $m$ on
         $\mathcal O\times\mathcal R$, then let
-        $U(\mathrm{NEG}\frown x)=\ulcorner\hspace{.2em} \overline m\hspace{.2em}\urcorner$ where
-        $\overline m(o,r)=m(o,-r)$.
+        $U(\mathrm{NEG}\frown x)=\ulcorner\hspace{.2em} \overline m\hspace{.2em}\urcorner$
+        where $\overline m(o,r)=m(o,-r)$.
         Otherwise, diverge.
+        \begin{itemize}
+            \item Informally:
+            If $x$ appears to be an instruction to plug $s$ into computer
+            program $y$ to get a probability measure $\mu(\bullet|s)$, then
+            instead plug $\overline s$ into $y$ and flip the resulting
+            probability measure so that the output
+            ends up being the flipped version of $\mu(\bullet|\overline s)$,
+            i.e., $\overline \mu(\bullet|s)$.
+        \end{itemize}
     \end{itemize}
-    By construction, if $y$ is any computer program in $U_0$ which computes
-    an environment $\mu$, then $\mathrm{NEG}\frown y$ is a computer program in
-    $U$ which computes $\overline\mu$. It follows that $U$ is a vertically symmetric
-    PFUTM.
+    By construction, whenever $\mathrm{POS}\frown y$ is a $U$-computer program
+    for $\ulcorner s\urcorner\mapsto \ulcorner \mu(\bullet|s)\urcorner$
+    (loosely speaking, a computer program for $\mu$),
+    $\mathrm{NEG}\frown y$ is an equal-length $U$-computer program
+    for $\ulcorner s\urcorner\mapsto \ulcorner \overline\mu(\bullet|s)\urcorner$
+    (loosely speaking, a computer program for $\overline \mu$),
+    and vice versa.
+    It follows that $U$ is vertically symmetric.
 \end{proof}
 
 The proof of Lemma \ref{envirosymmetricexistencelemma} proves more than required:
