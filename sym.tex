@@ -560,7 +560,7 @@ satisfies the above desideratum.
 \end{theorem}
 
 \begin{proof}
-    Let $\pi$ be an agent. Then:
+    Compute:
     \begin{align*}
         \LH_U(\overline\pi) &= \sum_{\mu\in W} 2^{-K_U(\mu)}V^{\overline\pi}_\mu
             &\mbox{(Definition \ref{universalintelligencedefn})}\\
@@ -581,11 +581,9 @@ The above desideratum, that $\Gamma(\overline\pi)=-\Gamma(\pi)$, applies to
 numerical intelligence measures. If one is merely interested in binary
 intelligence comparators (such as those in \cite{alexander2019intelligence}),
 the desideratum can be weakened into a non-numerical comparator form:
-\begin{quote}
     If $\pi$ is more intelligent than $\rho$,
     then $\overline\pi$ should be less intelligent than $\overline\rho$.
-\end{quote}
-The following corollary shows that $\Gamma_{\SYM}$ satisfies this desideratum too.
+The following corollary addresses this desideratum.
 
 \begin{corollary}
 \label{comparatorcorollary}
@@ -605,7 +603,7 @@ Legg-Hutter universal intelligence satisfies another obvious desideratum.
 \label{ignoringrewardscorollary}
     Let $U$ be a vertically symmetric PFUTM and
     suppose $\pi$ is an agent which ignores rewards (by which we mean that
-    $\pi(\bullet|p)$ does not depend on the rewards in $p$).
+    $\pi(\bullet|s)$ does not depend on the rewards in $s$).
     Then $\LH_U(\pi)=0$.
 \end{corollary}
 
@@ -629,9 +627,9 @@ these two outcomes from cancelling each other.
 
 \begin{remark}
 \label{leikeresponse}
-(Responding to Leike and Hutter \cite{leike2015bad})
+\emph{(Responding to Leike and Hutter \cite{leike2015bad})
 The above paragraph suggests that in the context of Legg-Hutter universal intelligence,
-vertical symmetry is one answer to Leike and Hutter's question \cite{leike2015bad},
+vertical symmetry is one answer to Leike and Hutter's question,
 ``But what are other desirable properties of a UTM?'' We would argue it also sheds light
 on the more general question of what makes a UTM ``natural''. Vertical symmetry is
 natural for the context of Legg-Hutter universal intelligence but would be
@@ -647,8 +645,8 @@ reflects this. No programming language is one-size-fits-all, but some programmin
 languages are better for some contexts, and for any given context, Legg-Hutter intelligence
 would work best using a UTM appropriate for that context. One could even use $\LH_U$ to
 measure intelligence at chess, by contriving the programming language $U$ so that chess-related
-environments have short source-codes and chess-irrelevant environments have longer
-source-codes!
+environments have shorter source-codes and chess-irrelevant environments have longer
+source-codes!}
 \end{remark}
 
 We conclude this section with an exercise, suggesting how the techniques of this paper
@@ -677,7 +675,7 @@ can be used to obtain other structural results.
         Show that if $U$ is a permutable PFUTM, then $\LH_U(P\pi)=\LH_U(\pi)$
         for every agent $\pi$ and permutation $P:\mathcal A\to\mathcal A$.
         \item
-        Modify this exercise to apply to permutations $P:\mathcal O\to\mathcal O$
+        Modify this exercise to apply to permutations
         of the observation-space.
     \end{enumerate}
 \end{exercise}
@@ -687,35 +685,29 @@ can be used to obtain other structural results.
 
 By extending our attention to environments which can punish agents,
 we became aware of algebraic structure in the agent-environment
-framework (Section \ref{dualsection}). This structure allowed us to
-show that by varying the weights used in the Legg-Hutter universal
-intelligence construction, we can construct a similar intelligence
-measure which satisfies key desiderata (Theorem \ref{maintheorem},
-and Corollary \ref{ignoringrewardscorollary}).
+framework (Section \ref{dualsection}). Using this structure, we were
+able to show that symmetries in Kolmogorov complexity lead to
+symmetries in Legg-Hutter intelligence.
 
-Similar modifications could be made to other intelligence
-measures based on the original Legg-Hutter idea, such as the anytime
+In future work it would be interesting to explore how these symmetries
+manifest themselves in other Legg-Hutter-like intelligence measures,
+such as the anytime
 intelligence measure of Hern{\'a}ndez-Orallo and Dowe \cite{hernandez}
-and perhaps the realtime intelligence measure of Gavane \cite{gavane},
-although the latter may involve greater care since negating numbers
-takes a nonzero amount of time. The precise strategy we employ in this
-paper is not relevant to Hibbardian intelligence measures of agents
-who compete in adversarial sequence prediction games
-\cite{hibbard} \cite{alexander2021measuring}. However, the higher-level
-idea still applies: a predictor who always dumbly
-makes the same prediction should have intelligence $0$, and yet, in some sense
-such a predictor still outperforms predictors who intentionally try
-to lose, and thus one could argue that intentionally-losing predictors
-really ought to have negative Hibbardian intelligence.
+and the realtime intelligence measure of Gavane \cite{gavane}.
+The precise strategy we employ in this
+paper is not relevant to Hibbardian sequence-prediction intelligence
+\cite{hibbard} \cite{alexander2021measuring}. However, a higher-level
+idea still applies:
+a predictor who intentionally tries to lose prediction games
+should be considered less intelligent than a zero-intelligence agent
+who makes the same guess every time.
 
-Beyond the technical details, at a higher level, a key takeaway of
+A high-level takeaway of
 this paper is that if intelligence is supposed to measure how much
 reward an agent extracts in aggregate across many environments,
-including environments capable of punishing the agent, then such
-intelligence measures ought to be permitted to output negative
-values for certain agents. It is fun to imagine the trouble
-that maximally anti-intelligent
-agents would get themselves into.
+including environments capable of punishment, then such
+intelligence measures should sometimes output negative
+values.
 
 
 \bibliographystyle{plain}
