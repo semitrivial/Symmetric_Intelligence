@@ -68,17 +68,17 @@ degree to which that agent can extract large rewards on average across many envi
 an agent who instead extracts large punishments on average across many environments
 should therefore have a negative intelligence level.
 
-Leike and Hutter \cite{leike2015bad} pointed out that Legg-Hutter intelligence
-(and related agents such as AIXI \cite{hutter2004universal}) are sensitive
-to the background choice of a Universal
-Turing Machine (UTM). Certain choices of UTM can make AIXI and Legg-Hutter intelligence
-apparently perform badly. Leike and Hutter lamented the lack of satisfactory answers to
-the question of how to choose a ``natural'' UTM. This paper is more optimistic:
-we show that certain UTM qualities improve the performance of Legg-Hutter
-intelligence. We will argue (in Remark \ref{leikeresponse} below)
-that Legg-Hutter intelligence's UTM-sensitivity is
-a feature, not a bug, and opine that the quest for ``the one true UTM'' is
-a red herring.
+% Leike and Hutter \cite{leike2015bad} pointed out that Legg-Hutter intelligence
+% (and related agents such as AIXI \cite{hutter2004universal}) are sensitive
+% to the background choice of a Universal
+% Turing Machine (UTM). Certain choices of UTM can make AIXI and Legg-Hutter intelligence
+% apparently perform badly. Leike and Hutter lamented the lack of satisfactory answers to
+% the question of how to choose a ``natural'' UTM. This paper is more optimistic:
+% we show that certain UTM qualities improve the performance of Legg-Hutter
+% intelligence. We will argue (in Remark \ref{leikeresponse} below)
+% that Legg-Hutter intelligence's UTM-sensitivity is
+% a feature, not a bug, and opine that the quest for ``the one true UTM'' is
+% a red herring.
 
 The structure of the paper is as follows:
 \begin{itemize}
@@ -546,7 +546,13 @@ Thus, by a well-known
 theorem from elementary calculus, the sum does not depend on which order the $\mu\in W$
 are enumerated.
 
-The following theorem addresses the above desideratum.
+Legg-Hutter intelligence has been accused of being subjective
+because of its UTM-sensitivity \cite{leike2015bad}. More optimistically,
+its UTM-sensitivity could be considered a feature, reflecting the fact
+that there are many kinds of intelligence. It could be used to measure
+intelligence in various contexts, by choosing UTMs appropriate for those
+contexts: one could even use it to measure, say, chess intelligence,
+by choosing a UTM where chess-related environments are easiest to program.
 
 \begin{theorem}
 \label{maintheorem}
@@ -614,7 +620,9 @@ Legg-Hutter universal intelligence satisfies another obvious desideratum.
 \end{proof}
 
 Corollary \ref{ignoringrewardscorollary} illustrates why it is appropriate, for
-purposes of Legg-Hutter universal intelligence, to choose a $\sqcap$-symmetric PFUTM.
+purposes of Legg-Hutter universal intelligence, to choose a $\sqcap$-symmetric
+PFUTM\footnote{Thus providing one answer to Leike and Hutter
+\cite{leike2015bad} who asked: ``But what are other desirable properties of a UTM?''}.
 Consider an agent $\pi_a$
 which always blindly repeats a fixed action $a\in\mathcal A$.
 For any particular environment $\mu$,
@@ -626,31 +634,31 @@ then the different weights
 $2^{-K^\sqcap_U(\mu)}\not=2^{-K^\sqcap_U(\overline\mu)}$ would prevent
 these two outcomes from cancelling each other.
 
-\begin{remark}
-\label{leikeresponse}
-\emph{(Responding to Leike and Hutter \cite{leike2015bad})
-The above paragraph suggests that in the context of Legg-Hutter universal intelligence,
-$\sqcap$-symmetry is one answer to Leike and Hutter's question,
-``But what are other desirable properties of a UTM?''
-In the proof of Theorem \ref{envirosymmetricexistencelemma}, we achieved
-$\sqcap$-symmetry by mandating every program begin with a keyword
-$\mathrm{POS}$ or $\mathrm{NEG}$, and if the program begins with $\mathrm{NEG}$
-then it has special RL-specific semantics. Imagine if someone mandated this
-initial keyword in a language like C or Python: developers would be unhappy,
-because these keywords are inappropriate when one is not an RL environment
-programmer. In our opinion, this illustrates the futility of trying to
-find UTMs that are ``natural'' across-the-board (interesting attempts
-like \cite{muller2010stationary} notwithstanding). We would even go as far as
-to suggest that for
-Legg-Hutter intelligence, UTM-sensitivity is a feature, not a bug. There are many
-kinds of intelligence, and UTM-sensitivity
-reflects this. For any given context, Legg-Hutter intelligence
-would work best with a UTM appropriate for that context. One could even use
-$\LH^\sqcap_U$ to
-measure chess intelligence, by contriving the programming language $U$ so that chess-related
-environments have shorter source-codes and chess-irrelevant environments have longer
-source-codes!}
-\end{remark}
+% \begin{remark}
+% \label{leikeresponse}
+% \emph{(Responding to Leike and Hutter \cite{leike2015bad})
+% The above paragraph suggests that in the context of Legg-Hutter universal intelligence,
+% $\sqcap$-symmetry is one answer to Leike and Hutter's question,
+% ``But what are other desirable properties of a UTM?''
+% In the proof of Theorem \ref{envirosymmetricexistencelemma}, we achieved
+% $\sqcap$-symmetry by mandating every program begin with a keyword
+% $\mathrm{POS}$ or $\mathrm{NEG}$, and if the program begins with $\mathrm{NEG}$
+% then it has special RL-specific semantics. Imagine if someone mandated this
+% initial keyword in a language like C or Python: developers would be unhappy,
+% because these keywords are inappropriate when one is not an RL environment
+% programmer. In our opinion, this illustrates the futility of trying to
+% find UTMs that are ``natural'' across-the-board (interesting attempts
+% like \cite{muller2010stationary} notwithstanding). We would even go as far as
+% to suggest that for
+% Legg-Hutter intelligence, UTM-sensitivity is a feature, not a bug. There are many
+% kinds of intelligence, and UTM-sensitivity
+% reflects this. For any given context, Legg-Hutter intelligence
+% would work best with a UTM appropriate for that context. One could even use
+% $\LH^\sqcap_U$ to
+% measure chess intelligence, by contriving the programming language $U$ so that chess-related
+% environments have shorter source-codes and chess-irrelevant environments have longer
+% source-codes!}
+% \end{remark}
 
 We conclude this section with an exercise, suggesting how the techniques of this paper
 can be used to obtain other structural results.
