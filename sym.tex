@@ -395,8 +395,8 @@ Nevertheless, we would not want to put said agent
 in charge of navigating environments for us (at least not without some
 reverse psychology).}.
 In this section, we will show that the universal intelligence measure
-proposed by Legg and Hutter satisfies the above equation, provided the
-background UTM is suitably chosen.
+proposed by Legg and Hutter satisfies the above equation, provided a
+background UTM and encoding are suitably chosen.
 
 We write $2^*$ for the set of finite binary strings.
 We write $f:\subseteq A\to B$ to indicate that $f$ has codomain $B$
@@ -421,51 +421,49 @@ and that $f$'s domain is some subset of $A$.
     \end{enumerate}
 \end{definition}
 
-Fix a computable prefix-free, suffix-free binary encoding of
-$(\mathcal O \mathcal R\mathcal A)^*$, in other words,
-fix a computable function
-$\ulcorner\bullet\urcorner:(\mathcal O \mathcal R\mathcal A)^*\to 2^*$
-assigning a distinct code $\ulcorner s\urcorner\in 2^*$ to every sequence
-$s\in (\mathcal O \mathcal R\mathcal A)^*$ in such a way that
-$\ulcorner s\urcorner$ is never an initial segment nor terminal segment
-of $\ulcorner s'\urcorner$
-for any distinct $s,s'\in (\mathcal O \mathcal R\mathcal A)^*$.
-That this can be done is clear by the Church-Turing thesis.
-Likewise, computably fix codes $\ulcorner m\urcorner$ for all
-$\mathbb Q$-valued probability-measures $m$ on $\mathcal O\times\mathcal R$.
+Legg-Hutter intelligence depends not only on a PFUTM but also on how
+the inputs and outputs of environments are encoded.
+
+\begin{definition}
+    By an \emph{RL-encoding} we mean a computable function
+    $\sqcap:(\mathcal O\mathcal R\mathcal A)^*\cup M\to 2^*$
+    (where $M$ is the set of $\mathbb Q$-valued probability-measures
+    on $\mathcal O\times\mathcal R$) such that the range of
+    $\sqcap$ is prefix-free (i.e., no element of its range is a
+    strict initial segment of another). We say $\sqcap$ is
+    \emph{suffix-free} if its range is suffix-free (i.e., no element
+    of its range is a strict terminal segment of another).
+    We write $\ulcorner x\urcorner$ for $\sqcap(x)$.
+\end{definition}
 
 \begin{definition}
 (Kolmogorov Complexity)
-Suppose $U$ is a PFUTM.
+Suppose $U$ is a PFUTM and $\sqcap$ is an RL-encoding.
 \begin{enumerate}
     \item
     For each computable environment $\mu$, the \emph{Kolmogorov complexity of $\mu$
-    given by $U$}, written $K_U(\mu)$, is the smallest $n\in\mathbb N$ such that
+    given by $U,\sqcap$}, written $K^\sqcap_U(\mu)$,
+    is the smallest $n\in\mathbb N$ such that
     there is some computer program of length $n$, in programming language $U$,
     for the function
-    $f$
+    $f:(\mathcal O \mathcal R\mathcal A)^*\to 2^*$
     defined by
-    $f(\ulcorner s\urcorner)=\ulcorner \mu(\bullet|s)\urcorner$
-    for all $s\in (\mathcal O \mathcal R\mathcal A)^*$.
+    $f(\ulcorner s\urcorner)=\ulcorner \mu(\bullet|s)\urcorner$.
     \item
-    We say $U$ is \emph{vertically symmetric in its reinforcement-learning
-    environment
-    cross-section} (or simply that $U$ is \emph{vertically symmetric}) if
-    $K_U(\mu)=K_U(\overline\mu)$ for every computable environment $\mu$.
+    We say $U$ is \emph{symmetric in its $\sqcap$-encoded environment
+    cross-section} (or simply that $U$ is \emph{$\sqcap$-symmetric}) if
+    $K^\sqcap_U(\mu)=K^\sqcap_U(\overline\mu)$ for every computable environment $\mu$.
 \end{enumerate}
 \end{definition}
 
-Strictly speaking, $K_U(\mu)$ implicitly depends on our encodings
-$\ulcorner \bullet\urcorner$, but we suppress this in the notation because
-including it would not add insight.
-
 \begin{theorem}
 \label{envirosymmetricexistencelemma}
-    There exists a vertically symmetric PFUTM.
+    For every suffix-free RL-encoding $\sqcap$,
+    there exists a $\sqcap$-symmetric PFUTM.
 \end{theorem}
 
 \begin{proof}
-    Let $U_0$ be a PFUTM, we will modify $U_0$ to obtain a vertically symmetric PFUTM.
+    Let $U_0$ be a PFUTM, we will modify $U_0$ to obtain a $\sqcap$-symmetric PFUTM.
     For readability's sake, write $\mathrm{POS}$ for $0$ and $\mathrm{NEG}$ for $1$.
     Thinking of $U_0$ as a programming language, we define a new programming language
     $U$ as follows. Every program in $U$ must begin with one of the keywords
@@ -475,7 +473,7 @@ including it would not add insight.
         \item To compute $U(\mathrm{NEG}\frown x)$, find
         $s\in (\mathcal O \mathcal R\mathcal A)^*$ such that
         $x=y\frown \ulcorner s\urcorner$ for some $y$ (if no such $s$ exists, diverge).
-        Note that $s$ is unique by suffix-freeness of $\ulcorner\bullet\urcorner$.
+        Note that $s$ is unique by suffix-freeness of $\sqcap$.
         If $
             U_0(y\frown
             \ulcorner \hspace{.2em} \overline s\hspace{.2em}\urcorner)
@@ -497,17 +495,16 @@ including it would not add insight.
         \end{itemize}
     \end{itemize}
     By construction, whenever $\mathrm{POS}\frown y$ is a $U$-computer program
-    for $\ulcorner s\urcorner\mapsto \ulcorner \mu(\bullet|s)\urcorner$
-    (loosely speaking, a computer program for $\mu$),
+    for $\ulcorner s\urcorner\mapsto \ulcorner \mu(\bullet|s)\urcorner$,
     $\mathrm{NEG}\frown y$ is an equal-length $U$-computer program
-    for $\ulcorner s\urcorner\mapsto \ulcorner \overline\mu(\bullet|s)\urcorner$
-    (loosely speaking, a computer program for $\overline \mu$),
+    for $\ulcorner s\urcorner\mapsto \ulcorner \overline\mu(\bullet|s)\urcorner$,
     and vice versa.
-    It follows that $U$ is vertically symmetric.
+    It follows that $U$ is $\sqcap$-symmetric.
 \end{proof}
 
 The proof of Theorem \ref{envirosymmetricexistencelemma} proves more than required:
-every PFUTM can be modified to make a vertically symmetric PFUTM. In some sense,
+any PFUTM can be modified to make a $\sqcap$-symmetric PFUTM
+if $\sqcap$ is suffix-free. In some sense,
 the construction in the proof of Theorem \ref{envirosymmetricexistencelemma} works
 by eliminating bias: reinforcement learning itself is implicitly biased in its
 convention that rewards be positive and punishments negative. We can imagine
@@ -534,47 +531,47 @@ $W=\overline W$.
 
 \begin{definition}
 \label{universalintelligencedefn}
-For every agent $\pi$
-and PFUTM $U$, the \emph{Legg-Hutter universal intelligence of $\pi$ given
-by $U$}, written $\LH_U(\pi)$, is
+For every PFUTM $U$, RL-encoding $\sqcap$, and agent $\pi$,
+the \emph{Legg-Hutter universal intelligence of $\pi$ given
+by $U,\sqcap$}, written $\LH^\sqcap_U(\pi)$, is
 \[
-    \LH_U(\pi) = \sum_{\mu \in W} 2^{-K_U(\mu)}V^\pi_\mu.
+    \LH^\sqcap_U(\pi) = \sum_{\mu \in W} 2^{-K^\sqcap_U(\mu)}V^\pi_\mu.
 \]
 \end{definition}
 
-The sum defining $\LH_U(\pi)$ is absolutely convergent because the summands
+The sum defining $\LH^\sqcap_U(\pi)$ is absolutely convergent because the summands
 in absolute value are dominated by the summands defining Chaitin's constant
 (this is why we insist on the UTM being prefix-free).
 Thus, by a well-known
 theorem from elementary calculus, the sum does not depend on which order the $\mu\in W$
 are enumerated.
 
-The following theorem shows that for every vertically symmetric PFUTM $U$, $\LH_U$
-satisfies the above desideratum.
+The following theorem addresses the above desideratum.
 
 \begin{theorem}
 \label{maintheorem}
 (Symmetry about the origin)
-    For every agent $\pi$ and vertically symmetric PFUTM $U$,
+    For every RL-encoding $\sqcap$,
+    every $\sqcap$-symmetric PFUTM $U$, and agent $\pi$,
     \[
-        \LH_U(\overline\pi) = -\LH_U(\pi).
+        \LH^\sqcap_U(\overline\pi) = -\LH^\sqcap_U(\pi).
     \]
 \end{theorem}
 
 \begin{proof}
     Compute:
     \begin{align*}
-        \LH_U(\overline\pi) &= \sum_{\mu\in W} 2^{-K_U(\mu)}V^{\overline\pi}_\mu
+        \LH^\sqcap_U(\overline\pi) &= \sum_{\mu\in W} 2^{-K^\sqcap_U(\mu)}V^{\overline\pi}_\mu
             &\mbox{(Definition \ref{universalintelligencedefn})}\\
-          &= -\sum_{\mu\in W} 2^{-K_U(\mu)}V^\pi_{\overline\mu}
+          &= -\sum_{\mu\in W} 2^{-K^\sqcap_U(\mu)}V^\pi_{\overline\mu}
             &\mbox{(Corollary \ref{twistcorollary})}\\
-          &= -\sum_{\mu\in W} 2^{-K_U(\overline\mu)}V^\pi_{\overline\mu}
-            &\mbox{($U$ is vertically symmetric)}\\
-          &= -\sum_{\mu\in \overline W} 2^{-K_U(\mu)}V^\pi_\mu
+          &= -\sum_{\mu\in W} 2^{-K^\sqcap_U(\overline\mu)}V^\pi_{\overline\mu}
+            &\mbox{($U$ is $\sqcap$-symmetric)}\\
+          &= -\sum_{\mu\in \overline W} 2^{-K^\sqcap_U(\mu)}V^\pi_\mu
             &\mbox{(Change of variables)}\\
-          &= -\sum_{\mu\in W} 2^{-K_U(\mu)}V^\pi_\mu
+          &= -\sum_{\mu\in W} 2^{-K^\sqcap_U(\mu)}V^\pi_\mu
             &\mbox{(Lemma \ref{WequalsminusWlemma})}\\
-          &= -\LH_{U}(\pi).
+          &= -\LH^\sqcap_{U}(\pi).
             &\mbox{(Definition \ref{universalintelligencedefn})}
     \end{align*}
 \end{proof}
@@ -589,52 +586,54 @@ The following corollary addresses this desideratum.
 
 \begin{corollary}
 \label{comparatorcorollary}
-    Let $U$ be a vertically symmetric PFUTM.
-    For any agents $\pi$ and $\rho$, if $\LH_U(\pi)>\LH_U(\rho)$
-    then $\LH_U(\overline\pi)<\LH_U(\overline\rho)$.
+    For every RL-encoding $\sqcap$, every $\sqcap$-symmetric PFUTM $U$,
+    for all agents $\pi$ and $\rho$, if $\LH^\sqcap_U(\pi)>\LH^\sqcap_U(\rho)$
+    then $\LH^\sqcap_U(\overline\pi)<\LH^\sqcap_U(\overline\rho)$.
 \end{corollary}
 
 \begin{proof}
     By Theorem \ref{maintheorem} and basic algebra.
 \end{proof}
 
-The following corollary shows that with suitable choice of UTM,
+The following corollary shows that with suitable choice of encoding and UTM,
 Legg-Hutter universal intelligence satisfies another obvious desideratum.
 
 \begin{corollary}
 \label{ignoringrewardscorollary}
-    Let $U$ be a vertically symmetric PFUTM and
+    Let $\sqcap$ be an RL-encoding,
+    let $U$ be a $\sqcap$-symmetric PFUTM and
     suppose $\pi$ is an agent which ignores rewards (by which we mean that
     $\pi(\bullet|s)$ does not depend on the rewards in $s$).
-    Then $\LH_U(\pi)=0$.
+    Then $\LH^\sqcap_U(\pi)=0$.
 \end{corollary}
 
 \begin{proof}
     The hypothesis clearly implies $\pi=\overline\pi$. Thus by Theorem
-    \ref{maintheorem}, $\LH_U(\pi)=-\LH_U(\pi)$,
-    forcing $\LH_U(\pi)=0$.
+    \ref{maintheorem}, $\LH^\sqcap_U(\pi)=-\LH^\sqcap_U(\pi)$,
+    forcing $\LH^\sqcap_U(\pi)=0$.
 \end{proof}
 
 Corollary \ref{ignoringrewardscorollary} illustrates why it is appropriate, for
-purposes of Legg-Hutter universal intelligence, to choose a vertically symmetric PFUTM.
+purposes of Legg-Hutter universal intelligence, to choose a $\sqcap$-symmetric PFUTM.
 Consider an agent $\pi_a$
 which always blindly repeats a fixed action $a\in\mathcal A$.
 For any particular environment $\mu$,
 where $\pi_a$ earns some total reward $r$ by blind luck,
 that total reward ought to be cancelled out by $\overline\mu$, where
 the exact same blind luck becomes blind misfortune and $\pi_a$ earns total reward
-$-r$ (Corollary \ref{twistcorollary}). But if $K_U(\mu)\not=K_U(\overline\mu)$,
-then the different weights $2^{-K_U(\mu)}\not=2^{-K_U(\overline\mu)}$ would prevent
+$-r$ (Corollary \ref{twistcorollary}). But if $K^\sqcap_U(\mu)\not=K^\sqcap_U(\overline\mu)$,
+then the different weights
+$2^{-K^\sqcap_U(\mu)}\not=2^{-K^\sqcap_U(\overline\mu)}$ would prevent
 these two outcomes from cancelling each other.
 
 \begin{remark}
 \label{leikeresponse}
 \emph{(Responding to Leike and Hutter \cite{leike2015bad})
 The above paragraph suggests that in the context of Legg-Hutter universal intelligence,
-vertical symmetry is one answer to Leike and Hutter's question,
+$\sqcap$-symmetry is one answer to Leike and Hutter's question,
 ``But what are other desirable properties of a UTM?'' We would argue it also sheds light
-on the more general question of what makes a UTM ``natural''. Vertical symmetry is
-natural for reinforcement learning but would be irrelevant elsewhere---just
+on the more general question of what makes a UTM ``natural''. $\sqcap$-symmetry is
+natural for RL but would be irrelevant elsewhere---just
 as adding first-class webprogramming support to C would be inappropriate for
 non-webprogramming applications.
 We opine that in the same way, this might explain the failure of
@@ -644,7 +643,8 @@ Legg-Hutter universal intelligence, UTM-sensitivity is a feature, not a bug. The
 kinds of intelligence, and UTM-sensitivity
 reflects this. Some programming
 languages are better for some contexts, and for any given context, Legg-Hutter intelligence
-would work best with a UTM appropriate for that context. One could even use $\LH_U$ to
+would work best with a UTM appropriate for that context. One could even use
+$\LH^\sqcap_U$ to
 measure chess intelligence, by contriving the programming language $U$ so that chess-related
 environments have shorter source-codes and chess-irrelevant environments have longer
 source-codes!}
@@ -667,13 +667,13 @@ can be used to obtain other structural results.
         and
         $V^{P\pi}_\mu = V^\pi_{P\mu}$.
         \item
-        Say that a PFUTM $U$ is \emph{permutable} if
-        $K_U(\mu)=K_U(P\mu)$ for every computable environment $\mu$
-        and permutation $P:\mathcal A\to\mathcal A$. Imitating the proof of
-        Theorem \ref{envirosymmetricexistencelemma}, show how any given
-        PFUTM can be transformed into a permutable PFUTM.
+        Say that a PFUTM $U$ is \emph{$\sqcap$-permutable} if
+        $K^\sqcap_U(\mu)=K^\sqcap_U(P\mu)$ for every computable environment $\mu$
+        and permutation $P:\mathcal A\to\mathcal A$. Show that if $\sqcap$ is
+        suffix-free then any given
+        PFUTM can be transformed into a $\sqcap$-permutable PFUTM.
         \item
-        Show that if $U$ is a permutable PFUTM, then $\LH_U(P\pi)=\LH_U(\pi)$
+        Show that if $U$ is a permutable PFUTM, then $\LH^\sqcap_U(P\pi)=\LH^\sqcap_U(\pi)$
         for every agent $\pi$ and permutation $P:\mathcal A\to\mathcal A$.
         \item
         Modify this exercise to apply to permutations
@@ -687,7 +687,7 @@ can be used to obtain other structural results.
 By allowing environments to punish agents,
 we found additional algebraic structure in the agent-environment
 framework. Using this, we showed
-that Kolmogorov complexity symmetries lead to
+that certain Kolmogorov complexity symmetries lead to
 Legg-Hutter intelligence symmetries.
 
 In future work it would be interesting to explore how these symmetries
