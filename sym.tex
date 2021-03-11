@@ -631,18 +631,20 @@ these two outcomes from cancelling each other.
 \emph{(Responding to Leike and Hutter \cite{leike2015bad})
 The above paragraph suggests that in the context of Legg-Hutter universal intelligence,
 $\sqcap$-symmetry is one answer to Leike and Hutter's question,
-``But what are other desirable properties of a UTM?'' We would argue it also sheds light
-on the more general question of what makes a UTM ``natural''. $\sqcap$-symmetry is
-natural for RL but would be irrelevant elsewhere---just
-as adding first-class webprogramming support to C would be inappropriate for
-non-webprogramming applications.
-We opine that in the same way, this might explain the failure of
-attempts \cite{muller2010stationary} to find UTMs that are ``natural'' across-the-board.
-We would even go as far as to suggest that for
-Legg-Hutter universal intelligence, UTM-sensitivity is a feature, not a bug. There are many
+``But what are other desirable properties of a UTM?''
+In the proof of Theorem \ref{envirosymmetricexistencelemma}, we achieved
+$\sqcap$-symmetry by mandating every program begin with a keyword
+$\mathrm{POS}$ or $\mathrm{NEG}$, and if the program begins with $\mathrm{NEG}$
+then it has special RL-specific semantics. Imagine if someone mandated this
+initial keyword in a language like C or Python: developers would be unhappy,
+because these keywords are inappropriate when one is not an RL environment
+programmer. In our opinion, this illustrates the futility of trying to
+find UTMs that are ``natural'' across-the-board (interesting attempts
+like \cite{muller2010stationary} notwithstanding). We would even go as far as
+to suggest that for
+Legg-Hutter intelligence, UTM-sensitivity is a feature, not a bug. There are many
 kinds of intelligence, and UTM-sensitivity
-reflects this. Some programming
-languages are better for some contexts, and for any given context, Legg-Hutter intelligence
+reflects this. For any given context, Legg-Hutter intelligence
 would work best with a UTM appropriate for that context. One could even use
 $\LH^\sqcap_U$ to
 measure chess intelligence, by contriving the programming language $U$ so that chess-related
