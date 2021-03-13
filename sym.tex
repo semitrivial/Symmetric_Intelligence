@@ -25,7 +25,7 @@
     We extend the Legg-Hutter agent-environment framework to include punishments
     and argue for an affirmative answer to that question.
     We show that if the background encodings and Universal Turing Machine (UTM) admit
-    vertically symmetric Kolmogorov complexities,
+    certain Kolmogorov complexity symmetries,
     then the resulting Legg-Hutter intelligence measure is symmetric about
     the origin. In particular, this implies reward-ignoring agents
     have Legg-Hutter intelligence $0$ according to such UTMs.
@@ -149,7 +149,7 @@ By $\langle\rangle$ we mean the empty sequence.
         \item
         If $\pi$ is an agent, $\mu$ is an environment, and $n\in\mathbb N$,
         we write $V^\pi_{\mu,n}$ for the expected value of the sum of
-        the first $n$ rewards which would occur in the sequence
+        the rewards which would occur in the sequence
         $(o_0,r_0,a_0,\ldots,o_n,r_n,a_n)$ randomly generated as follows:
         \begin{enumerate}
             \item $(o_0,r_0)\in \mathcal O\times\mathcal R$ is chosen randomly based
@@ -679,7 +679,8 @@ can be used to obtain other structural results.
         suffix-free then any given
         PFUTM can be transformed into a $\sqcap$-permutable PFUTM.
         \item
-        Show that if $U$ is a permutable PFUTM, then $\LH^\sqcap_U(P\pi)=\LH^\sqcap_U(\pi)$
+        Show that if $U$ is a $\sqcap$-permutable PFUTM,
+        then $\LH^\sqcap_U(P\pi)=\LH^\sqcap_U(\pi)$
         for every agent $\pi$ and permutation $P:\mathcal A\to\mathcal A$.
         \item
         Modify this exercise to apply to permutations
@@ -694,7 +695,7 @@ By allowing environments to punish agents,
 we found additional algebraic structure in the agent-environment
 framework. Using this, we showed
 that certain Kolmogorov complexity symmetries yield
-Legg-Hutter intelligence symmetries.
+Legg-Hutter intelligence symmetry.
 
 In future work it would be interesting to explore how these symmetries
 manifest themselves in other Legg-Hutter-like intelligence measures
