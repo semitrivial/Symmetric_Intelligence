@@ -1,19 +1,19 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
+\documentclass[runningheads]{llncs}
+% \usepackage[utf8]{inputenc}
 \usepackage{amssymb}
 \usepackage{amsmath}
-\usepackage{amsthm}
-\newtheorem{theorem}{Theorem}
-\newtheorem{exercise}[theorem]{Exercise}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
+% \usepackage{amsthm}
+\newtheorem{mytheorem}{Theorem}
+\newtheorem{myexercise}[theorem]{Exercise}
+\newtheorem{mydefinition}[theorem]{Definition}
+\newtheorem{mylemma}[theorem]{Lemma}
+\newtheorem{mycorollary}[theorem]{Corollary}
+\newtheorem{myproposition}[theorem]{Proposition}
 \def\LH{\Upsilon}
 \def\SYM{S}
 
 \title{Symmetric Complexity: On Legg-Hutter Universal Intelligence with Punishments}
+\titlerunning{Symmetric Complexity}
 \author{Samuel Allen Alexander}
 
 \begin{document}
@@ -112,7 +112,7 @@ We assume $\mathcal A$, $\mathcal O$, and $\mathcal R$ are mutually disjoint
 observation).
 By $\langle\rangle$ we mean the empty sequence.
 
-\begin{definition}
+\begin{mydefinition}
 \label{omnibusdefn}
     (Agents, environments, etc.)
     \begin{enumerate}
@@ -172,7 +172,7 @@ By $\langle\rangle$ we mean the empty sequence.
         Intuitively, $V^\pi_\mu$ is the expected total reward which $\pi$ would extract
         from $\mu$.
     \end{enumerate}
-\end{definition}
+\end{mydefinition}
 
 Note that it is possible for $V^\pi_\mu$ to be undefined.
 For example, if $\mu$ is an environment which always issues
@@ -192,11 +192,11 @@ rather than limit the total reward the environment can give and use that to
 force $V^\pi_\mu$ to be bounded, we will cut the middleman and
 directly assume that $V^\pi_\mu$ is bounded.
 
-\begin{definition}
+\begin{mydefinition}
     An environment $\mu$ is \emph{well-behaved} if $\mu$ is computable and the following
     condition holds: for every agent $\pi$, $V^\pi_\mu$ exists and
     $-1\leq V^\pi_\mu\leq 1$.
-\end{definition}
+\end{mydefinition}
 
 Note that reward-space $[0,1]$ can be transformed into punishment-space
 $[-1,0]$ either by means of $r\mapsto -r$ or by means of $r\mapsto r-1$.
@@ -220,7 +220,7 @@ In the Introduction, we promised that by allowing environments to punish agents,
 we would reveal algebraic structure not otherwise present. The key to this additional
 structure is the following definition.
 
-\begin{definition}
+\begin{mydefinition}
 (Dual Agents and Dual Environments)
 \begin{enumerate}
     \item
@@ -242,9 +242,9 @@ structure is the following definition.
     and reward $r\in\mathcal R$,
     \[\overline\mu(o,r|s)=\mu(o,-r|\overline s).\]
 \end{enumerate}
-\end{definition}
+\end{mydefinition}
 
-\begin{lemma}
+\begin{mylemma}
 \label{doublesubtractionlemma}
 (Double Negation)
     \begin{enumerate}
@@ -252,13 +252,13 @@ structure is the following definition.
         \item For each agent $\pi$, $\overline{\overline \pi}=\pi$.
         \item For each environment $\mu$, $\overline{\overline \mu}=\mu$.
     \end{enumerate}
-\end{lemma}
+\end{mylemma}
 
 \begin{proof}
     Follows from the fact that for every real number $r$, $--r=r$.
 \end{proof}
 
-\begin{theorem}
+\begin{mytheorem}
 \label{bigtheorem}
     Suppose $\mu$ is an environment and $\pi$ is an agent.
     Then
@@ -266,7 +266,7 @@ structure is the following definition.
         V^{\overline \pi}_{\overline \mu}=-V^\pi_\mu
     \]
     (and the left-hand side is defined if and only if the right-hand side is defined).
-\end{theorem}
+\end{mytheorem}
 
 \begin{proof}
     By Definition \ref{omnibusdefn} part 6,
@@ -319,12 +319,12 @@ structure is the following definition.
     \end{align*}
 \end{proof}
 
-\begin{corollary}
+\begin{mycorollary}
 \label{twistcorollary}
     For every agent $\pi$ and environment $\mu$,
     \[V^\pi_{\overline\mu}=-V^{\overline\pi}_{\mu}\]
     (and the left-hand side is defined if and only if the right-hand side is defined).
-\end{corollary}
+\end{mycorollary}
 
 \begin{proof}
     If neither side is defined, then there is nothing to prove.
@@ -338,11 +338,11 @@ structure is the following definition.
     as desired. A similar argument holds if we assume the right-hand side is defined.
 \end{proof}
 
-\begin{corollary}
+\begin{mycorollary}
 \label{wisminuswcorollary}
     For every environment $\mu$, $\mu$ is well-behaved if and only if $\overline\mu$
     is well-behaved.
-\end{corollary}
+\end{mycorollary}
 
 \begin{proof}
     We prove the $\Rightarrow$ direction, the other is similar.
@@ -398,7 +398,7 @@ We write $2^*$ for the set of finite binary strings.
 We write $f:\subseteq A\to B$ to indicate that $f$ has codomain $B$
 and that $f$'s domain is some subset of $A$.
 
-\begin{definition}
+\begin{mydefinition}
     (Prefix-free universal Turing machines)
     \begin{enumerate}
         \item A partial computable function $f:\subseteq 2^*\to 2^*$
@@ -415,12 +415,12 @@ and that $f$'s domain is some subset of $A$.
         In this case, we say $y$ is a \emph{computer program for
         $f$ in programming language $U$}.
     \end{enumerate}
-\end{definition}
+\end{mydefinition}
 
 Legg-Hutter intelligence depends not only on a PFUTM but also on how
 the inputs and outputs of environments are encoded.
 
-\begin{definition}
+\begin{mydefinition}
     By an \emph{RL-encoding} we mean a computable function
     $\sqcap:(\mathcal O\mathcal R\mathcal A)^*\cup M\to 2^*$
     (where $M$ is the set of $\mathbb Q$-valued probability-measures
@@ -430,9 +430,9 @@ the inputs and outputs of environments are encoded.
     \emph{suffix-free} if its range is suffix-free (i.e., no element
     of its range is a strict terminal segment of another).
     We write $\ulcorner x\urcorner$ for $\sqcap(x)$.
-\end{definition}
+\end{mydefinition}
 
-\begin{definition}
+\begin{mydefinition}
 (Kolmogorov Complexity)
 Suppose $U$ is a PFUTM and $\sqcap$ is an RL-encoding.
 \begin{enumerate}
@@ -450,13 +450,13 @@ Suppose $U$ is a PFUTM and $\sqcap$ is an RL-encoding.
     cross-section} (or simply that $U$ is \emph{$\sqcap$-symmetric}) if
     $K^\sqcap_U(\mu)=K^\sqcap_U(\overline\mu)$ for every computable environment $\mu$.
 \end{enumerate}
-\end{definition}
+\end{mydefinition}
 
-\begin{theorem}
+\begin{mytheorem}
 \label{envirosymmetricexistencelemma}
     For every suffix-free RL-encoding $\sqcap$,
     there exists a $\sqcap$-symmetric PFUTM.
-\end{theorem}
+\end{mytheorem}
 
 \begin{proof}
     Let $U_0$ be a PFUTM, we will modify $U_0$ to obtain a $\sqcap$-symmetric PFUTM.
@@ -511,21 +511,21 @@ unbiased in this sense, a computer program defining an environment
 should specify which of the two RL regimes it is operating in (hence the
 $\mathrm{POS}$ and $\mathrm{NEG}$ keywords).
 
-\begin{definition}
+\begin{mydefinition}
     Let $W$ be the set of all well-behaved environments.
     Let $\overline W=\{\overline\mu\,:\,\mu\in W\}$.
-\end{definition}
+\end{mydefinition}
 
-\begin{lemma}
+\begin{mylemma}
 \label{WequalsminusWlemma}
 $W=\overline W$.
-\end{lemma}
+\end{mylemma}
 
 \begin{proof}
     By Corollary \ref{wisminuswcorollary}.
 \end{proof}
 
-\begin{definition}
+\begin{mydefinition}
 \label{universalintelligencedefn}
 For every PFUTM $U$, RL-encoding $\sqcap$, and agent $\pi$,
 the \emph{Legg-Hutter universal intelligence of $\pi$ given
@@ -533,7 +533,7 @@ by $U,\sqcap$}, written $\LH^\sqcap_U(\pi)$, is
 \[
     \LH^\sqcap_U(\pi) = \sum_{\mu \in W} 2^{-K^\sqcap_U(\mu)}V^\pi_\mu.
 \]
-\end{definition}
+\end{mydefinition}
 
 The sum defining $\LH^\sqcap_U(\pi)$ is absolutely convergent because the summands
 in absolute value are dominated by the summands defining Chaitin's constant
@@ -550,7 +550,7 @@ intelligence in various contexts, by choosing UTMs appropriate for those
 contexts: one could even use it to measure, say, chess intelligence,
 by choosing a UTM where chess-related environments are easiest to program.
 
-\begin{theorem}
+\begin{mytheorem}
 \label{maintheorem}
 (Symmetry about the origin)
     For every RL-encoding $\sqcap$,
@@ -558,7 +558,7 @@ by choosing a UTM where chess-related environments are easiest to program.
     \[
         \LH^\sqcap_U(\overline\pi) = -\LH^\sqcap_U(\pi).
     \]
-\end{theorem}
+\end{mytheorem}
 
 \begin{proof}
     Compute:
@@ -586,12 +586,12 @@ the desideratum can be weakened into a non-numerical comparator form:
     then $\overline\pi$ should be less intelligent than $\overline\rho$.
 The following corollary addresses this desideratum.
 
-\begin{corollary}
+\begin{mycorollary}
 \label{comparatorcorollary}
     For every RL-encoding $\sqcap$, every $\sqcap$-symmetric PFUTM $U$,
     for all agents $\pi$ and $\rho$, if $\LH^\sqcap_U(\pi)>\LH^\sqcap_U(\rho)$
     then $\LH^\sqcap_U(\overline\pi)<\LH^\sqcap_U(\overline\rho)$.
-\end{corollary}
+\end{mycorollary}
 
 \begin{proof}
     By Theorem \ref{maintheorem} and basic algebra.
@@ -600,14 +600,14 @@ The following corollary addresses this desideratum.
 The following corollary shows that with suitable choice of encoding and UTM,
 Legg-Hutter universal intelligence satisfies another obvious desideratum.
 
-\begin{corollary}
+\begin{mycorollary}
 \label{ignoringrewardscorollary}
     Let $\sqcap$ be an RL-encoding,
     let $U$ be a $\sqcap$-symmetric PFUTM and
     suppose $\pi$ is an agent which ignores rewards (by which we mean that
     $\pi(\bullet|s)$ does not depend on the rewards in $s$).
     Then $\LH^\sqcap_U(\pi)=0$.
-\end{corollary}
+\end{mycorollary}
 
 \begin{proof}
     The hypothesis clearly implies $\pi=\overline\pi$. Thus by Theorem
@@ -659,7 +659,7 @@ these two outcomes from cancelling each other.
 We conclude this section with an exercise, suggesting how the techniques of this paper
 can be used to obtain other structural results.
 
-\begin{exercise} (Permutations)
+\begin{myexercise} (Permutations)
     \begin{enumerate}
         \item
         For each permutation $P:\mathcal A\to\mathcal A$ of the action-space,
@@ -686,7 +686,7 @@ can be used to obtain other structural results.
         Modify this exercise to apply to permutations
         of the observation-space.
     \end{enumerate}
-\end{exercise}
+\end{myexercise}
 
 \section{Conclusion}
 \label{conclusionsecn}
@@ -718,6 +718,6 @@ intelligence measures should sometimes output negative
 values.
 
 
-\bibliographystyle{plain}
+\bibliographystyle{splncs04}
 \bibliography{sym}
 \end{document}
