@@ -432,10 +432,11 @@ and that $f$'s domain is some subset of $A$.
     \end{enumerate}
 \end{mydefinition}
 
-Environments do not take strings from $2^*$ as inputs, and they do not output
-strings from $2^*$ either. Rather, they take
-elements of $(\mathcal O\mathcal R\mathcal A)^*$ as inputs and they
-output $\mathbb Q$-valued probability measures on $\mathcal O\times\mathcal R$.
+Environments do not have domain $\subseteq 2^*$, and they do not
+have codomain $2^*$.
+Rather, their domain and codomain are $(\mathcal O\mathcal R\mathcal A)^*$
+and the set of $\mathbb Q$-valued probability measures on $\mathcal O\times\mathcal R$,
+respectively.
 Thus, in order to talk about their Kolmogorov complexities,
 one must encode said inputs and outputs. This low-level detail is
 usually implicit, but we will need (in Theorem \ref{envirosymmetricexistencelemma})
