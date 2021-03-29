@@ -138,7 +138,8 @@ By $\langle\rangle$ we mean the empty sequence.
         and $r\in\mathcal R$ ($\frown$ denotes concatenation).
         \item
         By an \emph{agent}, we mean a function $\pi$ which assigns to every sequence
-        $s\in (\mathcal O\mathcal R\mathcal A)^* \mathcal O\mathcal R$ a $\mathbb Q$-valued probability measure,
+        $s\in (\mathcal O\mathcal R\mathcal A)^* \mathcal O\mathcal R$ a
+        $\mathbb Q$-valued probability measure,
         written $\pi(\bullet|s)$, on $\mathcal A$.
         For every such $s$ and every $a\in\mathcal A$,
         we write $\pi(a|s)$ for $(\pi(\bullet|s))(a)$.
@@ -431,8 +432,15 @@ and that $f$'s domain is some subset of $A$.
     \end{enumerate}
 \end{mydefinition}
 
-Legg-Hutter intelligence depends not only on a PFUTM but also on how
-the inputs and outputs of environments are encoded.
+Environments do not take strings from $2^*$ as inputs, and they do not output
+strings from $2^*$ either. Rather, they take
+elements of $(\mathcal O\mathcal R\mathcal A)^*$ as inputs and they
+output $\mathbb Q$-valued probability measures on $\mathcal O\times\mathcal R$.
+Thus, in order to talk about their Kolmogorov complexities,
+one must encode said inputs and outputs. This low-level detail is
+usually implicit, but we will need (in Theorem \ref{envirosymmetricexistencelemma})
+to distinguish between different kinds of encodings, so we must make the
+details explicit.
 
 \begin{mydefinition}
     By an \emph{RL-encoding} we mean a computable function
@@ -455,9 +463,8 @@ Suppose $U$ is a PFUTM and $\sqcap$ is an RL-encoding.
     given by $U,\sqcap$}, written $K^\sqcap_U(\mu)$,
     is the smallest $n\in\mathbb N$ such that
     there is some computer program of length $n$, in programming language $U$,
-    for the function
-    $f:\ulcorner(\mathcal O \mathcal R\mathcal A)^*\urcorner\to 2^*$
-    defined by
+    for some function $f:\subseteq 2^*\to 2^*$ such that
+    for all $s\in (\mathcal O\mathcal R\mathcal A)^*$,
     $f(\ulcorner s\urcorner)=\ulcorner \mu(\bullet|s)\urcorner$.
     \item
     We say $U$ is \emph{symmetric in its $\sqcap$-encoded-environment
