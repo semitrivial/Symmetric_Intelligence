@@ -217,21 +217,30 @@ whereas $r\mapsto r-1$ does not. For example, an environment which always
 issues reward $0$ (so is well-behaved)
 would become an environment which always issues reward $-1$ (so is ill-behaved).
 The authors of an interesting paper on reinforcement learning suicide/death
-\cite{martin2016death} indicate surprise that certain agents change their behavior
-when the reward-space $[0,1]$ is transformed into the punishment-space $[-1,0]$,
-because those specific agents\footnote{Note, however, that agents \emph{in general}
-are not invariant under positive linear reward transformations.
-A good example of this is hinted at in Exercise 3.7 of Sutton and Barto
-\cite{sutton2018reinforcement}, where it is observed that it is ineffective
-to give maze-runners
-a $+1$ reward on moves which escape the maze and $0$ reward on all other moves.
-If, instead, we gave the agent $0$ reward on moves which escape the maze and
-$-1$ reward on all other moves (a positive linear transformation $r\mapsto r-1$),
-the agent would be better incentivized to hurry through the maze.} do
-not normally change their behavior in response to positive
-linear reward transformations like $r\mapsto r-1$; said behavior-changes are
+\cite{martin2016death} indicate surprise that, in an RL variation where
+environments may output probability semi-measures instead of probability measures,
+certain agents change their behavior
+when the reward-space $[0,1]$ is transformed into the punishment-space $[-1,0]$.
+The reason they find this surprising is because ``in a standard RL setup ...\ the
+relative value of
+two policies is invariant under positive linear transformations of the reward''.
+Said behavior-changes are
 less surprising when one views the reward transformation as being the result of
 $r\mapsto -r$ instead of $r\mapsto r-1$.
+
+% because those specific agents\footnote{Note, however, that agents \emph{in general}
+% are not invariant under positive linear reward transformations.
+% A good example of this is hinted at in Exercise 3.7 of Sutton and Barto
+% \cite{sutton2018reinforcement}, where it is observed that it is ineffective
+% to give maze-runners
+% a $+1$ reward on moves which escape the maze and $0$ reward on all other moves.
+% If, instead, we gave the agent $0$ reward on moves which escape the maze and
+% $-1$ reward on all other moves (a positive linear transformation $r\mapsto r-1$),
+% the agent would be better incentivized to hurry through the maze.} do
+% not normally change their behavior in response to positive
+% linear reward transformations like $r\mapsto r-1$; said behavior-changes are
+% less surprising when one views the reward transformation as being the result of
+% $r\mapsto -r$ instead of $r\mapsto r-1$.
 
 \section{Dual Agents and Dual Environments}
 \label{dualsection}
