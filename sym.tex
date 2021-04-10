@@ -137,7 +137,9 @@ By $\langle\rangle$ we mean the empty sequence.
         $s\in (\mathcal O\mathcal R\mathcal A)^*$, $o\in\mathcal O$
         and $r\in\mathcal R$ ($\frown$ denotes concatenation).
         \item
-        By an \emph{agent}, we mean a function $\pi$ which assigns to every sequence
+        By an \emph{agent}, we mean a function $\pi$
+        with domain $(\mathcal O\mathcal R\mathcal A)^* \mathcal O\mathcal R$,
+        which assigns to every sequence
         $s\in (\mathcal O\mathcal R\mathcal A)^* \mathcal O\mathcal R$ a
         $\mathbb Q$-valued probability measure,
         written $\pi(\bullet|s)$, on $\mathcal A$.
@@ -147,6 +149,7 @@ By $\langle\rangle$ we mean the empty sequence.
         will take action $a$ in response to history $s$.
         \item
         By an \emph{environment}, we mean a function $\mu$
+        with domain $(\mathcal O\mathcal R\mathcal A)^*$,
         which assigns to every
         $s\in (\mathcal O\mathcal R\mathcal A)^*$
         a $\mathbb Q$-valued probability measure,
