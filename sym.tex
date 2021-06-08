@@ -213,13 +213,10 @@ directly assume that $V^\pi_\mu$ is bounded.
 \end{mydefinition}
 
 Note that reward-space $[0,1]$ can be transformed into punishment-space
-$[-1,0]$ either by means of $r\mapsto -r$ or by means of $r\mapsto r-1$.
+$[-1,0]$ either via $r\mapsto -r$ or via $r\mapsto r-1$.
 An advantage of $r\mapsto -r$ is that it preserves well-behavedness of
-environments (we will prove this below in Corollary \ref{wisminuswcorollary}),
-whereas $r\mapsto r-1$ does not. For example, an environment which always
-issues reward $0$ (so is well-behaved)
-would become an environment which always issues reward $-1$
-(so is ill-behaved)\footnote{It
+environments (we prove this below in
+Corollary \ref{wisminuswcorollary})\footnote{It
 is worth mentioning another difference
 between these two reward-space-transforms. The hypothetical agent
 $\mathrm{AI}_\mu$ with perfect knowledge of the environment's reward distribution
@@ -237,7 +234,7 @@ AIXI also changes its behavior in response to $r\mapsto r-1$, and it was recentl
 this can be interpreted in terms of suicide: AIXI models its environment using a mixture
 distribution over a countable class of semimeasures, and AIXI's behavior can be interpreted
 as treating the complement of the domain of the semimeasure as such a ``suicide'':
-see \cite{martin2016death}.}
+see \cite{martin2016death}.}.
 
 % The authors of an interesting paper on reinforcement learning suicide/death
 % \cite{martin2016death} indicate surprise that, in an RL variation where
