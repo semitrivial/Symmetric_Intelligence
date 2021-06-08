@@ -218,18 +218,38 @@ An advantage of $r\mapsto -r$ is that it preserves well-behavedness of
 environments (we will prove this below in Corollary \ref{wisminuswcorollary}),
 whereas $r\mapsto r-1$ does not. For example, an environment which always
 issues reward $0$ (so is well-behaved)
-would become an environment which always issues reward $-1$ (so is ill-behaved).
-The authors of an interesting paper on reinforcement learning suicide/death
-\cite{martin2016death} indicate surprise that, in an RL variation where
-environments may output probability semi-measures instead of probability measures,
-certain agents change their behavior
-when the reward-space $[0,1]$ is transformed into the punishment-space $[-1,0]$.
-The reason they find this surprising is because ``in a standard RL setup ...\ the
-relative value of
-two policies is invariant under positive linear transformations of the reward''.
-Said behavior-changes are
-less surprising when one views the reward transformation as being the result of
-$r\mapsto -r$ instead of $r\mapsto r-1$.
+would become an environment which always issues reward $-1$
+(so is ill-behaved)\footnote{It
+is worth mentioning another difference
+between these two reward-space-transforms. The hypothetical agent
+$\mathrm{AI}_\mu$ with perfect knowledge of the environment's reward distribution
+would not change its behavior in response to the transformation $r\mapsto r-1$ (nor indeed
+in response to any positive linear scaling of rewards, $r\mapsto ar+b$, $a>0$), but it would
+generally change its behavior in response to $r\mapsto -r$. Interestingly, this
+behavior invariance
+with respect to $r\mapsto r-1$ would not hold if $\mathrm{AI}_\mu$ were capable of
+``suiciding'' (deliberately terminating the environmental interaction):
+one should never walk away from a slot machine that always pays out between $0$ and $1$
+dollars, but one should immediately walk away from a slot machine that always pays out
+between $-1$ and $0$ dollars.
+The agent
+AIXI also changes its behavior in response to $r\mapsto r-1$, and it was recently argued that
+this can be interpreted in terms of suicide: AIXI models its environment using a mixture
+distribution over a countable class of semimeasures, and AIXI's behavior can be interpreted
+as treating the complement of the domain of the semimeasure as such a ``suicide'':
+see \cite{martin2016death}.}
+
+% The authors of an interesting paper on reinforcement learning suicide/death
+% \cite{martin2016death} indicate surprise that, in an RL variation where
+% environments may output probability semi-measures instead of probability measures,
+% certain agents change their behavior
+% when the reward-space $[0,1]$ is transformed into the punishment-space $[-1,0]$.
+% The reason they find this surprising is because ``in a standard RL setup ...\ the
+% relative value of
+% two policies is invariant under positive linear transformations of the reward''.
+% Said behavior-changes are
+% less surprising when one views the reward transformation as being the result of
+% $r\mapsto -r$ instead of $r\mapsto r-1$.
 
 % because those specific agents\footnote{Note, however, that agents \emph{in general}
 % are not invariant under positive linear reward transformations.
