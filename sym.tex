@@ -333,7 +333,24 @@ structure is the following definition.
 
     Case 1: $s$ is empty. Then $X=X'=1$.
 
-    Case 2: $s$ terminates with a reward.
+    Case 2: $s$ terminates with an action.
+    Then $s=t\frown a$ for some $t\in(\mathcal O\mathcal R\mathcal A)^*\mathcal O\mathcal R$.
+    Let $Y$ (resp.\ $Y'$) be the probability of generating $t$
+    (resp.\ $\overline t$)
+    using $\pi$ and $\mu$ (resp.\ $\overline\pi$ and $\overline\mu$). We reason:
+    \begin{align*}
+        X &= \pi(a|t)Y
+            &\mbox{(Definition of $X$)}\\
+          &= \pi(a|\overline{\overline t})Y
+            &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
+          &= \overline \pi(a|\overline t)Y
+            &\mbox{(Definition of $\overline \pi$)}\\
+          &= \overline \pi(a|\overline t)Y'
+            &\mbox{(By induction, $Y=Y'$)}\\
+          &= X'. &\mbox{(Definition of $X'$)}
+    \end{align*}
+
+    Case 3: $s$ terminates with a reward.
     Then $s=t\frown o \frown r$
     for some $t\in (\mathcal O\mathcal R\mathcal A)^*$.
     Let $Y$ (resp.\ $Y'$) be the probability of generating $t$
@@ -347,23 +364,6 @@ structure is the following definition.
           &= \overline \mu(o,-r| \overline t)Y
             &\mbox{(Definition of $\overline\mu$)}\\
           &= \overline \mu(o,-r| \overline t)Y'
-            &\mbox{(By induction, $Y=Y'$)}\\
-          &= X'. &\mbox{(Definition of $X'$)}
-    \end{align*}
-
-    Case 3: $s$ terminates with an action.
-    Then $s=t\frown a$ for some $t\in(\mathcal O\mathcal R\mathcal A)^*\mathcal O\mathcal R$.
-    Let $Y$ (resp.\ $Y'$) be the probability of generating $t$
-    (resp.\ $\overline t$)
-    using $\pi$ and $\mu$ (resp.\ $\overline\pi$ and $\overline\mu$). We reason:
-    \begin{align*}
-        X &= \pi(a|t)Y
-            &\mbox{(Definition of $X$)}\\
-          &= \pi(a|\overline{\overline t})Y
-            &\mbox{(Lemma \ref{doublesubtractionlemma})}\\
-          &= \overline \pi(a|\overline t)Y
-            &\mbox{(Definition of $\overline \pi$)}\\
-          &= \overline \pi(a|\overline t)Y'
             &\mbox{(By induction, $Y=Y'$)}\\
           &= X'. &\mbox{(Definition of $X'$)}
     \end{align*}
