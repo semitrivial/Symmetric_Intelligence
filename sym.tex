@@ -471,11 +471,13 @@ details explicit.
     By an \emph{RL-encoding} we mean a computable function
     $\sqcap:(\mathcal O\mathcal R\mathcal A)^*\cup M\to 2^*$
     (where $M$ is the set of $\mathbb Q$-valued probability-measures
-    on $\mathcal O\times\mathcal R$) such that the range of
-    $\sqcap$ is prefix-free (i.e., no element of its range is a
-    strict initial segment of another). We say $\sqcap$ is
-    \emph{suffix-free} if its range is suffix-free (i.e., no element
-    of its range is a strict terminal segment of another).
+    on $\mathcal O\times\mathcal R$) such that
+    for all $x,y\in (\mathcal O\mathcal R\mathcal A)^*\cup M$ (with $x\not=y$),
+    $\sqcap(x)$ is not an initial segment of $\sqcap(y)$.
+    We say $\sqcap$ is
+    \emph{suffix-free} if
+    for all $x,y\in (\mathcal O\mathcal R\mathcal A)^*\cup M$ (with $x\not=y$),
+    $\sqcap(x)$ is not a terminal segment of $\sqcap(y)$.
     We write $\ulcorner x\urcorner$ for $\sqcap(x)$.
 \end{mydefinition}
 
