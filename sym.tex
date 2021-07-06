@@ -407,9 +407,12 @@ act if $\pi$ were confused into thinking that punishments were rewards
 and rewards were punishments.
 Whatever ingenuity $\pi$ applies to maximize rewards,
 $\overline\pi$ applies that exact same ingenuity to maximize punishments.
-Thus, if $\Upsilon$ is an intelligence function (intended to measure how
-well an agent extracts rewards in some aggregate sense across the whole
-infinite space of all well-behaved environments), then $\Upsilon$ ought
+Thus, if $\Upsilon$ is an intelligence function, intended to measure how
+well an agent extracts rewards in aggregate across the whole
+infinite space of all well-behaved environments\footnote{Note that this intention
+might conflict with certain everyday uses of the word ``intelligence''. If a child
+manages to answer every single question wrong in a true-or-false IQ test, should we
+consider that child highly intelligent or highly unintelligent?}, then $\Upsilon$ ought
 to satisfy the equation:
 \[
     \Upsilon(\overline\pi) = -\Upsilon(\pi).
@@ -471,6 +474,10 @@ details explicit.
     $\sqcap(x)$ is not a terminal segment of $\sqcap(y)$.
     We write $\ulcorner x\urcorner$ for $\sqcap(x)$.
 \end{mydefinition}
+
+Notice that suffix-freeness is, in some sense, the reverse of prefix-freeness.
+The existence of encodings that are simultaneously prefix-free and suffix-free
+is well-known.
 
 \begin{mydefinition}
 (Kolmogorov Complexity)
