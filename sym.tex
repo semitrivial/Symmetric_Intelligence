@@ -225,7 +225,7 @@ that
 this can be interpreted in terms of suicide/death: AIXI models its environment using a mixture
 distribution over a countable class of semimeasures, and AIXI's behavior can be interpreted
 as treating the complement of the domain of each semimeasure as death,
-see \cite{marin2016death}.}.
+see \cite{martin2016death}.}.
 
 % The authors of an interesting paper on reinforcement learning suicide/death
 % \cite{martin2016death} indicate surprise that, in an RL variation where
@@ -558,7 +558,8 @@ where RL instead follows the opposite convention, and the
 RL in that parallel universe is no less valid than the RL in our own. To be
 unbiased in this sense, a computer program defining an environment
 should specify which of the two RL conventions it is operating under (hence the
-$\mathrm{POS}$ and $\mathrm{NEG}$ keywords).
+$\mathrm{POS}$ and $\mathrm{NEG}$ keywords). This trick of using an initial bit
+to indicate reward-reversal was previously used in \cite{legg2013approximation}.
 
 \begin{mydefinition}
     Let $W$ be the set of all well-behaved environments.
@@ -593,7 +594,9 @@ theorem from elementary calculus, the sum does not depend on which order the $\m
 are enumerated.
 
 Legg-Hutter intelligence has been accused of being subjective
-because of its UTM-sensitivity \cite{leike2015bad} \cite{hernandez2015c}. More optimistically,
+because of its
+UTM-sensitivity \cite{leike2015bad} \cite{hernandez2015c} \cite{hibbard2009bias}.
+More optimistically,
 its UTM-sensitivity could be considered a feature, reflecting the fact
 that there are many kinds of intelligence. It could be used to measure
 intelligence in various contexts, by choosing UTMs appropriate for those
@@ -658,7 +661,8 @@ The following corollary shows that with suitable choice of encoding and UTM,
 Legg-Hutter universal intelligence satisfies another obvious desideratum.
 Intelligence should have something to do with the agent's capacity to link
 past experience to future outcomes. If the agent ignores experience, it should
-not be considered intelligent.
+not be considered intelligent. This corollary is foreshadowed
+in \cite{legg2013approximation}.
 
 \begin{mycorollary}
 \label{ignoringrewardscorollary}
