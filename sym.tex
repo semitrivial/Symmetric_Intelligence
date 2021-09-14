@@ -8,6 +8,7 @@
 \newtheorem{mycorollary}[mytheorem]{Corollary}
 \def\LH{\Upsilon}
 \def\SYM{S}
+\def\sgn{\mathrm{sgn}}
 
 \title{Reward-Punishment Symmetric Universal Intelligence}
 \titlerunning{Reward-Punishment Symmetric Universal Intelligence}
@@ -752,6 +753,51 @@ can be used to obtain other structural results.
         of the observation-space.
     \end{enumerate}
 \end{myexercise}
+
+\section{Whether to take absolute values}
+
+Definition \ref{universalintelligencedefn} assigns negative intelligence to agents
+who consistently minimize rewards. This is based on the idea that the intelligence
+measure should measure performance: agents who consistently minimize rewards have
+poor performance. One could, however, argue that $|\LH^\sqcap_U(\pi)|$ would be a
+better intelligence measure of the agent's sheer ingenuity\footnote{We would note,
+however, that an agent could also have ingenuity in other ways missed by
+$|\LH^\sqcap_U|$. For example, an agent might use superhuman
+ingenuity to try to get total reward as close as possible to $0.1$.},
+even when that ingenuity is misdirected. In the
+same way, a subject who answers every question wrong in a true-false IQ test
+would be considered intelligent: answering every question wrong
+is as hard as answering every question right. Rather than take a side and declare
+one of $\LH^\sqcap_U$ or $|\LH^\sqcap_U|$ to be the better measure, we consider
+them to be two different measures, one of which measures performance and one of
+which measures the agent's ability to consistently extremize rewards (whether
+consistently positively or consistently negatively).
+
+If one knew that $\pi$'s Legg-Hutter intelligence were negative, one could
+derive the same benefit from that agent as from $\overline{\pi}$: just flip
+rewards. This raises the question: given $\pi$, can
+one computably determine $\sgn(\LH^\sqcap_U(\pi))$? Or more weakly, is there
+a procedure which outputs $\sgn(\LH^\sqcap_U(\pi))$ when
+$\LH^\sqcap_U(\pi)\not=0$ (but may give wrong answers
+when $\LH^\sqcap_U(\pi)=0$)?
+One can easily contrive non-$\sqcap$-symmetric PFUTMs where $\sgn(\LH^\sqcap_U(\pi))$
+is computable from $\pi$---in fact, without the $\sqcap$-symmetry requirement,
+one can arrange that $\LH^\sqcap_U(\pi)$ is
+\emph{always} positive, by arranging that $\LH^\sqcap_U(\pi)$ is dominated by
+a low-$K$ environment that blindly gives all agents $+1$ total reward.
+On the other hand, one can contrive a $\sqcap$-symmetric PFUTM such that the sign of
+$\LH^\sqcap_U(\pi)$ is not computable from $\pi$ even in the weak sense\footnote{Arrange
+that $\LH^\sqcap_U$ is dominated by $\mu$ and $\bar{\mu}$ where $\mu$ is an environment
+that initially gives reward $.1$, then waits for the agent to input the code of
+an arbitrary Turing machine $T$, then (if the agent does so), gives reward $-1.1$ and then
+starts simulating $T$ until it halts, finally giving reward $2$
+if it ever does halt. Then if $\sgn(\LH^\sqcap_U(\pi))$ were computable (even
+in the weak sense), one could compute it for strategically-chosen agents in order
+to solve the Halting Problem.}.
+We leave it an open question whether there is any $\sqcap$-symmetric
+PFUTM $U$ where $\sgn(\LH^\sqcap_U(\pi))$ is computable (whether in the strong
+or the weak sense).
+
 
 \section{Conclusion}
 \label{conclusionsecn}
