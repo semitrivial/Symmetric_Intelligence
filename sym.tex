@@ -779,9 +779,9 @@ a low-$K$ environment that blindly gives all agents $+1$ total reward.
 On the other hand, one can contrive a $\sqcap$-symmetric PFUTM such that
 $\sgn(\LH^\sqcap_U(\pi))$ is not computable from $\pi$ even in the weak sense\footnote{Arrange
 that $\LH^\sqcap_U$ is dominated by $\mu$ and $\bar{\mu}$ where $\mu$ is an environment
-that initially gives reward $.1$, then waits for the agent to input the code of
-an arbitrary Turing machine $T$, then (if the agent does so), gives reward $-1.1$ and then
-starts giving reward $0$ while simulating $T$ until it halts, finally giving reward $2$
+that initially gives reward $.01$, then waits for the agent to input the code of
+an arbitrary Turing machine $T$, then (if the agent does so), gives reward $-.51$ and then
+starts giving reward $0$ while simulating $T$ until it halts, finally giving reward $1$
 if $T$ ever does halt, and giving reward $0$ forever thereafter.
 Then if $\sgn(\LH^\sqcap_U(\pi))$ were computable (even
 in the weak sense), one could compute it for strategically-chosen agents in order
