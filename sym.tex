@@ -378,29 +378,40 @@ If $x$ is a sequence, agent, or environment, then $\overline{\overline x}=x$.
 \section{Symmetric Intelligence}
 \label{mainsecn}
 
-By definition, agent $\overline\pi$ acts exactly as agent $\pi$ would
-act if $\pi$ were confused into thinking that punishments were rewards
-and rewards were punishments.
-Whatever ingenuity $\pi$ applies to maximize rewards,
-$\overline\pi$ applies that exact same ingenuity to maximize punishments.
-Thus, if $\Upsilon$ is an intelligence function, intended to measure how
-well an agent extracts rewards in aggregate across the whole
-infinite space of all well-behaved environments\footnote{Note that this intention
+By definition, agent $\overline\pi$ acts as agent $\pi$ would act if $\pi$ were
+confused into thinking punishments were rewards and rewards were punishments. Whatever ingenuity $\pi$ applies to maximize rewards, $\overline\pi$ applies that same
+ingenuity to maximize punishments. Thus, if $\Upsilon$ measures intelligence as
+performance averaged in some way\footnote{Note that measuring intelligence as
+averaged performance
 might conflict with certain everyday uses of the word ``intelligent'',
-see Section \ref{absvaluesection}.}, then $\Upsilon$ ought
-to satisfy the equation:
-\[
-    \Upsilon(\overline\pi) = -\Upsilon(\pi).
-\]
-Not every intelligence function satisfies the above equation, but the
-above equation should be considered desirable when we
-invent ways of measuring intelligence: all else being equal, an
-intelligence function which satisfies the above equation should be
-considered better than an intelligence function which does
-not.
-In this section, we will show that the universal intelligence measure
-proposed by Legg and Hutter satisfies the above equation, provided a
-background UTM and encoding are suitably chosen.
+see Section \ref{absvaluesection}.}, it seems natural that we might expect the
+following property to hold ($*$): that whenever $\Upsilon(\pi)\not=0$,
+then $\Upsilon(\pi)\not=\Upsilon(\overline\pi)$. Indeed, one could argue it
+would be strange to hold that $\pi$ manages to extract (say) positive rewards on
+average, and at the same time hold that $\overline\pi$ (which uses $\pi$ to seek
+punishments) extracts the exact same positive rewards on average. To be clear, we
+do not declare ($*$) is an absolute law, we merely opine that ($*$) seems
+reasonable and natural. Now, assuming ($*$), we can offer an informal argument
+for a stronger-looking symmetry property ($**$): that
+$\Upsilon(\pi)=-\Upsilon(\overline\pi)$ for all $\pi$. The informal argument is
+as follows. Let $\pi$ be any agent. Imagine a new agent $\rho$ which, at
+the start of every environmental interaction, flips a coin and commits to act as
+$\pi$ for that whole interaction if the coin lands heads, or to act as
+$\overline\pi$ for the whole interaction if the coin lands tails.
+Probabilistic intuition suggests
+$\Upsilon(\rho)=\frac12(\Upsilon(\pi)+\Upsilon(\overline \pi))$, so if
+$\Upsilon(\rho)=0$ then $\Upsilon(\pi)=-\Upsilon(\overline\pi)$.
+But maybe the reader doubts $\Upsilon(\rho)=0$. In that case, define
+$\rho'$ in the same way except swap ``heads'' and ``tails''. It seems
+there is no way to meaningfully distinguish $\rho$ from $\rho'$, so it
+seems we ought to have $\Upsilon(\rho)=\Upsilon(\rho')$. But to swap ``heads''
+and ``tails'' is the same as to swap ``$\pi$'' and ``$\overline \pi$''.
+Thus $\rho'=\overline\rho$. Thus $\Upsilon(\rho)\not=0$ would contradict ($*$).
+In conclusion, while we do not declare it an absolute law, we do consider
+($**$) natural and reasonable, at least if $\Upsilon$
+measures intelligence as performance averaged in some way.
+In this section, we will show that Legg and Hutter's universal intelligence measure
+satisfies ($**$), provided a background UTM and encoding are suitably chosen.
 
 We write $2^*$ for the set of finite binary strings.
 We write $f:\subseteq A\to B$ to indicate that $f$ has codomain $B$
