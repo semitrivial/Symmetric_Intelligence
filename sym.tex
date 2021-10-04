@@ -112,7 +112,7 @@ fix a finite set $\mathcal A$ of \emph{actions},
 a finite set $\mathcal O$ of \emph{observations},
 and a finite set $\mathcal R\subseteq \mathbb Q\cap [-1,1]$ of \emph{rewards}
 (so each reward is a rational number between $-1$ and $1$ inclusive),
-with $|\mathcal A|>1$,
+with $|\mathcal A|>0$,
 $|\mathcal O|>0$, $|\mathcal R|>0$.
 We assume that $\mathcal R$ has the following property:
 whenever $\mathcal R$ contains any reward $r$, then $\mathcal R$
@@ -460,11 +460,16 @@ details explicit.
     We write $\ulcorner x\urcorner$ for $\sqcap(x)$.
 \end{mydefinition}
 
+Note that in Definition \ref{encodingdefn}, it makes sense to encode $M$ because
+$\mathcal O$ and $\mathcal R$ are finite (Section \ref{prelimsecn}).
 Notice that suffix-freeness is, in some sense, the reverse of prefix-freeness.
 The existence of encodings that are simultaneously prefix-free and suffix-free
-is well-known. For example, the range of $\sqcap$ could be composed of 8-bit blocks,
-such that every element of the range of $\sqcap$ begins and ends with the ASCII characters
-``['' and ``]'', respectively, and such that these characters do not appear anywhere in the
+is well-known. For example, the range of $\sqcap$ could be composed of 8-bit blocks
+(bytes),
+such that every element of the range of $\sqcap$ begins and ends with the ASCII
+closed-bracket characters
+$[$ and $]$, respectively, and such that these closed-brackets
+do not appear anywhere in the
 middle.
 
 \begin{mydefinition}
