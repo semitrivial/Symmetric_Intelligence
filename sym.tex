@@ -589,10 +589,10 @@ Legg-Hutter intelligence has been accused of being subjective
 because of its
 UTM-sensitivity \cite{leike2015bad} \cite{hernandez2015c} \cite{hibbard2009bias}.
 More optimistically,
-its UTM-sensitivity could be considered a feature, reflecting the fact
-that there are many kinds of intelligence. It could be used to measure
-intelligence in various contexts, by choosing UTMs appropriate for those
-contexts. One could even use it to measure, say, chess intelligence,
+UTM-sensitivity could be considered a feature, reflecting the
+existence of many kinds of intelligence. It could be used to measure
+intelligence in various contexts, by choosing UTMs appropriately.
+One could even use it to measure, say, chess intelligence,
 by choosing a UTM where chess-related environments are easiest to program.
 
 \begin{mytheorem}
@@ -665,15 +665,15 @@ purposes of Legg-Hutter universal intelligence, to choose a $\sqcap$-symmetric
 PFUTM\footnote{Thus providing one answer to Leike and Hutter
 \cite{leike2015bad} who asked: ``But what are other desirable properties of a UTM?''}.
 Consider an agent $\pi_a$
-which always blindly repeats a fixed action $a\in\mathcal A$.
+which blindly repeats a fixed action $a\in\mathcal A$.
 For any particular environment $\mu$,
-where $\pi_a$ earns some total reward $r$ by blind luck,
-that total reward ought to be cancelled out by $\overline\mu$, where
-the exact same blind luck becomes blind misfortune and $\pi_a$ earns total reward
-$-r$ (Corollary \ref{twistcorollary}). But if $K^\sqcap_U(\mu)\not=K^\sqcap_U(\overline\mu)$,
-then the different weights
+where $\pi_a$ earns total reward $r$ by blind luck,
+that total reward should be cancelled by $\overline\mu$, where
+that blind luck becomes blind misfortune and $\pi_a$ earns total reward
+$-r$ (Corollary \ref{twistcorollary}). If $K^\sqcap_U(\mu)\not=K^\sqcap_U(\overline\mu)$,
+the different weights
 $2^{-K^\sqcap_U(\mu)}\not=2^{-K^\sqcap_U(\overline\mu)}$ would prevent
-these two outcomes from cancelling each other.
+cancellation.
 
 % \begin{remark}
 % \label{leikeresponse}
@@ -718,7 +718,7 @@ can be used to obtain other structural results.
         and
         $V^{P\pi}_\mu = V^\pi_{P\mu}$.
         \item
-        Say that a PFUTM $U$ is \emph{$\sqcap$-permutable} if
+        Say PFUTM $U$ is \emph{$\sqcap$-permutable} if
         $K^\sqcap_U(\mu)=K^\sqcap_U(P\mu)$ for every computable environment $\mu$
         and permutation $P:\mathcal A\to\mathcal A$. Show that if $\sqcap$ is
         suffix-free then any given
@@ -776,12 +776,12 @@ On the other hand, one can contrive a $\sqcap$-symmetric PFUTM such that
 $\sgn(\LH^\sqcap_U(\pi))$ is not computable from $\pi$ even in the weak sense\footnote{Arrange
 that $\LH^\sqcap_U$ is dominated by $\mu$ and $\bar{\mu}$ where $\mu$ is an environment
 that initially gives reward $.01$, then waits for the agent to input the code of
-an arbitrary Turing machine $T$, then (if the agent does so), gives reward $-.51$ and then
-starts giving reward $0$ while simulating $T$ until it halts, finally giving reward $1$
-if $T$ ever does halt, and giving reward $0$ forever thereafter.
+a Turing machine $T$, then (if the agent does so), gives reward $-.51$, then
+gives reward $0$ while simulating $T$ until $T$ halts, finally giving reward $1$
+if $T$ does halt.
 Then if $\sgn(\LH^\sqcap_U(\pi))$ were computable (even
-in the weak sense), one could compute it for strategically-chosen agents in order
-to solve the Halting Problem.}.
+in the weak sense), one could compute it for strategically-chosen agents and
+solve the Halting Problem.}.
 We leave it an open question whether there is any $\sqcap$-symmetric
 PFUTM $U$ where $\sgn(\LH^\sqcap_U(\pi))$ is computable (whether in the strong
 or the weak sense).
