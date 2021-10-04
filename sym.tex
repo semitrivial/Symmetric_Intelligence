@@ -444,6 +444,7 @@ to distinguish between different kinds of encodings, so we must make the
 details explicit.
 
 \begin{mydefinition}
+\label{encodingdefn}
     By an \emph{RL-encoding} we mean a computable function
     $\sqcap:(\mathcal O\mathcal R\mathcal A)^*\cup M\to 2^*$
     (where $M$ is the set of $\mathbb Q$-valued probability-measures
@@ -475,13 +476,17 @@ Suppose $U$ is a PFUTM and $\sqcap$ is an RL-encoding.
     there is some computer program of length $n$, in programming language $U$,
     for some function $f:\subseteq 2^*\to 2^*$ such that
     for all $s\in (\mathcal O\mathcal R\mathcal A)^*$,
-    $f(\ulcorner s\urcorner)=\ulcorner \mu(\bullet|s)\urcorner$.
+    $f(\ulcorner s\urcorner)=\ulcorner \mu(\bullet|s)\urcorner$
+    (note this makes sense since the domain of $\sqcap$ in Definition \ref{encodingdefn}
+    is $(\mathcal O\mathcal R\mathcal A)^*\cup M$).
     \item
     We say $U$ is \emph{symmetric in its $\sqcap$-encoded-environment
     cross-section} (or simply that $U$ is \emph{$\sqcap$-symmetric}) if
     $K^\sqcap_U(\mu)=K^\sqcap_U(\overline\mu)$ for every computable environment $\mu$.
 \end{enumerate}
 \end{mydefinition}
+
+
 
 \begin{mytheorem}
 \label{envirosymmetricexistencelemma}
