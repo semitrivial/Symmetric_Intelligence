@@ -70,22 +70,17 @@ here we merely question the
 assumption that intelligence never be negative, leaving aside the
 question of whether intelligence should be real-valued.}.
 We would argue that this makes perfect sense when environments are capable of punishing
-agents: the intelligence level of a reinforcement learning agent should measure the
-degree to which that agent can extract large rewards on average across many environments.
-An agent who instead extracts large punishments on average across many environments
-should therefore have a negative intelligence level.
+agents: if the intelligence level of a reinforcement learning agent is a measure of
+its ability to extract large rewards on average across many environments, then
+an agent who instead extracts large punishments should have a negative intelligence level.
 
-% Leike and Hutter \cite{leike2015bad} pointed out that Legg-Hutter intelligence
-% (and related agents such as AIXI \cite{hutter2004universal}) are sensitive
-% to the background choice of a Universal
-% Turing Machine (UTM). Certain choices of UTM can make AIXI and Legg-Hutter intelligence
-% apparently perform badly. Leike and Hutter lamented the lack of satisfactory answers to
-% the question of how to choose a ``natural'' UTM. This paper is more optimistic:
-% we show that certain UTM qualities improve the performance of Legg-Hutter
-% intelligence. We will argue (in Remark \ref{leikeresponse} below)
-% that Legg-Hutter intelligence's UTM-sensitivity is
-% a feature, not a bug, and opine that the quest for ``the one true UTM'' is
-% a red herring.
+This paper advances the practical pursuit of AGI by suggesting
+(in Section \ref{mainsecn})
+certain symmetry constraints which would narrow down the space of
+background UTMs, thereby refining at least one approach to
+intelligence measurement. In particular these constrains are one
+answer to Leike and Hutter, who asked: ``But what are other desirable
+properties of a UTM?'' \cite{leike2015bad}.
 
 The structure of the paper is as follows:
 \begin{itemize}
