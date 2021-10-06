@@ -10,11 +10,11 @@
 \def\SYM{S}
 \def\sgn{\mathrm{sgn}}
 
-\title{Reward-Punishment Symmetric Universal Intelligence}
+\title{Reward-Punishment Symmetric\\Universal Intelligence}
 \titlerunning{Reward-Punishment Symmetric Universal Intelligence}
 
 \author{Samuel Allen Alexander\inst{1}
-\and\\
+\and
 Marcus Hutter\inst{2}}
 \authorrunning{S.\ A.\ Alexander \& M.\ Hutter}
 
@@ -23,7 +23,6 @@ Marcus Hutter\inst{2}}
 \url{https://philpeople.org/profiles/samuel-alexander/publications}
 \and
 DeepMind \& AMU
-\email{marcus.hutter@anu.edu.au}
 \url{http://www.hutter1.net/}
 }
 
@@ -80,7 +79,7 @@ This paper advances the practical pursuit of AGI by suggesting
 (in Section \ref{mainsecn})
 certain symmetry constraints which would narrow down the space of
 background UTMs, thereby refining at least one approach to
-intelligence measurement. In particular these constrains are one
+intelligence measurement. In particular these constraints are one
 answer to Leike and Hutter, who asked: ``But what are other desirable
 properties of a UTM?'' \cite{leike2015bad}.
 
@@ -92,7 +91,7 @@ The structure of the paper is as follows:
     \item In Section \ref{mainsecn}, we show the existence of UTMs yielding Kolmogorov
         complexities with certain symmetries, and show that the resulting Legg-Hutter
         intelligence measures are symmetric too.
-    \item In Section \ref{absvaluesection} we consider absolute value of Legg-Hutter
+    \item In Section \ref{absvaluesection} we consider the absolute value of Legg-Hutter
         intelligence as an alternative intelligence measure.
     \item In Section \ref{conclusionsecn}, we summarize and make concluding remarks, including
         remarks about how these ideas might be applied to certain other intelligence measures.
@@ -464,7 +463,8 @@ Note that in Definition \ref{encodingdefn}, it makes sense to encode $M$ because
 $\mathcal O$ and $\mathcal R$ are finite (Section \ref{prelimsecn}).
 Notice that suffix-freeness is, in some sense, the reverse of prefix-freeness.
 The existence of encodings that are simultaneously prefix-free and suffix-free
-is well-known. For example, the range of $\sqcap$ could be composed of 8-bit blocks
+is well-known. For example, elements of the range of $\sqcap$ could be
+composed of 8-bit blocks
 (bytes),
 such that every element of the range of $\sqcap$ begins and ends with the ASCII
 closed-bracket characters
@@ -781,7 +781,7 @@ $\sgn(\LH^\sqcap_U(\pi))$ is not computable from $\pi$ even in the weak sense\fo
 that $\LH^\sqcap_U$ is dominated by $\mu$ and $\bar{\mu}$ where $\mu$ is an environment
 that initially gives reward $.01$, then waits for the agent to input the code of
 a Turing machine $T$, then (if the agent does so), gives reward $-.51$, then
-gives reward $0$ while simulating $T$ until $T$ halts, finally giving reward $1$
+gives rewards $0$ while simulating $T$ until $T$ halts, finally giving reward $1$
 if $T$ does halt.
 Then if $\sgn(\LH^\sqcap_U(\pi))$ were computable (even
 in the weak sense), one could compute it for strategically-chosen agents and
